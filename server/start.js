@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const morgan = require('morgan')
 const path = require('path')
+const db = require('./db/index')
 
 //logging middleware
 app.use(morgan('dev'))
@@ -32,4 +33,13 @@ app.use((err, req, res, next) => {
 })
 
 //listen for server
-app.listen(5000, () => console.log('We here at 5000'))
+app.listen(5000, () => {
+  console.log('Hola we are on 5000')
+  db.sync()
+  .then(function () {
+    console.log('Synchronated the database')
+  })
+  .catch(function (err) {
+    console.error('Trouble right here in River City', err, err.stack)
+  })
+})
