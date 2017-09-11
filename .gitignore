@@ -1,0 +1,9 @@
+
+##OUR SECRETS FILE##
+secrets.js
+
+##NODE MODULES##
+node_modules
+
+##FRONT END BUNDLE##
+bundle.js
