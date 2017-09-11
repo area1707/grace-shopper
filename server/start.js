@@ -6,6 +6,9 @@ const app = express()
 const morgan = require('morgan')
 const path = require('path')
 const db = require('./db/index')
+const session = require('express-session')
+const passport = require('passport')
+const User = require('./db/models/users')
 
 //logging middleware
 app.use(morgan('dev'))
@@ -14,13 +17,14 @@ app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, '../public')))
 
 //any front end routes that don't match our api routes go to index.html
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 
 //parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', require('./api')); // matches all requests to /api
+
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 
 //page not found
 app.use((req, res) => res.sendStatus(404))
@@ -32,17 +36,34 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
-//listen for server
-// app.listen(5000, () => {
-//   console.log('Hola we are on 5000')
-//   db.sync({force: true})
-//   .then(function () {
-//     console.log('Synchronated the database')
-//   })
-//   .catch(function (err) {
-//     console.error('Trouble right here in River City', err, err.stack)
-//   })
-// })
+// configure and create our database store
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const dbStore = new SequelizeStore({ db: db })
+
+// sync so that our session table gets created
+dbStore.sync()
+
+// plug the store into our session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    store: dbStore,
+    resave: false,
+    saveUninitialized: false
+}))
+
+//initializing passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.serializeUser( (user, done) => done(null, user.id))
+
+//logging out and deleting from req.session
+passport.deserializeUser( (id, done) => {
+    User.findById(id)
+    .then(user => done(null, user))
+    .catch(done)
+})
+
 db.sync()  // sync our database
   .then(function(){
     app.listen(5000) // then start listening with our express server once we have synced
