@@ -33,13 +33,18 @@ app.use((err, req, res, next) => {
 })
 
 //listen for server
-app.listen(5000, () => {
-  console.log('Hola we are on 5000')
-  db.sync()
-  .then(function () {
-    console.log('Synchronated the database')
-  })
-  .catch(function (err) {
-    console.error('Trouble right here in River City', err, err.stack)
-  })
+// app.listen(5000, () => {
+//   console.log('Hola we are on 5000')
+//   db.sync({force: true})
+//   .then(function () {
+//     console.log('Synchronated the database')
+//   })
+//   .catch(function (err) {
+//     console.error('Trouble right here in River City', err, err.stack)
+//   })
+// })
+db.sync()  // sync our database
+  .then(function(){
+    app.listen(5000) // then start listening with our express server once we have synced
+    console.log('listening to 5000')
 })

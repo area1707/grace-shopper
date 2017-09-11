@@ -1,9 +1,3 @@
-const Sequelize = require('sequelize')
-
-const databaseURI = 'postgres://localhost:5432/graceshopper'
-
-const db = new Sequelize(databaseURI, {
-  logging: false
-})
-
+const db = require('./db')
+require('./models')
 module.exports = db

@@ -1,7 +1,7 @@
-const db = require('../index')
+const db = require('../db')
 const Sequelize = require('sequelize')
 
-const Accessories = db.define('accessory', {
+const Accessory = db.define('accessory', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -27,4 +27,4 @@ const Accessories = db.define('accessory', {
   }
 }, {})
 
-module.exports = Accessories
+module.exports = Accessory
