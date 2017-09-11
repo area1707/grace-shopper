@@ -20,3 +20,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', require('./api')); // matches all requests to /api
+
+//page not found
+app.use((req, res) => res.sendStatus(404))
+
+// error page, if time redirect to a cute error page with WHALE
+app.use((err, req, res, next) => {
+    console.error(err)
+    console.error(err.stack)
+    res.status(err.status || 500).send(err.message || 'Internal server error.')
+})
+
+//listen for server
+app.listen(5000, () => console.log('We here at 5000'))
