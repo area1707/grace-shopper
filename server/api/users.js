@@ -49,4 +49,13 @@ router.post('/signup', (req, res, next) => {
   })
 })
 
+router.post('/logout', (req, res, next) => {
+  req.logout()
+  res.sendStatus(200)
+})
+
+router.get('/me', (req, res, next) => {
+  res.json(req.user)
+})
+
 module.exports = router;

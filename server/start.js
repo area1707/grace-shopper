@@ -9,7 +9,7 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
-
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
 app.use(morgan('dev'))
 
@@ -32,7 +32,7 @@ dbStore.sync()
 
 // plug the store into our session middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'cat in the bag',
+    secret: process.env.SESSION_SECRET,
     store: dbStore,
     resave: false,
     saveUninitialized: false
