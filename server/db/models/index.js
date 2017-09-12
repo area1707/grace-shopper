@@ -2,10 +2,12 @@ const Accessory = require('./accessories')
 const User = require('./users')
 const Review = require('./reviews')
 const Order = require('./orders')
+const Order_accessory = require('./order_accessory')
 
 module.exports = {Accessory, User, Review, Order}
 
-Review.belongsTo(User)
 User.hasMany(Order)
-Order.hasMany(Accessory)
+Accessory.belongsToMany(Order, {through: 'order_accessory'})
 Order.belongsTo(User, {as: 'user'})
+Review.belongsTo(Accessory)
+Review.belongsTo(User)

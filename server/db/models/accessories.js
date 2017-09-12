@@ -21,10 +21,18 @@ const Accessory = db.define('accessory', {
   description: {
     type: Sequelize.TEXT
   },
+  inventory: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
+  },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: false
+    defaultValue: "https://i.pinimg.com/736x/ab/48/9d/ab489de6e7a85bac1290f4b615e95b04--fat-face-sad-cat.jpg"
   }
 }, {})
+
+// Accessory.hook('beforeUpdate', (accessory, options) => {
+//   return accessory.inventory--
+// })
 
 module.exports = Accessory
