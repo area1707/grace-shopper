@@ -43,7 +43,10 @@ router.post('/signup', (req, res, next) => {
       else res.json(user)
     })
   })
-  .catch(next)
+  .catch(function(err) {
+    // print the error details
+    console.log(err, request.body)
+  })
 })
 
 module.exports = router;
