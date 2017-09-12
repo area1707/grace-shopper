@@ -8,7 +8,7 @@ const accessories = [
     price: 10,
     color: 'black',
     description: 'retro cuties for your kitty',
-    imgUrl: '/img/glasses-1-sm.svg',
+    imageUrl: '/img/glasses-1-sm.svg',
     inventory: 10
   },
   {
@@ -17,7 +17,7 @@ const accessories = [
     price: 20,
     color: 'white',
     description: 'birthday beanie for your baby',
-    imgUrl:'/img/hat-1-sm.svg',
+    imageUrl:'/img/hat-1-sm.svg',
     inventory: 10
     },
   {
@@ -26,7 +26,7 @@ const accessories = [
     price: 5,
     color: 'green',
     description: 'a ball of yarn for your cat to play',
-    imgUrl: '/img/toy-1-sm.svg',
+    imageUrl: '/img/toy-1-sm.svg',
     inventory: 10
   }
 ]
