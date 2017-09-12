@@ -51,7 +51,7 @@ passport.deserializeUser( (id, done) => {
     .catch(done)
 })
 
-db.sync({})  // sync our database
+db.sync({force: true})  // sync our database
 .then(function(){
     app.listen(5000) // then start listening with our express server once we have synced
     console.log('listening to 5000')

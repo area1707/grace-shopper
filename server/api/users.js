@@ -1,7 +1,7 @@
 // api/users.js
 const router = require('express').Router();
 const User = require('../db/models/users')
-
+const passport = require('passport')
 // matches GET requests to /api/users/
 router.get('/', function (req, res, next) {
   User.findAll()
@@ -57,5 +57,7 @@ router.post('/logout', (req, res, next) => {
 router.get('/me', (req, res, next) => {
   res.json(req.user)
 })
+
+router.get('/auth/google', passport.authenticate('google', { scope: 'email' }))
 
 module.exports = router;
