@@ -24,6 +24,10 @@ const Accessory = db.define('accessory', {
   imageUrl: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  inventory: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 }, {})
 
