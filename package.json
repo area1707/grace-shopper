@@ -23,7 +23,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "path": "^0.12.7",
-    "pg": "^6.4.2",
+    "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -32,7 +32,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.8.3"
+    "sequelize": "^4.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
