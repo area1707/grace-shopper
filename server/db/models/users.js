@@ -4,10 +4,16 @@ const crypto = require('crypto');
 const _ = require('lodash');
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING
@@ -16,6 +22,9 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   google_id: {
+    type: Sequelize.STRING
+  },
+  shipping_address: {
     type: Sequelize.STRING
   }
 }, {
