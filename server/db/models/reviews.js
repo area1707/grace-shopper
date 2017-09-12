@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 
 const Review = db.define('review', {
   content: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   star: {
     type: Sequelize.INTEGER,
