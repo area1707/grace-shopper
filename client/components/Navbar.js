@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import history from './history'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -61,11 +62,11 @@ const mapProps = null;
 
 const mapDispatch = dispatch => ({
   logout: () => {
-    axios.get('/logout')
+    axios.get('/api/users/logout')
     .then(() => {
       console.log('You signed out.');
     })
-    this.props.history.push('/');
+    history.push('/');
   }
 });
 
