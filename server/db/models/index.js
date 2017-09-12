@@ -6,5 +6,6 @@ const Order = require('./orders')
 module.exports = {Accessory, User, Review, Order}
 
 Review.belongsTo(User)
-User.hasMany(Accessory)
+User.hasMany(Order)
+Order.hasMany(Accessory)
 Order.belongsTo(User, {as: 'user'})

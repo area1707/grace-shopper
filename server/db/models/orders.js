@@ -5,9 +5,10 @@ const Order = db.define('order', {
   order: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
-  hasShipped: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
+  status: {
+    type: Sequelize.ENUM,
+    values: ['created', 'processing', 'cancelled', 'completed'],
+    defaultValue: 'created'
   }
 }, {})
 

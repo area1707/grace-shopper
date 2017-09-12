@@ -4,6 +4,9 @@ const crypto = require('crypto');
 const _ = require('lodash');
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
