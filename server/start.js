@@ -22,19 +22,6 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api', require('./api')); // matches all requests to /api
-
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
-
-//page not found
-app.use((req, res) => res.sendStatus(404))
-
-// error page, if time redirect to a cute error page with WHALE
-app.use((err, req, res, next) => {
-    console.error(err)
-    console.error(err.stack)
-    res.status(err.status || 500).send(err.message || 'Internal server error.')
-})
 
 // configure and create our database store
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
@@ -45,7 +32,7 @@ dbStore.sync()
 
 // plug the store into our session middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'cat in the bag',
     store: dbStore,
     resave: false,
     saveUninitialized: false
@@ -65,7 +52,21 @@ passport.deserializeUser( (id, done) => {
 })
 
 db.sync()  // sync our database
-  .then(function(){
+.then(function(){
     app.listen(5000) // then start listening with our express server once we have synced
     console.log('listening to 5000')
+})
+
+app.use('/api', require('./api')); // matches all requests to /api
+
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
+
+//page not found
+app.use((req, res) => res.sendStatus(404))
+
+// error page, if time redirect to a cute error page with WHALE
+app.use((err, req, res, next) => {
+    console.error(err)
+    console.error(err.stack)
+    res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
