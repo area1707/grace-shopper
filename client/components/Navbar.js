@@ -25,7 +25,7 @@ class Navbar extends React.Component {
 
   renderLoginSignup() {
     return (
-      <ul className="nav navbar-nav navbar-right">
+      <ul>
         <li>
           <button>
             <NavLink to="/signup" activeClassName="active">signup</NavLink>
@@ -42,7 +42,7 @@ class Navbar extends React.Component {
 
   renderLogout() {
     return (
-      <ul className="nav navbar-nav navbar-right">
+      <ul>
         <li>
         <button
           className="navbar-btn btn btn-default"
