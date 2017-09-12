@@ -17,6 +17,9 @@ const User = db.define('user', {
   },
   google_id: {
     type: Sequelize.STRING
+  },
+  shipping_address: {
+    type: Sequelize.STRING
   }
 }, {
   hooks: {
