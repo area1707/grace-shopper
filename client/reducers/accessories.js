@@ -1,20 +1,21 @@
 import axios from 'axios'
 
 const GET_ACCESSORIES = 'GET_ACCESSORIES'
-const REMOVE_accessories  = 'REMOVE_accessories'
-const CREATE     = 'CREATE_accessories'
-const UPDATE     = 'UPDATE_accessories'
+const REMOVE_ACCESSORIES  = 'REMOVE_ACCESSORIES'
+const CREATE     = 'CREATE_ACCESSORIES'
+const UPDATE     = 'UPDATE_ACCESSORIES'
 
 const load = accessories => ({type: GET_ACCESSORIES, accessories})
-const remove = id => ({ type: REMOVE_accessories, id })
+const remove = id => ({ type: REMOVE_ACCESSORIES, id })
 const create = accessory  => ({ type: CREATE, accessory })
 const update = accessory   => ({ type: UPDATE, accessory })
+
 
 const accessoriesReducer = function(state=[], action) {
   switch(action.type) {
     case GET_ACCESSORIES:
       return action.accessories
-    case REMOVE_accessories:
+    case REMOVE_ACCESSORIES:
       return state.filter(accessory => accessory.id !== action.id)
     case CREATE:
       return [action.accessory, ...state]

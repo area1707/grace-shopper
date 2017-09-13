@@ -18,18 +18,47 @@ class Navbar extends React.Component {
       <nav className="navbar navbar-default">
         <div className="container">
           { this.renderHome() }
+          { this.renderCart() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
+          { this.renderSearch() }
         </div>
       </nav>
     )
   }
+
+
 
   renderHome() {
     return (
       <ul className="nav navbar-nav navbar-left">
         <li>
           <NavLink to="/" activeClassName="active">Home</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
+  renderCart() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li>
+          <NavLink to="/cart" activeClassName="active">Cart</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
+  renderSearch() {
+    return (
+      <ul className="nav navbar-nav navbar-right">
+        <li>
+          <form className="navbar-form navbar-right" role="search">
+            <div className="form-group" >
+                <input id="inputsm" type="text" className="form-control input-sm" placeholder="Search"/>
+            </div>
+            <button type="submit" className="navbar-btn btn btn-default">Submit</button>
+          </form>
         </li>
       </ul>
     )

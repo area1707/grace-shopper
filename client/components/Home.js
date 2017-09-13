@@ -25,7 +25,7 @@ class Home extends Component {
 }
 
 const mapState = ({accessories}) => ({accessories})
-const mapDispatch = {  };
+const mapDispatch = {}
 
 const HomeContainer = withRouter(connect(mapState, mapDispatch)(Home))
 export default HomeContainer
