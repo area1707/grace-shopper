@@ -355,6 +355,33 @@ const accessories = [
   }
 ]
 
+const users = [
+  {
+    name: 'Erin',
+    email: 'erin.kimberly.shaw@gmail.com',
+    password: 'password',
+    isAdmin: true
+  },
+  {
+    name: 'An',
+    email: 'lean257@gmail.com',
+    password: 'password',
+    isAdmin: true
+  },
+  {
+    name: 'Raz',
+    email: 'kaur.rasprit@gmail.com',
+    password: 'password',
+    isAdmin: true
+  },
+  {
+    name: 'Alice',
+    email: 'alicejychen15@gmail.com',
+    password: 'password',
+    isAdmin: true
+  },
+]
+
 const seed = () =>
   Promise.all(accessories.map(accessory =>
     Accessory.create(accessory))
