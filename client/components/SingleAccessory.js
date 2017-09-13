@@ -10,7 +10,8 @@ class SingleAccessory extends Component {
     this.state = {
       isEditing: false,
       name: this.props.accessory.name,
-      image: this.props.accessory.imageUrl
+      image: this.props.accessory.imageUrl,
+      price: this.props.accessory.price
     }
     this.removeAccessory = this.removeAccessory.bind(this)
     this.doneEdit = this.doneEdit.bind(this)
@@ -18,6 +19,7 @@ class SingleAccessory extends Component {
     this.cancelEdit = this.cancelEdit.bind(this)
     this.updateAccessoryName = this.updateAccessoryName.bind(this)
     this.updateAccessoryImage = this.updateAccessoryImage.bind(this)
+    this.updateAccessoryPrice = this.updateAccessoryPrice.bind(this)
   }
 
   render() {
@@ -54,6 +56,15 @@ class SingleAccessory extends Component {
                   className="form-like"
                   value={this.state.image}
                   onChange={this.updateAccessoryImage}
+                />
+              </h5>
+              <h5 className="tucked">
+                <input
+                  name="price"
+                  type="text"
+                  className="form-like"
+                  value={this.state.price}
+                  onChange={this.updateAccessoryPrice}
                 />
               </h5>
               </div>
@@ -111,7 +122,7 @@ class SingleAccessory extends Component {
   removeAccessory (event) {
     const { accessory, removeAccessory } = this.props;
     event.stopPropagation()
-    removeAccessory(Accessory.id)
+    removeAccessory(accessory.id)
   }
   clickEdit(event) {
     this.setState({isEditing: true})
@@ -124,12 +135,17 @@ class SingleAccessory extends Component {
     const image = event.target.value
     return this.setState({image})
   }
+  updateAccessoryPrice(event) {
+    const price = event.target.value
+    return this.setState({price})
+  }
   doneEdit(event) {
     const {accessory, updateAccessory} = this.props
     event.preventDefault()
     updateAccessory(accessory.id, {
       name: this.state.name,
-      image: this.state.imageUrl
+      image: this.state.imageUrl,
+      price: this.state.price
     })
     this.setState({isEditing: false})
   }
