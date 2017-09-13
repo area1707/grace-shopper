@@ -11,6 +11,16 @@ router.get('/', function (req, res, next) {
   .catch(next)
 })
 
+//matches GET requests to /api/users/:userId
+router.get('/:userId', function (req, res, next) {
+  User.find(
+    {
+      where: {id:req.params.userId}
+    })
+  .then( user => res.status(200).json(user))
+  .catch(next)
+})
+
 // matches POST requests to /api/users/
 router.post('/', function (req, res, next) { /* etc */});
 // matches PUT requests to /api/users/:userId
