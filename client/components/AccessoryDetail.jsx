@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
-import SingleAccessory from './singleAccessory'
+import SingleAccessory from './SingleAccessory'
 
 function Accessory(props) {
   const accessoryId =  props.match.params.accessoryId
