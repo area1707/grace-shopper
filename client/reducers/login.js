@@ -23,18 +23,19 @@ export default function loginReducer(currentUser={}, action) {
 }
 
 export const fetchCurrentUser = () => dispatch => {
-  axios.get('/api/users/me')
+  axios.get('/me')
       .then(res => dispatch(initialUser(res.data)));
 }
 
 export function verifyUser(user) {
   return function thunk(dispatch) {
-    return axios.post('/api/users/login', user)
+    return axios.post('/login', user)
     .then(res => res.data)
     .then(currentUser => {
       console.log('currentUser', currentUser)
       dispatch(loginUser(currentUser))
-      history.push(`/users/${currentUser.id}`)
+      //need to figure out redirect link
+      history.push(`/`)
     })
     .catch(console.error)
   }
@@ -42,12 +43,13 @@ export function verifyUser(user) {
 
 export function createNewUser(user) {
   return function thunk(dispatch) {
-    return axios.post('/api/users/signup', user)
+    return axios.post('/signup', user)
     .then(res => res.data)
     .then(newUser => {
       console.log('got back new user!', newUser);
       dispatch(createUser(newUser));
-      history.push(`/users/${newUser.id}`);
+      //need to figure out redirect link
+      history.push(`/`);
     })
     .catch(console.error)
   }

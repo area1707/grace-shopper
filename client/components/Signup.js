@@ -19,6 +19,14 @@ class Signup extends React.Component {
         <div className="buffer local">
           <form onSubmit={this.onSignupSubmit}>
             <div className="form-group">
+              <label>Name</label>
+              <input
+                name="name"
+                type="name"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
               <label>email</label>
               <input
                 name="email"
@@ -62,11 +70,10 @@ class Signup extends React.Component {
   onSignupSubmit(event) {
     const { message } = this.props;
     event.preventDefault();
+    const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    store.dispatch(createNewUser({email, password}));
-    console.log('currentuser', this.props.currentUser);
-    console.log(`${message} isn't implemented yet`);
+    store.dispatch(createNewUser({name, email, password}));
   }
 }
 

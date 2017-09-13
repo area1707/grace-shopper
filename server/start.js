@@ -145,7 +145,7 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
-db.sync({force: true})  // sync our database
+db.sync({})  // sync our database
 .then(function(){
     app.listen(5000) // then start listening with our express server once we have synced
     console.log('listening to 5000')
