@@ -1,5 +1,6 @@
 const db = require('./server/db')
 const Accessory = require('./server/db/models/accessories')
+const User = require('./server/db/models/users')
 
 const accessories = [
   {
@@ -382,10 +383,17 @@ const users = [
   },
 ]
 
-const seed = () =>
-  Promise.all(accessories.map(accessory =>
+const seed = () => {
+  return Promise.all(accessories.map(accessory =>
     Accessory.create(accessory))
   )
+  .then(() => {
+    return Promise.all(users.map(user =>
+      User.create(user))
+    )
+  })
+}
+
 
 const main = () => {
   console.log('Syncing db...')
