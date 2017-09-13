@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) { /* etc */});
 // matches PUT requests to /api/users/:userId
 router.put('/:userId', function (req, res, next) { /* etc */});
-// matches DELTE requests to /api/users/:userId
+// matches DELETE requests to /api/users/:userId
 router.delete('/:userId', function (req, res, next) { /* etc */});
 
 module.exports = router;

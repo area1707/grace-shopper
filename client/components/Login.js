@@ -61,7 +61,7 @@ class Login extends React.Component {
 
   onLoginSubmit(event) {
     event.preventDefault();
-    const { message, currentUser } = this.props;
+    const { message, currentUser } = this.props; // OB/SRC: dead code
     const email = event.target.email.value
     const password = event.target.password.value
     store.dispatch(verifyUser({email, password}))

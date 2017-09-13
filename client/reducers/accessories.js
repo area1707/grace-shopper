@@ -20,6 +20,7 @@ const accessoriesReducer = function(state=[], action) {
     case CREATE:
       return [action.accessory, ...state]
     case UPDATE:
+      // OB/SRC: could be a .map operation
       return [
         ...state.filter(accessory => accessory.id !== action.accessory.id),
         Object.assign({}, action.accessory)
@@ -40,9 +41,14 @@ export function fetchAccessories() {
   }
 }
 
+// OB/SRC: lacking `return`s in functions below
+
 export const removeAccessory = id => dispatch => {
+  // OB/SRC: optimistic, cool!
   dispatch(remove(id));
   axios.delete(`/api/accessories/${id}`)
+    // OB/SRC: inconsistent indentation
+    // OB/SRC: consider react-toastr (or things like it) for error reporting to users
        .catch(err => console.error(`Removing accessory: ${id} unsuccessful`, err));
 }
 

@@ -1,6 +1,7 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 
+// OB/SRC: consider validations on these fields
 const Accessory = db.define('accessory', {
   name: {
     type: Sequelize.STRING,
@@ -12,7 +13,7 @@ const Accessory = db.define('accessory', {
     allowNull: false
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER, // OB/SRC: good!
     allowNull: false
   },
   color: {

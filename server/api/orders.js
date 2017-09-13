@@ -5,6 +5,7 @@ const Order_accessory = require('../db/models/order_accessory')
 //api/orders
 module.exports = router
 
+// OB/SRC: /api/orders/:userId non standard, consider /api/orders?userId=? /api/users/userId/orders
 router.get('/:user_id', (req, res, next) => {
   Order.findAll({
     where: {
@@ -15,11 +16,13 @@ router.get('/:user_id', (req, res, next) => {
   .catch(next)
 })
 
+// OB/SRC: perfect place for class method
 //the aim is when an order is posted in our order table, we also need to create a row in order_accessories (join table)
 //we can do this by looking up the id of the resulted order, and then returns an array of accessory IDs
 // we take the accessory ids to update the inventory of the accessories
 router.post('/:user_id', (req, res, next) => {
   Order.create(req.body)
+  // OB/SRC: undead code
   // .then(result => {
   //   let orderArr = result.order
   //   orderArr.map(order => {
