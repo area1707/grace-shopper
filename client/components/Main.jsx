@@ -12,6 +12,13 @@ import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
 
 export default class Main extends Component {
+  constructor() {
+    super()
+    this.state = {
+      searchValue: ''
+    }
+  }
+
   componentDidMount () {
     store.dispatch(fetchAccessories())
   }

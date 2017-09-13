@@ -33,6 +33,7 @@ class Navbar extends React.Component {
           { this.renderLogout() }
           { this.renderLoginSignup() }
           { this.renderSearch() }
+          <SearchValues searchValue={this.state.searchValue} />
           {console.log(this.state)}
         </div>
       </nav>
