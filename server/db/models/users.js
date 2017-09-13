@@ -26,6 +26,10 @@ const User = db.define('user', {
   },
   shipping_address: {
     type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 }, {
   hooks: {

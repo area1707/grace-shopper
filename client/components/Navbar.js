@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import history from './history'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -14,8 +15,9 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav>
-        <div>
+      <nav className="navbar navbar-default">
+        <div className="container">
+          { this.renderHome() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
         </div>
@@ -23,18 +25,24 @@ class Navbar extends React.Component {
     )
   }
 
+  renderHome() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li>
+          <NavLink to="/" activeClassName="active">Home</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
   renderLoginSignup() {
     return (
-      <ul>
+      <ul className="nav navbar-nav navbar-right">
         <li>
-          <button>
-            <NavLink to="/signup" activeClassName="active">signup</NavLink>
-          </button>
+          <NavLink to="/signup" activeClassName="active">signup</NavLink>
         </li>
         <li>
-          <button>
-            <NavLink to="/login" activeClassName="active">login</NavLink>
-          </button>
+          <NavLink to="/login" activeClassName="active">login</NavLink>
         </li>
       </ul>
     );
@@ -42,7 +50,7 @@ class Navbar extends React.Component {
 
   renderLogout() {
     return (
-      <ul>
+      <ul className="nav navbar-nav navbar-right">
         <li>
         <button
           className="navbar-btn btn btn-default"
@@ -61,11 +69,11 @@ const mapProps = null;
 
 const mapDispatch = dispatch => ({
   logout: () => {
-    axios.get('/logout')
+    axios.get('/api/users/logout')
     .then(() => {
       console.log('You signed out.');
     })
-    this.props.history.push('/');
+    history.push('/');
   }
 });
 
