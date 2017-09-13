@@ -15,8 +15,9 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav>
-        <div>
+      <nav className="navbar navbar-default">
+        <div className="container">
+          { this.renderHome() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
         </div>
@@ -24,18 +25,24 @@ class Navbar extends React.Component {
     )
   }
 
+  renderHome() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li>
+          <NavLink to="/" activeClassName="active">Home</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
   renderLoginSignup() {
     return (
-      <ul>
+      <ul className="nav navbar-nav navbar-right">
         <li>
-          <button>
-            <NavLink to="/signup" activeClassName="active">signup</NavLink>
-          </button>
+          <NavLink to="/signup" activeClassName="active">signup</NavLink>
         </li>
         <li>
-          <button>
-            <NavLink to="/login" activeClassName="active">login</NavLink>
-          </button>
+          <NavLink to="/login" activeClassName="active">login</NavLink>
         </li>
       </ul>
     );
@@ -43,7 +50,7 @@ class Navbar extends React.Component {
 
   renderLogout() {
     return (
-      <ul>
+      <ul className="nav navbar-nav navbar-right">
         <li>
         <button
           className="navbar-btn btn btn-default"
