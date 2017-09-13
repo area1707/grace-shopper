@@ -14,6 +14,7 @@ class SingleAccessory extends Component {
       image: this.props.accessory.imageUrl,
       price: this.props.accessory.price
     }
+    // OB/SRC: can use arrow function class syntax instead of bind (see below)
     this.removeAccessory = this.removeAccessory.bind(this)
     this.doneEdit = this.doneEdit.bind(this)
     this.clickEdit = this.clickEdit.bind(this)
@@ -26,6 +27,7 @@ class SingleAccessory extends Component {
   render() {
     const { accessory } = this.props
     if (this.state.isEditing) {
+      // OB/SRC: consider splitting this component up into multiple components
       return (
         <div className="list-group-item min-content user-item">
           <form className="media">
@@ -128,6 +130,12 @@ class SingleAccessory extends Component {
       </div>
     );
   }
+  // // OB/SRC: instead of `.bind`, can be arrow function (need a babel plugin)
+  // removeAccessory = (event) => {
+  //   const { accessory, removeAccessory } = this.props;
+  //   event.stopPropagation()
+  //   removeAccessory(accessory.id)
+  // }
   removeAccessory (event) {
     const { accessory, removeAccessory } = this.props;
     event.stopPropagation()

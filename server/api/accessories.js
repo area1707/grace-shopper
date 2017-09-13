@@ -16,6 +16,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/:accessoryId', (req, res, next) => {
   Accessory.findById(req.params.accessoryId)
+  // OB/SRC: probably mean to use lower case here?
   .then(Accessory => res.json(Accessory))
   .catch(next)
 })
@@ -26,13 +27,14 @@ router.put('/:accessoryId', (req, res, next) => {
     {where: {id: req.params.accessoryId},
     returning: true})
   .then(result => {
-    res.status(200).json(result[1][0])
+    res.status(200).json(result[1][0]) // OB/SRC: document what's going on here
   })
   .catch(next)
 })
 
 router.delete('/:accessoryId', (req, res, next) => {
   Accessory.findById(req.params.accessoryId)
+  // OB/SRC: probably mean to use lower case here?
   .then(Accessory => Accessory.destroy())
   .then(() => res.sendStatus(204))
   .catch(next)

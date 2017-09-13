@@ -32,6 +32,7 @@ const dbStore = new SequelizeStore({ db })
 dbStore.sync()
 
 // plug the store into our session middleware
+// OB/SRC: inconsistent indentation
 app.use(session({
     secret: process.env.SESSION_SECRET,
     store: dbStore,
@@ -55,6 +56,7 @@ passport.deserializeUser( (id, done) => {
 
 app.use('/api', require('./api')); // matches all requests to /api
 
+// OB/SRC: login / auth routes could be put into their own module
 //route for login
 app.post('/login', (req, res, next) => {
   User.findOne( {

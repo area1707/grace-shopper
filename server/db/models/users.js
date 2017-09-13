@@ -21,6 +21,7 @@ const User = db.define('user', {
   salt: {
     type: Sequelize.STRING
   },
+  // OB/SRC: inconsistent casing
   google_id: {
     type: Sequelize.STRING
   },

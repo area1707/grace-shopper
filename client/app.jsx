@@ -8,7 +8,7 @@ import '../public/index.scss'
 
 render (
   <Provider store={store}>
-    <Router>
+    <Router> {/* OB/SRC: killll meeeee */}
       <Main />
     </Router>
   </Provider>,

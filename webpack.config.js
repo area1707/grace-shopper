@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+const webpack = require('webpack') // OB/SRC: dead code, unnecessary dep
 
 module.exports = {
     entry: './client/app.jsx', //entry point in client app.js

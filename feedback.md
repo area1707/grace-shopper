@@ -1,0 +1,10 @@
+- Commit as often as you would "save" (a word doc)
+- Commit messages are reasonable, but could be even better https://seesparkbox.com/foundry/semantic_commit_messages
+- Contribution guide!
+- README.md
+- Delete dead branches
+- As you build out your routes, look for bloated code that could become instance/class methods in your model, hooks, getters/setters
+- Test-as-you-go
+- Anytime you find yourself "manually" testing that something works, good time to consider making it an automated test
+- Consider a linter
+- Many reducers are dead
