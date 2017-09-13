@@ -8,6 +8,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
 import AccessoryDetail from './AccessoryDetail'
+import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
 
 export default class Main extends Component {
@@ -19,11 +20,13 @@ export default class Main extends Component {
     return(
       <Router history={history}>
         <Root>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
+            <Route path="/search" component={SearchValues} />
           </Switch>
         </Root>
       </Router>
