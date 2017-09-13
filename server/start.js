@@ -9,6 +9,7 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
+
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
 app.use(morgan('dev'))
@@ -25,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // configure and create our database store
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const dbStore = new SequelizeStore({ db: db })
+const dbStore = new SequelizeStore({ db })
 
 // sync so that our session table gets created
 dbStore.sync()
