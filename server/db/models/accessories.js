@@ -31,6 +31,7 @@ const Accessory = db.define('accessory', {
   }
 }, {})
 
+// OB/SRC: exorcise undead code (from master)
 // Accessory.hook('beforeUpdate', (accessory, options) => {
 //   return accessory.inventory--
 // })

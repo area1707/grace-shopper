@@ -1,0 +1,5 @@
+- Commit as often as you would "save" (a word doc)
+- Commit messages are reasonable, but could be even better https://seesparkbox.com/foundry/semantic_commit_messages
+- Contribution guide!
+- README.md
+- Delete dead branches
