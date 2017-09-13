@@ -8,9 +8,7 @@ import '../public/index.scss'
 
 render (
   <Provider store={store}>
-    <Router>
       <Main />
-    </Router>
   </Provider>,
   document.getElementById('main')
 )
