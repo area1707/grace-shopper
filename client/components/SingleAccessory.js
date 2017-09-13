@@ -78,6 +78,15 @@ class SingleAccessory extends Component {
             <p className="">
               <span placeholder="tabby glasses">{accessory.description}</span>
             </p>
+            <p className="">
+              <span placeholder="10">Color: {accessory.color}</span>
+            </p>
+            <p className="">
+              <span placeholder="$10">${accessory.price}</span>
+            </p>
+            <p className="">
+              <span placeholder="10">In store: {accessory.inventory}</span>
+            </p>
           </NavLink>
           <div className="media-right media-middle">
             <button
