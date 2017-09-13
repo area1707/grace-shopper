@@ -7,6 +7,7 @@ import history from './history'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import Cart from './Cart'
 import AccessoryDetail from './AccessoryDetail'
 import {fetchAccessories} from '../reducers/accessories'
 
@@ -23,6 +24,7 @@ export default class Main extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/cart" component={Cart} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
           </Switch>
         </Root>
