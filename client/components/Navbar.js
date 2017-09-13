@@ -18,12 +18,15 @@ class Navbar extends React.Component {
       <nav className="navbar navbar-default">
         <div className="container">
           { this.renderHome() }
+          { this.renderCart() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
         </div>
       </nav>
     )
   }
+
+
 
   renderHome() {
     return (
@@ -35,6 +38,16 @@ class Navbar extends React.Component {
     )
   }
 
+  renderCart() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li>
+          <NavLink to="/cart" activeClassName="active">Cart</NavLink>
+        </li>
+      </ul>
+    )
+  }
+  
   renderLoginSignup() {
     return (
       <ul className="nav navbar-nav navbar-right">
