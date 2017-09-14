@@ -3,7 +3,9 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {removeAccessory, updateAccessory} from '../reducers/accessories'
-import {addItem} from '../reducers/cart'
+import {receiveLineItem, addToCart} from '../reducers/cart'
+import axios from 'axios'
+import store from '../store'
 
 class SingleAccessory extends Component {
   constructor(props){
@@ -21,10 +23,11 @@ class SingleAccessory extends Component {
     this.updateAccessoryName = this.updateAccessoryName.bind(this)
     this.updateAccessoryImage = this.updateAccessoryImage.bind(this)
     this.updateAccessoryPrice = this.updateAccessoryPrice.bind(this)
+    this.handleCartAdd = this.handleCartAdd.bind(this)
   }
 
   render() {
-    const { accessory } = this.props
+    const { accessory, receiveLineItem, user } = this.props
     if (this.state.isEditing) {
       return (
         <div className="list-group-item min-content user-item">
@@ -117,12 +120,13 @@ class SingleAccessory extends Component {
             </button>
           </div>
           <div className="media-right media-middle">
+             <NavLink to="/cart" onClick={(e) => this.handleCartAdd(e, user, accessory)}>
             <button
                 className="btn btn-default"
-                onClick={() => this.props.addItem(accessory, 1) }
                 value={accessory.id}>
               <span className="glyphicon glyphicon-plus" />
             </button>
+          </NavLink>
           </div>
         </div>
       </div>
@@ -161,9 +165,13 @@ class SingleAccessory extends Component {
   cancelEdit(event) {
     return this.setState({isEditing: false})
   }
+  handleCartAdd(e, user, selectedProduct) {
+    e.preventDefault()
+    this.props.addToCart(user, selectedProduct)
+  }
 }
 
-const mapState = ({accessories}) => ({accessories})
-const mapDispatch = {removeAccessory, updateAccessory, addItem}
+const mapState = ({accessories, user}) => ({accessories, user})
+const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart}
 
 export default withRouter(connect(mapState, mapDispatch)(SingleAccessory))

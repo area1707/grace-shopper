@@ -1,94 +1,111 @@
-import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
+import { Grid, Row, Col, Button, FormControl, Form, FormGroup, ControlLabel } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import {withRouter} from 'react-router'
-import {removeAccessory, addAccessory} from '../reducers/accessories'
-import Home from './Home'
+import {connect} from 'react-redux'
+import axios from 'axios'
+import {updateLineItem, removeLineItem, addToCart} from '../reducers/cart'
 
 class Cart extends Component {
+
   constructor(props) {
     super(props)
-    this.state = {
-      quantity: 1
-    }
-    this.updateQuantity = this.updateQuantity.bind(this)
-    this.calculateTotal = this.calculateTotal.bind(this)
-    this.calculateSubTotal = this.calculateSubTotal.bind(this)
   }
+
   render() {
-    const {accessories, cart} = this.props
-    console.log('cart', cart)
-    if (!cart.length) {
-      return(
-        <div>
-          <h3>Add Items to your cart!</h3>
-          <Home />
-        </div>
-      )
-    }
-    return(
-      <table className="table">
-        <thead>
-          <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total</th>
-          </tr>
-        </thead>
-        <tbody className="container">
-          {
-            cart.map((itemDetails) => (
-              <tr>
-                <th key={itemDetails.item.name}>
-                  {itemDetails.item.name}
-                </th>
-                <th>
-                <input
-                  name="quantity"
-                  type="text"
-                  required
-                  className="form-like"
-                  value={this.state.quantity}
-                  onChange={this.updateQuantity}
-                />
-                </th>
-                <th key={itemDetails.item.price}>
-                  {itemDetails.item.price}
-                </th>
-                <th>
-                  {this.calculateTotal(itemDetails.item.price, this.state.quantity)}
-                </th>
-              </tr>
-            ))
-          }
-          <tr>
-            <th></th>
-            <th></th>
-            <th>SubTotal</th>
-            <th>{this.calculateSubTotal(cart)}</th>
-          </tr>
-        </tbody>
-      </table>
+  let total = 0
+  const {lineItems, handleUpdate, handleRemove} = this.props
+  console.log('lineItems', lineItems)
+  let rows = lineItems && lineItems.map(item => {
+    let price = (item.accessory.price * item.quantity).toFixed(2);
+    total += +price;
+
+    return (
+      <div key={item.id} >
+        <Row className="show-grid">
+          <Col sm={2} md={2} >
+            <Link to={`accessories/${item.accessory.id}`}>
+              <img className="image-responsive" src={item.accessory.photo} />
+            </Link>
+          </Col>
+
+          <Col sm={5} md={5} >
+            <h3>{item.accessory.name}</h3>
+            <br />
+            <Form inline onSubmit={(e) => handleUpdate(e, item.id)}>
+              <FormGroup controlId="formInlineName">
+                <ControlLabel><h4>Quantity: </h4></ControlLabel>
+                {' '}
+                <FormControl className="quantity-form" type="text" defaultValue={item.quantity} name="inputField"/>
+                <Button type="submit" bsStyle='primary'>Update Cart</Button>
+              </FormGroup>
+            </Form>
+          </Col>
+
+          <Col sm={2} md={2}>
+            <h4>${price}
+            </h4>
+          </Col>
+          <br />
+          <Button bsStyle='danger' onClick={(e) => handleRemove(e, item.id)}>Remove</Button>
+
+        </Row>
+        <hr />
+      </div>
     )
-  }
-  updateQuantity(event) {
-    const quantity = event.target.value
-    this.setState({quantity})
-    // return quantity
-  }
-  calculateTotal(price, quantity) {
-    return price * quantity
-  }
-  calculateSubTotal(cart) {
-    let priceArr = []
-    priceArr = cart.map(item => item.item.price)
-    let sum = priceArr.reduce((sum, currVal) => (sum + currVal))
-    return sum
+  })
+
+  if (!rows.length) {rows = <h4>Add your items!</h4>}
+  total = total === 0 ? null : '$' + total.toFixed(2);
+
+  return (
+    <Grid className="cart">
+      <h1>Your Cart</h1>
+      <br />
+      <br />
+       <Row className="show-grid">
+         { rows }
+       </Row>
+       <Row className="show-grid">
+         <Col sm={2} md={2} />
+         <Col sm={2} md={5} />
+         <Col sm={2} md={2}><h4>{total}</h4></Col>
+          <LinkContainer to="/order" >
+            <Button bsStyle='info'>
+              PROCEED TO CHECKOUT
+            </Button>
+          </LinkContainer>
+
+       </Row>
+    </Grid>
+  )
+}
+}
+
+const mapState = (state) => {
+  return {
+    lineItems: state.cart.lineItems
   }
 }
 
-const mapState = ({accessories, cart}) => ({accessories, cart})
-const mapDispatch = {removeAccessory, addAccessory};
+const mapDispatch = (dispatch) => {
+  return {
+    handleRemove: function(e, lineItemId) {
+      e.preventDefault();
+      axios.delete(`/api/cart/item/${lineItemId}`)
+        .then(status => {
+          dispatch(removeLineItem(lineItemId))
+        })
+        .catch(console.error)
+    },
+    handleUpdate: function(e, lineItemId) {
+      e.preventDefault();
+      axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
+        .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
+        .catch(console.error)
+    }
+  }
+}
 
 export default withRouter(connect(mapState, mapDispatch)(Cart))

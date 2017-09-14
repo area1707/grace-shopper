@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {Route, Switch} from 'react-router-dom'
-import { Router } from 'react-router';
+// import {Route, Switch} from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router';
 import store from '../store'
 import Root from './Root'
 import history from './history'
@@ -12,11 +12,14 @@ import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers} from '../reducers/users'
+import { receiveProducts, receiveProduct } from '../reducers/accessories'
+import { fetchCart } from '../reducers/cart'
 
 export default class Main extends Component {
   componentDidMount () {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
+    store.dispatch(fetchCart())
   }
 
   render() {
@@ -36,4 +39,3 @@ export default class Main extends Component {
     )
   }
 }
-

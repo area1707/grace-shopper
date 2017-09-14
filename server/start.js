@@ -17,8 +17,6 @@ app.use(morgan('dev'))
 //static middleware
 app.use(express.static(path.join(__dirname, '../public')))
 
-//any front end routes that don't match our api routes go to index.html
-
 //parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -117,9 +115,7 @@ passport.use(
   // Google will send back the token and profile
   function (token, refreshToken, profile, done) {
     // the callback will pass back user profile information and each service (Facebook, Twitter, and Google) will pass it back a different way. Passport standardizes the information that comes back in its profile object.
-    /*
-    --- fill this part in ---
-    */
+
     var info = {
       name: profile.displayName,
       email: profile.emails[0].value
