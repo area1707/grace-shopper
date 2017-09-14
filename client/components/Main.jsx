@@ -11,6 +11,7 @@ import Cart from './Cart'
 import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
+import OrderCheckout from './OrderCheckout'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers} from '../reducers/users'
 
@@ -45,6 +46,8 @@ export default class Main extends Component {
             <Route path="/search"
                 render = {() => <Home searchValue={this.state.searchValue} />}
             />
+            {/* for testing */}
+            <Route path="/checkout" component={OrderCheckout} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
