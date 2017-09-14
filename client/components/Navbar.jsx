@@ -9,11 +9,22 @@ import history from './history'
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      searchValue: ''
+    }
+
+    this.renderHome = this.renderHome.bind(this);
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
     this.renderLogout = this.renderLogout.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
+    this.renderCart = this.renderCart.bind(this);
   }
 
   render() {
+
+    const { accessories } = this.props
+
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -49,15 +60,31 @@ class Navbar extends React.Component {
     )
   }
 
+  // search everything
   renderSearch() {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <form className="navbar-form navbar-right" role="search">
+          <form className="navbar-form navbar-right" role="search" onSubmit={ (event) => {
+            event.preventDefault() 
+            this.props.handleSubmit(this.state.searchValue) 
+            this.setState({searchValue: ''})
+            } }>
+
             <div className="form-group" >
-                <input id="inputsm" type="text" className="form-control input-sm" placeholder="Search"/>
+                <input 
+                  id="inputsm" 
+                  type="text" 
+                  className="form-control input-sm" 
+                  placeholder="Search for..."
+                  onChange={evt => this.setState({ searchValue: evt.target.value })} 
+                  value={this.state.searchValue}     
+                  />
             </div>
-            <button type="submit" className="navbar-btn btn btn-default">Submit</button>
+            <button 
+              type="submit" 
+              className="navbar-btn btn btn-default"
+              >Submit</button>
           </form>
         </li>
       </ul>
