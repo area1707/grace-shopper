@@ -9,6 +9,7 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
+const Cart = require('./db/models/cart')
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
@@ -36,6 +37,33 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use((req, res, next) => {
+  if (req.session.cartId) {
+    Cart.findOrCreate({
+      where: {
+        id: req.session.cartId
+      }
+    })
+    .then(cart => {
+      req.cart = cart
+      next()
+    })
+    .catch(next)
+  } else {
+    Cart.create()
+    .then(cart => {
+      req.cart = cart
+      req.session.cartId = cart.id
+      next()
+    })
+    .catch(next)
+  }
+})
+
+app.get('/me', (req, res, next) => {
+  res.json(req.user)
+})
 
 //initializing passport
 app.use(passport.initialize())
@@ -92,9 +120,6 @@ app.post('/logout', (req, res, next) => {
   res.sendStatus(200)
 })
 
-app.get('/me', (req, res, next) => {
-  res.json(req.user)
-})
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 

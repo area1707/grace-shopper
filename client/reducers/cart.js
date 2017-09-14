@@ -83,7 +83,7 @@ export const fetchCart = () => dispatch => {
 }
 
 export const addToCart = (user, selectedProduct) => dispatch => {
-  return axios.post(`/api/cart/${user.id || 'unauthUser'}`, {product: selectedProduct})
+  return axios.post(`/api/cart/`, {product: selectedProduct})
     .then(createdLineItem => dispatch(receiveLineItem(createdLineItem.data)))
     .catch(console.error)
 }
@@ -94,8 +94,8 @@ export const removeFromCart = (lineItemId) => dispatch => {
     .catch(console.error)
 }
 
-export const updateQuantity = (e, lineItemId) => dispatch => {
-  return axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
+export const updateQuantity = (lineItemId, quantity) => dispatch => {
+  return axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: quantity})
     .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
     .catch(console.error)
 }

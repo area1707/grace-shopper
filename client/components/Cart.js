@@ -16,7 +16,6 @@ class Cart extends Component {
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
-  console.log('lineItems', lineItems)
   let rows = lineItems && lineItems.map(item => {
     let price = (item.accessory.price * item.quantity).toFixed(2);
     total += +price;

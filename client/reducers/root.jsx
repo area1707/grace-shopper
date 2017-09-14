@@ -6,7 +6,6 @@ import users from './users'
 import cart from './cart'
 import accessories from './accessories'
 import currentUser from './login'
-import user from './auth'
 
 const rootReducer = combineReducers({
   glasses,
@@ -15,8 +14,7 @@ const rootReducer = combineReducers({
   users,
   accessories,
   currentUser,
-  cart,
-  user
+  cart
 })
 
 export default rootReducer
