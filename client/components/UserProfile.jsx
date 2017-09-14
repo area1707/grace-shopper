@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchSingleUser } from '../reducers/users'
 
-class UserProfile extends Component {
+export class UserProfile extends Component {
     render() {
         const { user } = this.props
         return (

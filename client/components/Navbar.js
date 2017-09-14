@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import history from './history'
+import {logUserOut} from '../reducers/login'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -115,14 +116,24 @@ class Navbar extends React.Component {
   }
 
   renderLoginSignup() {
+    const {currentUser} = this.props
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
           <NavLink to="/signup" activeClassName="active">signup</NavLink>
         </li>
+        {
+        (Object.keys(currentUser).length !== 0) ?
+        <li>
+          <NavLink to={`users/${currentUser.id}`}>
+          Welcome {this.props.currentUser.name}!
+          </NavLink>
+        </li>
+        :
         <li>
           <NavLink to="/login" activeClassName="active">login</NavLink>
         </li>
+      }
       </ul>
     );
   }
@@ -133,7 +144,7 @@ class Navbar extends React.Component {
         <li>
         <button
           className="navbar-btn btn btn-default"
-          onClick={this.props.logout}>
+          onClick={() => this.props.logUserOut(this.props.currentUser)}>
           logout
         </button>
         </li>
@@ -144,16 +155,13 @@ class Navbar extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapProps = null;
-
-const mapDispatch = dispatch => ({
-  logout: () => {
-    axios.get('/api/users/logout')
-    .then(() => {
-      console.log('You signed out.');
-    })
-    history.push('/');
+const mapProps = ({currentUser}) => {
+  console.log('currentUser', currentUser)
+  return {
+    currentUser: currentUser
   }
-});
+}
+
+const mapDispatch = {logUserOut}
 
 export default withRouter(connect(mapProps, mapDispatch)(Navbar));

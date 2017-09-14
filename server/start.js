@@ -9,6 +9,7 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
+const Order = require('./db/models/orders')
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
@@ -16,8 +17,6 @@ app.use(morgan('dev'))
 
 //static middleware
 app.use(express.static(path.join(__dirname, '../public')))
-
-//any front end routes that don't match our api routes go to index.html
 
 //parsing middleware
 app.use(bodyParser.json());
@@ -38,6 +37,33 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use((req, res, next) => {
+  if (req.session.cartId) {
+    Order.findOrCreate({
+      where: {
+        id: req.session.cartId
+      }
+    })
+    .then(cart => {
+      req.cart = cart[0]
+      next()
+    })
+    .catch(next)
+  } else {
+    Order.create()
+    .then(cart => {
+      req.cart = cart
+      req.session.cartId = cart.id
+      next()
+    })
+    .catch(next)
+  }
+})
+
+app.get('/me', (req, res, next) => {
+  res.json(req.user)
+})
 
 //initializing passport
 app.use(passport.initialize())
@@ -94,9 +120,6 @@ app.post('/logout', (req, res, next) => {
   res.sendStatus(200)
 })
 
-app.get('/me', (req, res, next) => {
-  res.json(req.user)
-})
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 
@@ -117,9 +140,7 @@ passport.use(
   // Google will send back the token and profile
   function (token, refreshToken, profile, done) {
     // the callback will pass back user profile information and each service (Facebook, Twitter, and Google) will pass it back a different way. Passport standardizes the information that comes back in its profile object.
-    /*
-    --- fill this part in ---
-    */
+
     var info = {
       name: profile.displayName,
       email: profile.emails[0].value

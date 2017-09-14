@@ -1,6 +1,7 @@
 const db = require('./server/db')
 const Accessory = require('./server/db/models/accessories')
 const User = require('./server/db/models/users')
+const Review = require('./server/db/models/reviews')
 
 const accessories = [
   {
@@ -383,6 +384,80 @@ const users = [
   },
 ]
 
+const reviews = [
+  {
+    content: 'a purrfect pair of glasses',
+    star: 5,
+    accessoryId: 2,
+    userId: 1
+  },
+  {
+    content: 'would purrfer if they were more feline',
+    star: 3,
+    accessoryId: 2,
+    userId: 2
+  },
+  {
+    content: 'who would go in the water?!',
+    star: 1,
+    accessoryId: 4,
+    userId: 2
+  },
+  {
+    content: 'feliz cumpleaños, feline!',
+    star: 4,
+    accessoryId: 8,
+    userId: 1
+  },
+  {
+    content: 'fit for royalty!',
+    star: 5,
+    accessoryId: 15,
+    userId: 2
+  },
+  {
+    content: 'a fez fit for a feline friend!',
+    star: 4,
+    accessoryId: 11,
+    userId: 3
+  },
+  {
+    content: 'delish!',
+    star: 5,
+    accessoryId: 26,
+    userId: 4
+  },
+  {
+    content: 'would have preferred it alive...',
+    star: 3,
+    accessoryId: 22,
+    userId: 4
+  },
+  {
+    content: 'who doesn\'t love a good pizza?',
+    star: 4,
+    accessoryId: 23,
+    userId: 1
+  },
+  {
+    content: 'used to be alive...',
+    star: 1,
+    accessoryId: 24,
+    userId: 1
+  },
+  {
+    content: 'a purrfect spot to curl up next to',
+    star: 4,
+    accessoryId: 28,
+    userId: 3
+  },  {
+    content: 'wish it were a bit stronger :(',
+    star: 3,
+    accessoryId: 39,
+    userId: 4
+  },
+]
+
 const seed = () => {
   return Promise.all(accessories.map(accessory =>
     Accessory.create(accessory))
@@ -390,6 +465,11 @@ const seed = () => {
   .then(() => {
     return Promise.all(users.map(user =>
       User.create(user))
+    )
+  })
+  .then(() => {
+    return Promise.all(reviews.map(review =>
+      Review.create(review))
     )
   })
 }
