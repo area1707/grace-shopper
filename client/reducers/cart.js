@@ -73,7 +73,10 @@ export default cartReducer
 
 export const addToCart = (user, selectedProduct) => dispatch => {
   return axios.post(`/api/cart/`, {product: selectedProduct})
-    .then(createdLineItem => dispatch(receiveLineItem(createdLineItem.data)))
+    .then(createdLineItem => {
+      console.log('createdLineItem inside addToCart', createdLineItem)
+      dispatch(receiveLineItem(createdLineItem.data))
+    })
     .catch(console.error)
 }
 
@@ -87,4 +90,8 @@ export const updateQuantity = (lineItemId, quantity) => dispatch => {
   return axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: quantity})
     .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
     .catch(console.error)
+}
+export const fetchItemsInCart = (orderId) => dispatch => {
+  return axios.get(`/api/cart/${orderId}`)
+  .then(itemsArr => dispatch(receiveLineItems(itemsArr)))
 }

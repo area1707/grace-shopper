@@ -46,7 +46,7 @@ app.use((req, res, next) => {
       }
     })
     .then(cart => {
-      req.cart = cart
+      req.cart = cart[0]
       next()
     })
     .catch(next)

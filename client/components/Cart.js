@@ -5,32 +5,31 @@ import { Link } from 'react-router-dom'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {updateLineItem, removeLineItem, addToCart} from '../reducers/cart'
+import {updateLineItem, removeLineItem, addToCart, fetchItemsInCart} from '../reducers/cart'
 
 class Cart extends Component {
 
   constructor(props) {
     super(props)
   }
-
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
   let rows = lineItems && lineItems.map(item => {
-    let price = (item.accessory.price * item.quantity).toFixed(2);
+    let price = (item.price * item.quantity).toFixed(2);
     total += +price;
 
     return (
       <div key={item.id} >
         <Row className="show-grid">
           <Col sm={2} md={2} >
-            <Link to={`accessories/${item.accessory.id}`}>
-              <img className="image-responsive" src={item.accessory.photo} />
+            <Link to={`accessories/${item.id}`}>
+              <img className="image-responsive" src={item.imageUrl} />
             </Link>
           </Col>
 
           <Col sm={5} md={5} >
-            <h3>{item.accessory.name}</h3>
+            <h3>{item.name}</h3>
             <br />
             <Form inline onSubmit={(e) => handleUpdate(e, item.id)}>
               <FormGroup controlId="formInlineName">
@@ -87,6 +86,7 @@ const mapState = (state) => {
     lineItems: state.cart.lineItems
   }
 }
+// const mapState = {}
 
 const mapDispatch = (dispatch) => {
   return {
@@ -103,6 +103,9 @@ const mapDispatch = (dispatch) => {
       axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
         .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
         .catch(console.error)
+    },
+    fetchItems: function(orderId) {
+      dispatch(fetchItemsInCart(orderId))
     }
   }
 }

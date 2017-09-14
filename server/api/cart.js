@@ -6,14 +6,13 @@ const api = module.exports = require('express').Router()
 
 api.post('/', (req, res, next) => {
     let product = req.body.product
-    //try to use addAccessory (magic method) but it didn't work
-    req.cart.addAccessory(product.id)
-    // LineItem.create({
-    //   cartId: req.session.cartId,
-    //   accessoryId: product.id
-    // })
-    // .then(line => LineItem.scope('default').findById(line.id))
-    .then(line => res.send(line))
+    console.log('req.cart', req.cart)
+    return req.cart.addAccessory(product.id)
+    .then(() => {
+      // console.log('line inside post cart', Object.keys(line))
+      Accessory.findById(product.id)
+      .then(line => res.send(line))
+    })
     .catch(next)
 })
 
@@ -21,7 +20,7 @@ api.post('/', (req, res, next) => {
 api.get('/:userId', (req, res, next) => {
     Order.findById(req.session.cartId)
     .then(cart => {
-      if (cart) return Order_accessory.scope('default').findAll({where: {orderId: req.session.cartId}})
+      if (cart) return Order_accessory.findAll({where: {orderId: req.session.cartId}})
       else {return []}
     })
     .then(lineItems => res.send(lineItems))
@@ -38,4 +37,21 @@ api.put(`/item/:lineItemId`, (req, res, next) => {
     Order_accessory.update({quantity: req.body.newQuantity}, {where: {accessoryId: req.params.lineItemId}})
         .then(updated => res.send(req.body.newQuantity))
         .catch(next)
+})
+
+api.get('/:orderId', (req, res, next) => {
+  Order_accessory.findAll({
+    where: {
+      orderId: req.params.orderId
+    }
+  })
+  .then(accArr => {
+    accArr.map(acc => Accessory.find({
+      where: {
+        id: acc.accessoryId
+      }
+    }))
+  .then(result => res.send(result))
+  .catch(next)
+  })
 })
