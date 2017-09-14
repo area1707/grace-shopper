@@ -2,12 +2,11 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
-import {removeAccessory, updateAccessory} from '../reducers/accessories'
-import {addItem} from '../reducers/cart'
 
 function SingleReview(props) {
 
   console.log('HERE!!!!', props)
+    const review  = props.review
     return (
       <div className="list-group-item min-content students-item">
         {/* <div className="media">
@@ -60,7 +59,7 @@ function SingleReview(props) {
           </div>
         </div> */}
         {/* {review} */}
-        test
+        {review.content}
       </div>
     );
 

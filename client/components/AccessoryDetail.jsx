@@ -17,8 +17,6 @@ function Accessory(props) {
       <SingleAccessory accessory={accessory} />
       {
         reviews.map(review => {
-          console.log(review.accessoryId, 'review.accesoryid')
-          console.log(+accessoryId, 'accesoryid')
           if (review.accessoryId === +accessoryId) return <SingleReview review={review} key={review.id} />
           }
         )
