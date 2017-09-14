@@ -18,29 +18,10 @@ describe('User reducer', () => {
 
     describe('CREATE', () => {
 
-        it('sets firstColor to action color', () => {
-            testStore.dispatch({ type: 'SET_FIRST_COLOR', color: [0, 255, 0] });
+        it('creates new user and adds to users array', () => {
+            testStore.dispatch({ type: 'CREATE', user: {userObj} });
             const newState = testStore.getState();
-            expect(newState.firstColor).to.be.deep.equal([0, 255, 0]);
-            expect(newState.secondColor).to.be.deep.equal([0, 0, 0]);
-            expect(newState.thirdColor).to.be.deep.equal([0, 0, 0]);
-        });
-
-    });
-
-    describe('SET_ALL_COLORS', () => {
-
-        it('sets colors in order to action colors', () => {
-            const newColors = [
-                [255, 0, 0],
-                [0, 255, 0],
-                [0, 0, 255]
-            ];
-            testStore.dispatch({ type: 'SET_ALL_COLORS', colors: newColors });
-            const newState = testStore.getState();
-            expect(newState.firstColor).to.be.deep.equal([255, 0, 0]);
-            expect(newState.secondColor).to.be.deep.equal([0, 255, 0]);
-            expect(newState.thirdColor).to.be.deep.equal([0, 0, 255]);
+            expect(newState.users).to.be.deep.equal([{userObj}]);
         });
 
     });
