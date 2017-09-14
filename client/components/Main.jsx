@@ -10,12 +10,25 @@ import Home from './Home'
 import Cart from './Cart'
 import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
+import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers} from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
 import { fetchCart } from '../reducers/cart'
 
 export default class Main extends Component {
+  constructor() {
+    super()
+    this.state = {
+      searchValue: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit (searchValue) {
+    this.setState({ searchValue })
+  }
+
   componentDidMount () {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
@@ -26,8 +39,15 @@ export default class Main extends Component {
     return(
       <Router history={history}>
         <Root>
+          <Navbar handleSubmit={this.handleSubmit}/>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/"
+              render = {() =>
+                <Home searchValue={''} handleSubmit={this.handleSubmit}/>}
+            />
+            <Route path="/search"
+                render = {() => <Home searchValue={this.state.searchValue} />}
+            />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
