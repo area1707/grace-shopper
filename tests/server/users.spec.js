@@ -1,7 +1,7 @@
 const {expect} = require('chai')
 const request = require('supertest')
-const db = require('../db')
-const app = require('../index')
+const db = require('../../server/db')
+const app = require('../../server/start')
 const User = db.model('user')
 
 describe('User routes', () => {
@@ -15,7 +15,7 @@ describe('User routes', () => {
       return User.create({
         name: 'Bob',
         email: 'bob@bob.com',
-        shipping_addres: '5 Hanover'
+        shipping_address: '5 Hanover'
       })
     })
 
