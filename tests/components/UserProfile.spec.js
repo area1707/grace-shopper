@@ -6,8 +6,8 @@ import {UserProfile} from '../../client/components/UserProfile'
 describe('UserProfile', () => {
   let userProfile
 
-  beforeEach(() => {
-    userProfile = shallow(<UserProfile user={name:'Bob', email:'bob@bob.com', shipping_address:'5 Hanover'} />)
+  beforeEach('Create user component', () => {
+    userProfile = shallow(<UserProfile user={{name:'Bob', email:'bob@bob.com', shipping_address:'5 Hanover'}} />)
   })
 
   it('renders the greeting in an h1', () => {
