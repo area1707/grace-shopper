@@ -3,45 +3,88 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {removeAccessory, addAccessory} from '../reducers/accessories'
+import Home from './Home'
 
 class Cart extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      quantity: 1
+    }
+    this.updateQuantity = this.updateQuantity.bind(this)
+    this.calculateTotal = this.calculateTotal.bind(this)
+    this.calculateSubTotal = this.calculateSubTotal.bind(this)
   }
   render() {
     const {accessories, cart} = this.props
+    console.log('cart', cart)
+    if (!cart.length) {
+      return(
+        <div>
+          <h3>Add Items to your cart!</h3>
+          <Home />
+        </div>
+      )
+    }
     return(
       <table className="table">
         <thead>
           <tr>
               <th>Product</th>
-              <th>Quantiy</th>
+              <th>Quantity</th>
               <th>Price</th>
               <th>Total</th>
           </tr>
         </thead>
         <tbody className="container">
           {
-            cart.map((item, idx) => (
+            cart.map((itemDetails, idx) => (
               <tr>
-                <th key={item.name}>
-                  {item.name}
+                <th key={itemDetails.item.name}>
+                  {itemDetails.item.name}
                 </th>
                 <th>
-                  1
+                <input
+                  name="quantity"
+                  type="text"
+                  required
+                  className="form-like"
+                  value={itemDetails.quantity}
+                  onChange={this.updateQuantity}
+                />
                 </th>
-                <th key={item.price}>
-                  {item.price}
+                <th key={itemDetails.item.price}>
+                  {itemDetails.item.price}
                 </th>
                 <th>
-                  {item.price}
+                  {this.calculateTotal(itemDetails.item.price, itemDetails.quantity)}
                 </th>
               </tr>
             ))
           }
+          <tr>
+            <th></th>
+            <th></th>
+            <th>SubTotal</th>
+            <th>{this.calculateSubTotal(cart)}</th>
+          </tr>
         </tbody>
       </table>
     )
+  }
+  updateQuantity(event) {
+    const quantity = event.target.value
+    // this.setState({quantity})
+    return quantity
+  }
+  calculateTotal(price, quantity) {
+    return price * quantity
+  }
+  calculateSubTotal(cart) {
+    let priceArr = []
+    priceArr = cart.map(item => item.item.price)
+    let sum = priceArr.reduce((sum, currVal) => (sum + currVal))
+    return sum
   }
 }
 

@@ -1,18 +1,22 @@
 export const ADD_TO_CART = 'ADD_TO_CART'
-
+//cart = [{item, quantity}, {item, quantity}]
 export default function cart (state=[], action) {
   switch (action.type) {
     case ADD_TO_CART:
-      return [...state, action.item]
+      // return [...state, action.item]
+      return [...state, {"item": action.item, "quantity": action.quantity}]
     default: return state;
   }
 }
 
-const addItemToCart = item => ({
+const addItemToCart = (item, quantity) => ({
   type: ADD_TO_CART,
-  item
+  item,
+  quantity
 })
 
-export const addItem = item => dispatch => {
-  dispatch(addItemToCart(item))
+const updateQuantity = quantity => ({type: UPDATE_QUANTITY})
+
+export const addItem = (item, quantity) => dispatch => {
+  dispatch(addItemToCart(item, quantity))
 }

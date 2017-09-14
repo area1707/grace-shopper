@@ -119,7 +119,7 @@ class SingleAccessory extends Component {
           <div className="media-right media-middle">
             <button
                 className="btn btn-default"
-                onClick={() => this.props.addItem(accessory) }
+                onClick={() => this.props.addItem(accessory, 1) }
                 value={accessory.id}>
               <span className="glyphicon glyphicon-plus" />
             </button>
