@@ -7,22 +7,22 @@ import SingleAccessory from './SingleAccessory'
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
   }
 
   render(){
     const {accessories, searchValue} = this.props
     let searchResults = [];
     accessories.forEach(accessory => {
-      if (accessory.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) searchResults.push(accessory)
+      if (accessory.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 || accessory.category.toLowerCase() === searchValue.toLowerCase()) searchResults.push(accessory)
     })
+
 
     return (
       <div className="container">
       {
         searchResults.length ? searchResults.map(accessory => {
-          return (<SingleAccessory accessory={accessory} key={accessory.id} />) 
-        }) : 
+          return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+        }) :
         accessories.map(accessory => {
           return (<SingleAccessory accessory={accessory} key={accessory.id} />)
         })
