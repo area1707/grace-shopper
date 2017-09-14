@@ -7,59 +7,22 @@ function SingleReview(props) {
 
   console.log('HERE!!!!', props)
     const review  = props.review
+    const stars = (num) => {
+      let reviewStars = []
+      for (var star = 1; star <= num; star++) {
+        reviewStars.push(<img src="/img/star.svg" className="star" key={star} />)
+      }
+      return reviewStars
+    }
     return (
       <div className="list-group-item min-content students-item">
-        {/* <div className="media">
-          <div className="media-left media-middle icon-container">
-            <img className="media-object img-circle" src={accessory.imageUrl} height="120" width="120"/>
-          </div>
-          <NavLink
-            className="media-body"
-            activeClassName="active"
-            to={`/accessories/${accessory.id}`}>
-            <h4 className="media-heading tucked">
-              <span placeholder="tabby glasses">{accessory.name}</span>
-            </h4>
-            <p className="">
-              <span placeholder="tabby glasses">{accessory.description}</span>
-            </p>
-            <p className="">
-              <span placeholder="10">Color: {accessory.color}</span>
-            </p>
-            <p className="">
-              <span placeholder="$10">${accessory.price}</span>
-            </p>
-            <p className="">
-              <span placeholder="10">In store: {accessory.inventory}</span>
-            </p>
-          </NavLink>
-          <div className="media-right media-middle">
-            <button
-                className="btn btn-default"
-                onClick={this.removeAccessory}
-                value={accessory.id}>
-              <span className="glyphicon glyphicon-remove" />
-            </button>
-          </div>
-          <div className="media-right media-middle">
-            <button
-                className="btn btn-default"
-                onClick={this.clickEdit}
-                value={accessory.id}>
-              <span className="glyphicon glyphicon-edit" />
-            </button>
-          </div>
-          <div className="media-right media-middle">
-            <button
-                className="btn btn-default"
-                onClick={() => this.props.addItem(accessory) }
-                value={accessory.id}>
-              <span className="glyphicon glyphicon-plus" />
-            </button>
-          </div>
-        </div> */}
-        {/* {review} */}
-        {review.content}
+        <div>
+          {stars(review.star).map( img => img)}
+
+        </div>
+        <div>
+          {review.content}
+        </div>
       </div>
     );
 
@@ -70,3 +33,25 @@ const mapState = ({reviews}) => ({reviews})
 // const mapDispatch = {removeAccessory, updateAccessory, addItem}
 
 export default withRouter(connect(mapState)(SingleReview))
+
+
+{/* <div className="media">
+          <div className="media-left media-middle icon-container">
+            put stars here?
+          </div>
+          <div className="media-body media-middle" >
+            <table>
+            <tr>
+              <th>Month</th>
+              <th>Savings</th>
+            </tr>
+            <tr>
+              <td>January</td>
+              <td>$100</td>
+            </tr>
+          </table>
+          </div>
+          <div className="media-right media-middle">
+          {review.content}
+          </div>
+        </div> */}
