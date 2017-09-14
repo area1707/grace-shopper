@@ -6,10 +6,8 @@ const api = module.exports = require('express').Router()
 
 api.post('/', (req, res, next) => {
     let product = req.body.product
-    console.log('req.cart', req.cart)
     return req.cart.addAccessory(product.id)
     .then(() => {
-      // console.log('line inside post cart', Object.keys(line))
       Accessory.findById(product.id)
       .then(line => res.send(line))
     })

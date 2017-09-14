@@ -10,16 +10,29 @@ import {logUserOut} from '../reducers/login'
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      searchValue: ''
+    }
+
+    this.renderHome = this.renderHome.bind(this);
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
     this.renderLogout = this.renderLogout.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
+    this.renderCart = this.renderCart.bind(this);
+    this.renderCategories = this.renderCategories.bind(this);
   }
 
   render() {
+
+    const { accessories } = this.props
+
     return (
       <nav className="navbar navbar-default">
         <div className="container">
           { this.renderHome() }
           { this.renderCart() }
+          { this.renderCategories() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
           { this.renderSearch() }
@@ -50,15 +63,52 @@ class Navbar extends React.Component {
     )
   }
 
+  renderCategories() {
+
+  const sortByCategory = (category) => {
+    this.props.handleSubmit(category)
+    this.props.history.push(`/search/${category}`)
+  }
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li className="dropdown">
+          <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span className="caret"></span></a>
+          <ul className="dropdown-menu" >
+            <li><a onClick={() => {sortByCategory('glasses')}}>Glasses</a></li>
+            <li><a  onClick={() => {sortByCategory('hats')}}>Hats</a></li>
+            <li><a  onClick={() => {sortByCategory('toys')}}>Toys</a></li>
+            <li><a  onClick={() => {sortByCategory('')}}>All Accessories</a></li>
+          </ul>
+        </li>
+      </ul>
+    )
+  }
+
+  // search everything for the searchValue
   renderSearch() {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <form className="navbar-form navbar-right" role="search">
+          <form className="navbar-form navbar-right" role="search" onSubmit={ (event) => {
+            event.preventDefault()
+            this.props.handleSubmit(this.state.searchValue)
+            this.setState({searchValue: ''})
+            } }>
+
             <div className="form-group" >
-                <input id="inputsm" type="text" className="form-control input-sm" placeholder="Search"/>
+                <input
+                  id="inputsm"
+                  type="text"
+                  className="form-control input-sm"
+                  placeholder="Search for..."
+                  onChange={evt => this.setState({ searchValue: evt.target.value })}
+                  value={this.state.searchValue}
+                  />
             </div>
-            <button type="submit" className="navbar-btn btn btn-default">Submit</button>
+            <button
+              type="submit"
+              className="navbar-btn btn btn-default"
+              onClick={() => this.props.history.push(`/search/${this.state.searchValue}`)}>Submit</button>
           </form>
         </li>
       </ul>
