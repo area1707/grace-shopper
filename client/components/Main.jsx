@@ -14,6 +14,7 @@ import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers} from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
 import { fetchCart } from '../reducers/cart'
+import {fetchReviews} from '../reducers/reviews'
 
 export default class Main extends Component {
   constructor() {
@@ -31,10 +32,11 @@ export default class Main extends Component {
   componentDidMount () {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
+    store.dispatch(fetchReviews())
   }
 
   render() {
-    return(
+    return (
       <Router history={history}>
         <Root>
           <Navbar handleSubmit={this.handleSubmit}/>
