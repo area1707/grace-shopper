@@ -1,13 +1,15 @@
 import axios from 'axios';
 import history from '../components/history'
 
-const LOGIN_USER = 'LOGIN_USER';
-const CREATE_USER = 'CREATE_USER';
-const INITIAL_USER = "INITIAL_USER";
+const LOGIN_USER = 'LOGIN_USER'
+const CREATE_USER = 'CREATE_USER'
+const INITIAL_USER = 'INITIAL_USER'
+const LOG_OUT = 'LOG_OUT'
 
-const loginUser = user  => ({ type: LOGIN_USER, user });
-const createUser = user => ({ type: CREATE_USER, user });
-const initialUser = user => ({ type: INITIAL_USER, user});
+const loginUser = user  => ({ type: LOGIN_USER, user })
+const createUser = user => ({ type: CREATE_USER, user })
+const initialUser = user => ({ type: INITIAL_USER, user})
+const logOut = user => ({ type: LOG_OUT, user})
 
 export default function loginReducer(currentUser={}, action) {
   switch (action.type) {
@@ -17,6 +19,8 @@ export default function loginReducer(currentUser={}, action) {
       return action.user
     case INITIAL_USER:
       return action.user
+    case LOG_OUT:
+      return {}
     default:
       return currentUser
   }
@@ -24,7 +28,7 @@ export default function loginReducer(currentUser={}, action) {
 
 export const fetchCurrentUser = () => dispatch => {
   axios.get('/me')
-      .then(res => dispatch(initialUser(res.data)));
+    .then(res => dispatch(initialUser(res.data)));
 }
 
 export function verifyUser(user) {
@@ -53,4 +57,13 @@ export function createNewUser(user) {
     })
     .catch(console.error)
   }
+}
+
+export const logUserOut = (user) => dispatch => {
+  return axios.get('/logout')
+    .then(() => {
+      console.log('You signed out.')
+      dispatch(logOut(user))
+    })
+    history.push('/')
 }

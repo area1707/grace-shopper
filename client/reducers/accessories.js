@@ -10,7 +10,6 @@ const remove = id => ({ type: REMOVE_ACCESSORIES, id })
 const create = accessory  => ({ type: CREATE, accessory })
 const update = accessory   => ({ type: UPDATE, accessory })
 
-
 const accessoriesReducer = function(state=[], action) {
   switch(action.type) {
     case GET_ACCESSORIES:
@@ -30,14 +29,12 @@ const accessoriesReducer = function(state=[], action) {
 
 export default accessoriesReducer
 
-export function fetchAccessories() {
-  return function thunk (dispatch) {
-    return axios.get('/api/accessories')
-      .then(res => res.data)
-      .then(accessories => {
-        dispatch(load(accessories))
-      })
-  }
+export const fetchAccessories = () => dispatch => {
+  return axios.get('/api/accessories')
+    .then(res => res.data)
+    .then(accessories => {
+      dispatch(load(accessories))
+    })
 }
 
 export const removeAccessory = id => dispatch => {

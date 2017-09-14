@@ -6,7 +6,7 @@ const User = db.model('user')
 //const User = require('../db/models/users')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-
+const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 // matches GET requests to /api/users/
 router.get('/', function (req, res, next) {
   User.findAll()
@@ -15,10 +15,19 @@ router.get('/', function (req, res, next) {
 })
 
 // matches POST requests to /api/users/
-router.post('/', function (req, res, next) { /* etc */});
+router.post('/', (req, res, next) =>
+	User.create(req.body)
+	.then(user => res.status(201).json(user))
+	.catch(next))
 // matches PUT requests to /api/users/:userId
 router.put('/:userId', function (req, res, next) { /* etc */});
 // matches DELTE requests to /api/users/:userId
 router.delete('/:userId', function (req, res, next) { /* etc */});
+
+router.get('/unauth', (req, res, next) => res.send(req.headers.cookie))
+router.get('/:id', mustBeLoggedIn, (req, res, next) =>
+	User.findById(req.params.id)
+	.then(user => res.json(user))
+	.catch(next))
 
 module.exports = router;
