@@ -388,72 +388,72 @@ const reviews = [
   {
     content: 'a purrfect pair of glasses',
     star: 5,
-    accesoryId: 2,
+    accessoryId: 2,
     userId: 1
   },
   {
     content: 'would purrfer if they were more feline',
     star: 3,
-    accesoryId: 2,
+    accessoryId: 2,
     userId: 2
   },
   {
     content: 'who would go in the water?!',
     star: 1,
-    accesoryId: 4,
+    accessoryId: 4,
     userId: 2
   },
   {
     content: 'feliz cumpleaños, feline!',
     star: 4,
-    accesoryId: 8,
+    accessoryId: 8,
     userId: 1
   },
   {
     content: 'fit for royalty!',
     star: 5,
-    accesoryId: 15,
+    accessoryId: 15,
     userId: 2
   },
   {
     content: 'a fez fit for a feline friend!',
     star: 4,
-    accesoryId: 11,
+    accessoryId: 11,
     userId: 3
   },
   {
     content: 'delish!',
     star: 5,
-    accesoryId: 26,
+    accessoryId: 26,
     userId: 4
   },
   {
     content: 'would have preferred it alive...',
     star: 3,
-    accesoryId: 22,
+    accessoryId: 22,
     userId: 4
   },
   {
     content: 'who doesn\'t love a good pizza?',
     star: 4,
-    accesoryId: 23,
+    accessoryId: 23,
     userId: 1
   },
   {
     content: 'used to be alive...',
     star: 1,
-    accesoryId: 24,
+    accessoryId: 24,
     userId: 1
   },
   {
     content: 'a purrfect spot to curl up next to',
     star: 4,
-    accesoryId: 28,
+    accessoryId: 28,
     userId: 3
   },  {
     content: 'wish it were a bit stronger :(',
     star: 3,
-    accesoryId: 39,
+    accessoryId: 39,
     userId: 4
   },
 ]
