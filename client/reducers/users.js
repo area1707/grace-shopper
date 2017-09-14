@@ -48,11 +48,6 @@ export const fetchUsers = () => dispatch => {
        .then(res => dispatch(init(res.data)));
 };
 
-export const fetchSingleUser = () => dispatch => {
-  axios.get(`/api/users/${id}`)
-        .then(res => dispatch(init(res.data)))
-}
-
 // optimistic
 export const removeUser = id => dispatch => {
   dispatch(remove(id));
