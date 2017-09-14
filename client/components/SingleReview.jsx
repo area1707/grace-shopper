@@ -5,7 +5,7 @@ import {withRouter} from 'react-router'
 
 function SingleReview(props) {
 
-  console.log('HERE!!!!', props)
+  console.log('HERE!!!!', props.review)
     const review  = props.review
     const stars = (num) => {
       let reviewStars = []
