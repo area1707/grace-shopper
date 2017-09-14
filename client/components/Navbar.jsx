@@ -65,7 +65,9 @@ class Navbar extends React.Component {
         <li>
           <form className="navbar-form navbar-right" role="search" onSubmit={ (event) => {
             event.preventDefault() 
-            this.props.handleSubmit(this.state.searchValue)} }>
+            this.props.handleSubmit(this.state.searchValue) 
+            // figure out how to reset the search bar after pressing SEARCH
+            this.setState({searchValue: ''})} }>
             <div className="form-group" >
                 <input 
                   id="inputsm" 
