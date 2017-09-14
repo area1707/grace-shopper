@@ -71,17 +71,6 @@ export const updateLineItem = (lineItemId, quantity) => {
 
 export default cartReducer
 
-export const fetchCart = () => dispatch => {
-  let authUser = store.getState().currentUser.id;
-  return axios.get(`/api/cart/${authUser || 'unauthUser'}`)
-    .then(cart => {
-      console.log('cart.data inside cart reducer', cart.data)
-      return cart.data
-    })
-    .then(cart => dispatch(receiveLineItems(cart)))
-    .catch(console.error)
-}
-
 export const addToCart = (user, selectedProduct) => dispatch => {
   return axios.post(`/api/cart/`, {product: selectedProduct})
     .then(createdLineItem => dispatch(receiveLineItem(createdLineItem.data)))

@@ -9,7 +9,7 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
-const Cart = require('./db/models/cart')
+const Order = require('./db/models/orders')
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
@@ -40,7 +40,7 @@ app.use(session({
 
 app.use((req, res, next) => {
   if (req.session.cartId) {
-    Cart.findOrCreate({
+    Order.findOrCreate({
       where: {
         id: req.session.cartId
       }
@@ -51,7 +51,7 @@ app.use((req, res, next) => {
     })
     .catch(next)
   } else {
-    Cart.create()
+    Order.create()
     .then(cart => {
       req.cart = cart
       req.session.cartId = cart.id

@@ -32,7 +32,6 @@ export default class Main extends Component {
   componentDidMount () {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
-    store.dispatch(fetchCart())
   }
 
   render() {
