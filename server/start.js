@@ -9,6 +9,9 @@ const db = require('./db/index')
 const session = require('express-session')
 const passport = require('passport')
 const User = require('./db/models/users')
+//we need to move all this middleware into a middleware file and export app
+//then require db and app in here so you can START your db
+//module.exports = app
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 //logging middleware
@@ -151,3 +154,4 @@ db.sync({})  // sync our database
     app.listen(5000) // then start listening with our express server once we have synced
     console.log('listening to 5000')
 })
+
