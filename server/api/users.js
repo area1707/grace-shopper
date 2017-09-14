@@ -1,6 +1,9 @@
 // api/users.js
 const router = require('express').Router();
-const User = require('../db/models/users')
+const db = require('../db/index')
+const User = db.model('user')
+//this wont have associations so dont use it
+//const User = require('../db/models/users')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
