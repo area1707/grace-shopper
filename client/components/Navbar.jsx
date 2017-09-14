@@ -19,6 +19,7 @@ class Navbar extends React.Component {
     this.renderLogout = this.renderLogout.bind(this);
     this.renderSearch = this.renderSearch.bind(this);
     this.renderCart = this.renderCart.bind(this);
+    this.renderCategories = this.renderCategories.bind(this);
   }
 
   render() {
@@ -30,6 +31,7 @@ class Navbar extends React.Component {
         <div className="container">
           { this.renderHome() }
           { this.renderCart() }
+          { this.renderCategories() }
           { this.renderLogout() }
           { this.renderLoginSignup() }
           { this.renderSearch() }
@@ -55,6 +57,25 @@ class Navbar extends React.Component {
       <ul className="nav navbar-nav navbar-left">
         <li>
           <NavLink to="/cart" activeClassName="active">Cart</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
+  renderCategories() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li className="dropdown">
+          <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span className="caret"></span></a>
+          <ul className="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" className="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" className="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
         </li>
       </ul>
     )
