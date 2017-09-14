@@ -5,7 +5,6 @@ import {withRouter} from 'react-router'
 
 function SingleReview(props) {
 
-  console.log('HERE!!!!', props.review)
     const review  = props.review
     const stars = (num) => {
       let reviewStars = []
@@ -14,11 +13,12 @@ function SingleReview(props) {
       }
       return reviewStars
     }
+
     return (
       <div className="list-group-item min-content students-item">
         <div>
-          {stars(review.star).map( img => img)}
-
+          <div>{stars(review.star).map( img => img)}</div>
+          <div>{review.user.name}</div>
         </div>
         <div>
           {review.content}
