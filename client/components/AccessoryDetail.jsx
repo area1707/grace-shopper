@@ -11,7 +11,7 @@ function Accessory(props) {
   const accessories = props.accessories
   const accessory = accessories.find((acc) => acc.id === +accessoryId)
   const reviews = props.reviews
-  console.log(reviews)
+
   return (
     <div className="single-accessory">
       <SingleAccessory accessory={accessory} />
