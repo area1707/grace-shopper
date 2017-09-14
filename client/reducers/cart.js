@@ -40,10 +40,11 @@ const cartReducer = (state = initialState, action) => {
 
 //ACTION CREATORS
 
-export const receiveLineItem = (lineItem) => {
+export const receiveLineItem = (lineItem, quantity) => {
   return {
     type: "RECEIVE_LINE_ITEM",
-    lineItem
+    lineItem,
+    quantity
   }
 }
 
