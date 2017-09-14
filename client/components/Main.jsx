@@ -17,6 +17,11 @@ export default class Main extends Component {
     this.state = {
       searchValue: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit (searchValue) {
+    this.setState({ searchValue })
   }
 
   componentDidMount () {
@@ -24,16 +29,16 @@ export default class Main extends Component {
   }
 
   render() {
+    console.log(this.state, 'im in main')
     return(
       <Router history={history}>
         <Root>
-          <Navbar />
+          <Navbar handleSubmit={this.handleSubmit}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
-            <Route path="/search" component={SearchValues} />
           </Switch>
         </Root>
       </Router>

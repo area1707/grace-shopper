@@ -33,18 +33,8 @@ class Navbar extends React.Component {
           { this.renderLogout() }
           { this.renderLoginSignup() }
           { this.renderSearch() }
-          <SearchValues searchValue={this.state.searchValue} />
-          {console.log(this.state)}
         </div>
       </nav>
-    )
-  }
-
-  //make a dropdown to show the different categories
-  submitSearch() {
-    //render a search value page
-    return (
-      <SearchValues searchValue={this.state.searchValue}/>
     )
   }
 
@@ -73,20 +63,22 @@ class Navbar extends React.Component {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <form className="navbar-form navbar-right" role="search">
+          <form className="navbar-form navbar-right" role="search" onSubmit={ (event) => {
+            event.preventDefault() 
+            this.props.handleSubmit(this.state.searchValue)} }>
             <div className="form-group" >
                 <input 
                   id="inputsm" 
                   type="text" 
                   className="form-control input-sm" 
                   placeholder="Search for..."
-                  onChange={evt => this.setState({ searchValue: evt.target.value })}
+                  onChange={evt => this.setState({ searchValue: evt.target.value })}      
                   />
             </div>
             <button 
               type="submit" 
               className="navbar-btn btn btn-default"
-              onSubmit={this.submitSearch}>Submit</button>
+              >Submit</button>
           </form>
         </li>
       </ul>
