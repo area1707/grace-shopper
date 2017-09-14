@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {removeAccessory, updateAccessory} from '../reducers/accessories'
+import {addItem} from '../reducers/cart'
 
 class SingleAccessory extends Component {
   constructor(props){
@@ -115,6 +116,14 @@ class SingleAccessory extends Component {
               <span className="glyphicon glyphicon-edit" />
             </button>
           </div>
+          <div className="media-right media-middle">
+            <button
+                className="btn btn-default"
+                onClick={() => this.props.addItem(accessory) }
+                value={accessory.id}>
+              <span className="glyphicon glyphicon-plus" />
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -155,6 +164,6 @@ class SingleAccessory extends Component {
 }
 
 const mapState = ({accessories}) => ({accessories})
-const mapDispatch = {removeAccessory, updateAccessory};
+const mapDispatch = {removeAccessory, updateAccessory, addItem}
 
 export default withRouter(connect(mapState, mapDispatch)(SingleAccessory))

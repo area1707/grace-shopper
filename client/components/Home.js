@@ -7,6 +7,7 @@ import SingleAccessory from './SingleAccessory'
 class Home extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
   }
 
   render(){
@@ -32,7 +33,7 @@ class Home extends Component {
 }
 
 const mapState = ({accessories}) => ({accessories})
-const mapDispatch = {  };
+const mapDispatch = {}
 
 const HomeContainer = withRouter(connect(mapState, mapDispatch)(Home))
 export default HomeContainer

@@ -7,9 +7,12 @@ import history from './history'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import Cart from './Cart'
+import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
+import {fetchUsers} from '../reducers/users'
 
 export default class Main extends Component {
   constructor() {
@@ -26,6 +29,7 @@ export default class Main extends Component {
 
   componentDidMount () {
     store.dispatch(fetchAccessories())
+    store.dispatch(fetchUsers())
   }
 
   render() {
@@ -40,10 +44,13 @@ export default class Main extends Component {
             />  
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/cart" component={Cart} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
+            <Route path="/users/:userId" component={UserProfile} />
           </Switch>
         </Root>
       </Router>
     )
   }
 }
+
