@@ -15,8 +15,10 @@ const addItemToCart = (item, quantity) => ({
   quantity
 })
 
-const updateQuantity = quantity => ({type: UPDATE_QUANTITY})
-
 export const addItem = (item, quantity) => dispatch => {
   dispatch(addItemToCart(item, quantity))
+}
+
+export const updateQuantity = (idx, quantity) => dispatch => {
+  
 }

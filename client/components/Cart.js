@@ -38,7 +38,7 @@ class Cart extends Component {
         </thead>
         <tbody className="container">
           {
-            cart.map((itemDetails, idx) => (
+            cart.map((itemDetails) => (
               <tr>
                 <th key={itemDetails.item.name}>
                   {itemDetails.item.name}
@@ -49,7 +49,7 @@ class Cart extends Component {
                   type="text"
                   required
                   className="form-like"
-                  value={itemDetails.quantity}
+                  value={this.state.quantity}
                   onChange={this.updateQuantity}
                 />
                 </th>
@@ -57,7 +57,7 @@ class Cart extends Component {
                   {itemDetails.item.price}
                 </th>
                 <th>
-                  {this.calculateTotal(itemDetails.item.price, itemDetails.quantity)}
+                  {this.calculateTotal(itemDetails.item.price, this.state.quantity)}
                 </th>
               </tr>
             ))
@@ -74,8 +74,8 @@ class Cart extends Component {
   }
   updateQuantity(event) {
     const quantity = event.target.value
-    // this.setState({quantity})
-    return quantity
+    this.setState({quantity})
+    // return quantity
   }
   calculateTotal(price, quantity) {
     return price * quantity
