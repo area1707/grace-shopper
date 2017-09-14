@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/graceshopper' mocha ./**/*.spec.js --compilers js:babel-register",    
     "build": "webpack",
     "build-watch": "webpack -w",
     "start": "webpack -w & nodemon --watch server -e js,html server/start.js"
@@ -45,6 +45,7 @@
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
     "enzyme": "^2.9.1",
+    "mocha": "^3.5.3",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
