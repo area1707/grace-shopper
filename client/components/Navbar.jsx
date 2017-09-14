@@ -63,18 +63,20 @@ class Navbar extends React.Component {
   }
 
   renderCategories() {
+
+  const sortByCategory = (category) => {
+    this.props.handleSubmit(category)
+    this.props.history.push(`/search/${category}`)
+  }
     return (
       <ul className="nav navbar-nav navbar-left">
         <li className="dropdown">
-          <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span className="caret"></span></a>
-          <ul className="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" className="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" className="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+          <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span className="caret"></span></a>
+          <ul className="dropdown-menu" >
+            <li><a onClick={() => {sortByCategory('glasses')}}>Glasses</a></li>
+            <li><a  onClick={() => {sortByCategory('hats')}}>Hats</a></li>
+            <li><a  onClick={() => {sortByCategory('toys')}}>Toys</a></li>
+            <li><a  onClick={() => {sortByCategory('')}}>All Accessories</a></li>
           </ul>
         </li>
       </ul>
@@ -87,23 +89,23 @@ class Navbar extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         <li>
           <form className="navbar-form navbar-right" role="search" onSubmit={ (event) => {
-            event.preventDefault() 
-            this.props.handleSubmit(this.state.searchValue) 
+            event.preventDefault()
+            this.props.handleSubmit(this.state.searchValue)
             this.setState({searchValue: ''})
             } }>
 
             <div className="form-group" >
-                <input 
-                  id="inputsm" 
-                  type="text" 
-                  className="form-control input-sm" 
+                <input
+                  id="inputsm"
+                  type="text"
+                  className="form-control input-sm"
                   placeholder="Search for..."
-                  onChange={evt => this.setState({ searchValue: evt.target.value })} 
-                  value={this.state.searchValue}     
+                  onChange={evt => this.setState({ searchValue: evt.target.value })}
+                  value={this.state.searchValue}
                   />
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="navbar-btn btn btn-default"
               onClick={() => this.props.history.push(`/search/${this.state.searchValue}`)}>Submit</button>
           </form>

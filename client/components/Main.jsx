@@ -38,12 +38,12 @@ export default class Main extends Component {
         <Root>
           <Navbar handleSubmit={this.handleSubmit}/>
           <Switch>
-            <Route exact path="/" 
-              render = {() => 
-                <Home searchValue={''} handleSubmit={this.handleSubmit}/>} 
-            /> 
-            <Route path="/search" 
-                render = {() => <Home searchValue={this.state.searchValue} />} 
+            <Route exact path="/"
+              render = {() =>
+                <Home searchValue={''} handleSubmit={this.handleSubmit}/>}
+            />
+            <Route path="/search"
+                render = {() => <Home searchValue={this.state.searchValue} />}
             />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
