@@ -60,7 +60,7 @@ class Navbar extends React.Component {
     )
   }
 
-  // search everything
+  // search everything for the searchValue
   renderSearch() {
     return (
       <ul className="nav navbar-nav navbar-right">
@@ -84,7 +84,7 @@ class Navbar extends React.Component {
             <button 
               type="submit" 
               className="navbar-btn btn btn-default"
-              >Submit</button>
+              onClick={() => this.props.history.push(`/search/${this.state.searchValue}`)}>Submit</button>
           </form>
         </li>
       </ul>
