@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import userReducer,{addUser} from '../../client/reducers/users';
+import loginReducer,{createNewUser} from '../../client/reducers/login';
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -26,18 +26,23 @@ describe('thunk creators', () => {
     expect(store.getState()).to.be.deep.equal([]);
   });
 
-  describe('add new user', () => {
-    it('addUser: eventually dispatches the CREATE action', () => {
+  describe('add new user after sign up', () => {
+    it('createNewUser: eventually dispatches the CREATE_USER action', () => {
       const fakeUser = {
           name: 'Bob',
           email: 'bob@bob.com',
-          shipping_address: '5 Hanover'
+          password: 'passaword'
       }
-      mockAxios.onPost('/api/users').replyOnce(200, fakeUser)
-      return store.dispatch(addUser())
+      const fakeUser1 = {
+        name: 'Sob',
+        email: 'sob@bob.com',
+        password: 'passaword'
+      }
+      mockAxios.onPost('/signup').replyOnce(201, fakeUser)
+      return store.dispatch(createNewUser(fakeUser))
         .then(() => {
           const actions = store.getActions()
-          expect(actions[0].type).to.be.equal('CREATE')
+          expect(actions[0].type).to.be.equal('CREATE_USER')
           expect(actions[0].user).to.be.deep.equal(fakeUser)
         })
     })
