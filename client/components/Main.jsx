@@ -12,10 +12,11 @@ import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
 import OrderCheckout from './OrderCheckout'
 import {fetchAccessories} from '../reducers/accessories'
-import {fetchUsers} from '../reducers/users'
+import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
-import { fetchCart } from '../reducers/cart'
+import { fetchItemsInCart } from '../reducers/cart'
 import {fetchReviews} from '../reducers/reviews'
+import {fetchCurrentUser} from '../reducers/login'
 
 export default class Main extends Component {
   constructor() {
@@ -34,6 +35,8 @@ export default class Main extends Component {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
     store.dispatch(fetchReviews())
+    store.dispatch(fetchItemsInCart())
+    store.dispatch(fetchCurrentUser())
   }
 
   render() {
