@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { Router, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom'
 import store from '../store'
 import Root from './Root'
-import history from './history'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
@@ -40,7 +40,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router >
         <Root>
           <Navbar handleSubmit={this.handleSubmit}/>
           <Switch>

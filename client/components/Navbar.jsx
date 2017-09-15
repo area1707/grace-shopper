@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import history from './history'
 import {logUserOut} from '../reducers/login'
 
 /* -----------------    COMPONENT     ------------------ */
@@ -144,7 +143,7 @@ class Navbar extends React.Component {
         <li>
         <button
           className="navbar-btn btn btn-default"
-          onClick={() => this.props.logUserOut(this.props.currentUser)}>
+          onClick={() => this.props.logOut(this.props.currentUser)}>
           logout
         </button>
         </li>
@@ -162,6 +161,13 @@ const mapProps = ({currentUser}) => {
   }
 }
 
-const mapDispatch = {logUserOut}
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+    logOut: (currentUser) => {
+      dispatch(logUserOut(currentUser))
+      ownProps.history.push('/')
+    }
+  }
+}
 
 export default withRouter(connect(mapProps, mapDispatch)(Navbar));
