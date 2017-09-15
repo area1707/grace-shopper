@@ -167,7 +167,7 @@ class SingleAccessory extends Component {
   }
   handleCartAdd(e, user, selectedProduct) {
     e.preventDefault()
-    this.props.addToCart(user, selectedProduct)
+    this.props.addToCart(user, selectedProduct, 1)
   }
 }
 
