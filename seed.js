@@ -2,6 +2,8 @@ const db = require('./server/db')
 const Accessory = require('./server/db/models/accessories')
 const User = require('./server/db/models/users')
 const Review = require('./server/db/models/reviews')
+const Order = require('./server/db/models/orders')
+const Sequelize = require('sequelize')
 
 const accessories = [
   {
@@ -458,6 +460,58 @@ const reviews = [
   },
 ]
 
+const orders = [
+  {status: 'incomplete',
+  userId: 1},
+  {status: 'created',
+  userId: 1},
+  {status: 'processing',
+  userId: 1},
+  {status: 'cancelled',
+  userId: 1},
+  {status: 'completed',
+  userId: 1},
+  {status: 'incomplete',
+  userId: 2},
+  {status: 'created',
+  userId: 2},
+  {status: 'processing',
+  userId: 2},
+  {status: 'cancelled',
+  userId: 2},
+  {status: 'completed',
+  userId: 2},
+  {status: 'incomplete',
+  userId: 3},
+  {status: 'created',
+  userId: 3},
+  {status: 'processing',
+  userId: 3},
+  {status: 'cancelled',
+  userId: 3},
+  {status: 'completed',
+  userId: 3},
+  {status: 'incomplete',
+  userId: 4},
+  {status: 'created',
+  userId: 4},
+  {status: 'processing',
+  userId: 4},
+  {status: 'cancelled',
+  userId: 4},
+  {status: 'completed',
+  userId: 4}
+]
+
+const makeRandomOrder = () => {
+  let orderItems = []
+  let orderNum = Math.ceil(Math.random()*9)
+  for (var i = 0; i <= orderNum; i++) {
+    orderItems.push(Math.ceil(Math.random()*39))
+  }
+  return orderItems
+}
+
 const seed = () => {
   return Promise.all(accessories.map(accessory =>
     Accessory.create(accessory))
@@ -472,8 +526,17 @@ const seed = () => {
       Review.create(review))
     )
   })
+  .then(() => {
+    return Promise.all(orders.map(order =>
+      Order.create(order)
+      .then(order => {
+        const basket = makeRandomOrder()
+        return order.addAccessories([1,2])
+      })
+    ))
+  })
 }
-
+//need to add quantity to the join table
 
 const main = () => {
   console.log('Syncing db...')
