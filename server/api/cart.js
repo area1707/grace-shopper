@@ -37,19 +37,22 @@ api.put(`/item/:lineItemId`, (req, res, next) => {
         .catch(next)
 })
 
-api.get('/:orderId', (req, res, next) => {
+api.get('/', (req, res, next) => {
+  console.log('req.cart.id', req.cart.id)
   Order_accessory.findAll({
     where: {
-      orderId: req.params.orderId
+      orderId: req.cart ? req.cart.id : req.session.cartId
     }
   })
   .then(accArr => {
-    accArr.map(acc => Accessory.find({
+    return Promise.all(accArr.map(acc => Accessory.findOne({
       where: {
         id: acc.accessoryId
       }
-    }))
-  .then(result => res.send(result))
+    })))
+  .then(result => {
+    res.send(result)
+  })
   .catch(next)
   })
 })

@@ -18,6 +18,7 @@ export default function loginReducer(currentUser={}, action) {
     case CREATE_USER:
       return action.user
     case INITIAL_USER:
+      console.log('currentUser', action.user)
       return action.user
     case LOG_OUT:
       return {}
@@ -28,7 +29,11 @@ export default function loginReducer(currentUser={}, action) {
 
 export const fetchCurrentUser = () => dispatch => {
   axios.get('/me')
-    .then(res => dispatch(initialUser(res.data)));
+    .then(res => {
+      console.log("res inside fetchCurrentUser", res.data)
+      dispatch(initialUser(res.data))
+    })
+    .catch(console.error)
 }
 
 export function verifyUser(user) {
@@ -36,7 +41,6 @@ export function verifyUser(user) {
     return axios.post('/login', user)
     .then(res => res.data)
     .then(currentUser => {
-      console.log('currentUser', currentUser)
       dispatch(loginUser(currentUser))
       //need to figure out redirect link
       history.push(`/`)

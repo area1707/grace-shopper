@@ -39,6 +39,19 @@ app.use(session({
     saveUninitialized: false
 }))
 
+//initializing passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.serializeUser( (user, done) => done(null, user.id))
+
+//logging out and deleting from req.session
+passport.deserializeUser( (id, done) => {
+    User.findById(id)
+    .then(user => done(null, user))
+    .catch(done)
+})
+
 app.use((req, res, next) => {
   if (req.session.cartId) {
     Order.findOrCreate({
@@ -66,19 +79,6 @@ app.get('/me', (req, res, next) => {
   res.json(req.user)
 })
 
-//initializing passport
-app.use(passport.initialize())
-app.use(passport.session())
-
-passport.serializeUser( (user, done) => done(null, user.id))
-
-//logging out and deleting from req.session
-passport.deserializeUser( (id, done) => {
-    User.findById(id)
-    .then(user => done(null, user))
-    .catch(done)
-})
-
 
 app.use('/api', require('./api')); // matches all requests to /api
 
@@ -97,6 +97,7 @@ app.post('/login', (req, res, next) => {
         if (err) next(err)
         else res.json(user)
       })
+      // Order.update()
     }
   })
   .catch(next)
