@@ -40,8 +40,6 @@ export function verifyUser(user) {
     .then(res => res.data)
     .then(currentUser => {
       dispatch(loginUser(currentUser))
-      //need to figure out redirect link
-      //history.push(`/`)
     })
     .catch(console.error)
   }
