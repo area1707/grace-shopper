@@ -74,6 +74,7 @@ class Signup extends React.Component {
     const email = event.target.email.value;
     const password = event.target.password.value;
     store.dispatch(createNewUser({name, email, password}));
+    this.props.history.push('/')
   }
 }
 

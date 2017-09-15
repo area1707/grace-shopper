@@ -65,6 +65,7 @@ class Login extends React.Component {
     const email = event.target.email.value
     const password = event.target.password.value
     store.dispatch(verifyUser({email, password}))
+    this.props.history.push('/')
   }
 }
 
