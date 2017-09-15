@@ -5,6 +5,7 @@ I am full of information about this repo!
 ## Running this code in development
 
 `npm install` them `npm start` will make great things happen!
+Be sure to `node seed` to generate your db
 
 ## Contribution guide
 
