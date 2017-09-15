@@ -1,32 +1,45 @@
 import {expect} from 'chai';
+import userReducer,{addUser} from '../../client/reducers/users';
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import configureMockStore from 'redux-mock-store'
+import thunkMiddleware from 'redux-thunk'
 
-import {createStore} from 'redux';
-import userReducer from '../../client/reducers/users';
+const mockAxios = new MockAdapter(axios)
+const middlewares = [thunkMiddleware]
+const mockStore = configureMockStore(middlewares)
 
-describe('User reducer', () => {
+describe('thunk creators', () => {
+  let store
 
-    let testStore, fakeUser;
-    beforeEach('Create testing store and fake user', () => {
-        testStore = createStore(userReducer);
-        fakeUser = {
-            name: 'Bob',
-            email: 'bob@bob.com',
-            shipping_address: '5 Hanover'
-          }
-    });
+  const initialState = []
 
-    it('has expected initial state', () => {
-        expect(testStore.getState()).to.be.deep.equal([]);
-    });
+  beforeEach(() => {
+    store = mockStore(initialState)
+  })
 
-    describe('CREATE', () => {
+  afterEach(() => {
+    store.clearActions()
+  })
 
-        it('creates new user and adds to users array', () => {
-            testStore.dispatch({ type: 'CREATE', user: fakeUser });
-            const newState = testStore.getState();
-            expect(newState.users).to.be.deep.equal([fakeUser]);
-        });
+  it('has expected initial state', () => {
+    expect(store.getState()).to.be.deep.equal([]);
+  });
 
-    });
-
-});
+  describe('add new user', () => {
+    it('addUser: eventually dispatches the CREATE action', () => {
+      const fakeUser = {
+          name: 'Bob',
+          email: 'bob@bob.com',
+          shipping_address: '5 Hanover'
+      }
+      mockAxios.onPost('/api/users').replyOnce(200, fakeUser)
+      return store.dispatch(addUser())
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('CREATE')
+          expect(actions[0].user).to.be.deep.equal(fakeUser)
+        })
+    })
+  })
+})
