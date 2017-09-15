@@ -505,9 +505,9 @@ const orders = [
 
 const makeRandomOrder = () => {
   let orderItems = []
-  let orderNum = Math.ceil(Math.random()*9)
+  let orderNum = Math.ceil(Math.random() * 9)
   for (var i = 0; i <= orderNum; i++) {
-    orderItems.push(Math.ceil(Math.random()*39))
+    orderItems.push(Math.ceil(Math.random() * 39))
   }
   return orderItems
 }
