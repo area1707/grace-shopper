@@ -132,7 +132,7 @@ class SingleAccessory extends Component {
       </div>
     );
   }
-  removeAccessory (event) {
+  removeAccessory(event) {
     const { accessory, removeAccessory } = this.props;
     event.stopPropagation()
     removeAccessory(accessory.id)
