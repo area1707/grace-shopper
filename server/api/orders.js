@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const Order = require('../db/models/orders')
 const Order_accessory = require('../db/models/order_accessory')
-//api/orders
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -11,15 +10,15 @@ router.get('/', (req, res, next) => {
 })
 
 
-router.get('/:order_id', (req, res, next) => {
-  Order_accessory.findAll({
-    where: {
-      orderId: req.params.order_id
-    }
-  })
-  .then(order => res.json(order))
-  .catch(next)
-})
+// router.get('/:order_id', (req, res, next) => {
+//   Order_accessory.findAll({
+//     where: {
+//       orderId: req.params.order_id
+//     }
+//   })
+//   .then(order => res.json(order))
+//   .catch(next)
+// })
 
 //the aim is when an order is posted in our order table, we also need to create a row in order_accessories (join table)
 //we can do this by looking up the id of the resulted order, and then returns an array of accessory IDs
