@@ -14,13 +14,13 @@ function SingleReview(props) {
     }
 
     return (
-      <div className="list-group-item min-content students-item">
-        <div>
-          <div>{stars(review.star).map( img => img)}</div>
-          <div>Reviewed by: {review.user.name}</div>
-        </div>
-        <div>
+      <div className="list-group-item min-content">
+        <div className="review left">{stars(review.star).map( img => img)}</div>
+        <div className="review right">
           {review.content}
+        </div>
+        <div className="review bottom">
+            Reviewed by: {review.user.name}
         </div>
       </div>
     );

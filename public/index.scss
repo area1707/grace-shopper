@@ -1,3 +1,10 @@
+body {
+  font-family: 'Chivo', sans-serif;
+  // font-weight: bold;
+  font-size: 16px;
+}
+
+
 select {
   -webkit-appearance: menulist-button;
   background-color: transparent;
@@ -156,4 +163,14 @@ input.form-like[disabled] {
 // formatting our star size
 .star {
   width: 50px
+}
+
+//flexbox for our reviews
+.review {
+  display: inline;
+  align-content: space-between
+}
+
+.bottom {
+  display: block;
 }
