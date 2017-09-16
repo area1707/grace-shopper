@@ -3,7 +3,7 @@ const Accessory = require('./server/db/models/accessories')
 const User = require('./server/db/models/users')
 const Review = require('./server/db/models/reviews')
 const Order = require('./server/db/models/orders')
-const Sequelize = require('sequelize')
+const Order_accessory = require('./server/db/models/order_accessory')
 
 const accessories = [
   {
@@ -530,8 +530,10 @@ const seed = () => {
     return Promise.all(orders.map(order =>
       Order.create(order)
       .then(order => {
-        const basket = makeRandomOrder()
-        return order.addAccessories([1,2])
+        const basket = makeRandomOrder().filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+      })
+        return order.addAccessories(basket)
       })
     ))
   })
