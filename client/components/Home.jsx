@@ -18,7 +18,7 @@ class Home extends Component {
 
     return (
       <div className="container">
-        <img className="mascot" src="/img/tabby-cat.png" />
+        <img className="mascot" src="/img/cat-banner.gif" />
         <center><h1>{ searchValue.toUpperCase() || 'ALL ACCESSORIES'}</h1></center>
       {
         searchResults.length ? searchResults.map(accessory => {
