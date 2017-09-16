@@ -21,7 +21,6 @@ router.post('/login', (req, res, next) => {
         if (err) next(err)
         else res.json(user)
       })
-      // Order.update()
     }
   })
   .catch(next)
@@ -41,8 +40,9 @@ router.post('/signup', (req, res, next) => {
   })
 })
 
-router.post('/logout', (req, res, next) => {
+router.get('/logout', (req, res, next) => {
   req.logout()
+  req.session.cartId = 0 
   res.sendStatus(200)
 })
 

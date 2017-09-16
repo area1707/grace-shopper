@@ -52,34 +52,7 @@ passport.deserializeUser( (id, done) => {
     .catch(done)
 })
 
-app.use((req, res, next) => {
-  if (req.session.cartId) {
-    Order.findOrCreate({
-      where: {
-        id: req.session.cartId
-      }
-    })
-    .then(cart => {
-      req.cart = cart[0]
-      next()
-    })
-    .catch(next)
-  } else {
-    Order.create()
-    .then(cart => {
-      req.cart = cart
-      req.session.cartId = cart.id
-      next()
-    })
-    .catch(next)
-  }
-})
-
-// app.get('/me', (req, res, next) => {
-//   res.json(req.user)
-// })
-
-app.use('/auth', require('./auth')) 
+app.use('/auth', require('./auth'))
 app.use('/api', require('./api')) // matches all requests to /api
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))

@@ -4,6 +4,41 @@ const db = require('../db')
 const { Accessory, User, Order, Review, Order_accessory } = require('../db/models')
 const api = module.exports = require('express').Router()
 
+api.use((req, res, next) => {
+  if (req.user) {
+    Order.findOrCreate({
+      where: {
+        userId: req.user.id
+      }
+    })
+    .then(cart => {
+      req.cart = cart[0]
+      next()
+    })
+    .catch(next)
+  }
+  else if (req.session.cartId) {
+    Order.findOrCreate({
+      where: {
+        id: req.session.cartId
+      }
+    })
+    .then(cart => {
+      req.cart = cart[0]
+      next()
+    })
+    .catch(next)
+  } else {
+    Order.create()
+    .then(cart => {
+      req.cart = cart
+      req.session.cartId = cart.id
+      next()
+    })
+    .catch(next)
+  }
+})
+
 api.post('/', (req, res, next) => {
     let product = req.body.product
     return req.cart.addAccessory(product.id)
@@ -11,17 +46,6 @@ api.post('/', (req, res, next) => {
       Accessory.findById(product.id)
       .then(line => res.send(line))
     })
-    .catch(next)
-})
-
-
-api.get('/:userId', (req, res, next) => {
-    Order.findById(req.session.cartId)
-    .then(cart => {
-      if (cart) return Order_accessory.findAll({where: {orderId: req.session.cartId}})
-      else {return []}
-    })
-    .then(lineItems => res.send(lineItems))
     .catch(next)
 })
 
@@ -38,7 +62,6 @@ api.put(`/item/:lineItemId`, (req, res, next) => {
 })
 
 api.get('/', (req, res, next) => {
-  console.log('req.cart.id', req.cart.id)
   Order_accessory.findAll({
     where: {
       orderId: req.cart ? req.cart.id : req.session.cartId
