@@ -1,3 +1,4 @@
+
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
@@ -16,36 +17,36 @@ class OrderCheckout extends Component {
   // will need to recreate a post request , so a thunk and a store value for this flow
 
   render() {
-      //const currentUser = req.user
-      return (
-        <div>
+    //const currentUser = req.user
+    return (
+      <div>
 
-            <form>
-                <label>Shipping Information</label>
-                <div className="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input 
-                        name="email"
-                        className="form-control" 
-                        placeholder="Enter email..." 
-                    />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label for="exampleInputPassword1">Shipping Address</label>
-                    <input 
-                        name="shippingAddress"
-                        className="form-control" 
-                        placeholder="Enter shipping address..."
-                    />
-                </div>
-                <div className='form-group'>
-                    <button type='submit' className='btn btn-default'>Submit Order</button>
-                </div>
-            </form>
+        <form>
+          <label>Shipping Information</label>
+          <div className="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input 
+              name="email"
+              className="form-control" 
+              placeholder="Enter email..." 
+            />
+            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group">
+            <label for="exampleInputPassword1">Shipping Address</label>
+            <input 
+              name="shippingAddress"
+              className="form-control" 
+              placeholder="Enter shipping address..."
+            />
+          </div>
+          <div className='form-group'>
+              <button type='submit' className='btn btn-default'>Submit Order</button>
+          </div>
+        </form>
 
-        </div>
-      )
+      </div>
+    )
   }
 }
 
@@ -58,10 +59,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handleSubmit: function(evt) {
-            evt.preventDefault()
-            const email = evt.target.email.value
-            const shipping_address = evt.target.shippingAddress.value
-            dispatch(addUser({ email, shipping_address }))
+          evt.preventDefault()
+          const email = evt.target.email.value
+          const shipping_address = evt.target.shippingAddress.value
+          dispatch(addUser({ email, shipping_address }))
         }
     }
 }

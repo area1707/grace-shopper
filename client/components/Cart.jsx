@@ -70,7 +70,7 @@ class Cart extends Component {
          <Col sm={2} md={2} />
          <Col sm={2} md={5} />
          <Col sm={2} md={2}><h4>{total}</h4></Col>
-          <LinkContainer to="/order" >
+          <LinkContainer to="/checkout" >
             <Button bsStyle='info'>
               PROCEED TO CHECKOUT
             </Button>
