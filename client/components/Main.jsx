@@ -10,10 +10,12 @@ import Cart from './Cart'
 import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
+import SingleOrder from './SingleOrder'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
 import {fetchReviews} from '../reducers/reviews'
+import {fetchOrders} from '../reducers/orders'
 import {fetchCurrentUser} from '../reducers/login'
 
 export default class Main extends Component {
@@ -34,6 +36,7 @@ export default class Main extends Component {
     store.dispatch(fetchUsers())
     store.dispatch(fetchReviews())
     store.dispatch(fetchCurrentUser())
+    store.dispatch(fetchOrders())
   }
 
   render() {
@@ -54,6 +57,7 @@ export default class Main extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
             <Route path="/users/:userId" component={UserProfile} />
+            <Route path="/orders/:orderId" component={SingleOrder} />
           </Switch>
         </Root>
       </Router>

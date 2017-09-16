@@ -4,7 +4,7 @@ const GET_ORDERS = 'GET_ORDERS'
 
 const load = orders => ({type: GET_ORDERS, orders})
 
-export default orderReducer = function(state = [], action){
+export default function orderReducer(state = [], action){
   switch(action.type){
     case GET_ORDERS:
       return action.orders
