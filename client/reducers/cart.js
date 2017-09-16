@@ -99,9 +99,8 @@ export const updateQuantity = (lineItemId, quantity) => dispatch => {
     .catch(console.error)
 }
 export const fetchItemsInCart = () => dispatch => {
-  return axios.get(`/api/cart/`)
+  return axios.get(`/api/cart`)
   .then(itemsArr => {
-    console.log('itemsArr inside reducer', itemsArr.data)
     dispatch(receiveLineItems(itemsArr.data))
   })
 }

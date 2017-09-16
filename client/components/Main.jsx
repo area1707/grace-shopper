@@ -13,7 +13,6 @@ import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
-import { fetchItemsInCart } from '../reducers/cart'
 import {fetchReviews} from '../reducers/reviews'
 import {fetchCurrentUser} from '../reducers/login'
 
@@ -34,7 +33,6 @@ export default class Main extends Component {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
     store.dispatch(fetchReviews())
-    store.dispatch(fetchItemsInCart())
     store.dispatch(fetchCurrentUser())
   }
 
