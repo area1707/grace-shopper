@@ -168,7 +168,7 @@ input.form-like[disabled] {
 //flexbox for our reviews
 .review {
   display: block;
-  align-content: space-between
+  align-content: space-between;
 }
 
 .bottom {
@@ -183,6 +183,6 @@ input.form-like[disabled] {
   font-style: bold
 }
 
-NavLink {
-  color: green
+body {
+  background: #c9d2fc
 }
