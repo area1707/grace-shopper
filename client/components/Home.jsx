@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {NavLink} from 'react-router-dom'
 import SingleAccessory from './SingleAccessory'
 
 class Home extends Component {
@@ -15,20 +16,38 @@ class Home extends Component {
       if (accessory.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 || accessory.category.toLowerCase() === searchValue.toLowerCase()) searchResults.push(accessory)
     })
 
-
     return (
       <div className="container">
         <img className="mascot" src="/img/tabby-cat.png" />
+        <center><h1>{ searchValue.toUpperCase() || 'ALL ACCESSORIES'}</h1></center>
       {
         searchResults.length ? searchResults.map(accessory => {
-          return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+          return (
+            <img className="allProducts" src ={accessory.imageUrl}/>
+          )
         }) :
         accessories.map(accessory => {
-          return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+          return (
+            <img className="allProducts" src ={accessory.imageUrl}/>
+          )
         })
       }
       </div>
     )
+
+    // return (
+    //   <div className="container">
+    //     <img className="mascot" src="/img/tabby-cat.png" />
+    //   {
+    //     searchResults.length ? searchResults.map(accessory => {
+    //       return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+    //     }) :
+    //     accessories.map(accessory => {
+    //       return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+    //     })
+    //   }
+    //   </div>
+    // )
   }
 }
 

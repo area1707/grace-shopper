@@ -188,5 +188,17 @@ body {
 }
 
 .mascot {
-  height: 200px
+  height: 200px;
+  display: block
+}
+
+.allProducts {
+  width: 150;
+  display: inline-flex;
+  margin: 0px 50px 50px 50px;
+  justify-content: space-around
+}
+
+h1 {
+  font-style: bold
 }
