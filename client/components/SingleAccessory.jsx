@@ -78,9 +78,9 @@ class SingleAccessory extends Component {
     }
 
     return (
-      <div className="list-group-item min-content students-item">
+      <div className="list-group-item min-content students-item grey">
         <div className="media">
-          <div className="media-left media-middle icon-container">
+          <div className="media-left media-middle icon-container ">
             <img className="media-object" src={accessory.imageUrl} height="120" width="120"/>
           </div>
           <NavLink

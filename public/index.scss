@@ -167,10 +167,22 @@ input.form-like[disabled] {
 
 //flexbox for our reviews
 .review {
-  display: inline;
+  display: block;
   align-content: space-between
 }
 
 .bottom {
   display: block;
+}
+
+.grey {
+  background: #c9d2fc
+}
+
+.bold {
+  font-style: bold
+}
+
+NavLink {
+  color: green
 }
