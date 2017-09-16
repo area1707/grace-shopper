@@ -6,7 +6,6 @@ const api = module.exports = require('express').Router()
 
 api.use((req, res, next) => {
   if (req.user) {
-    console.log('req.user inside cart server', req.user)
     Order.findOrCreate({
       where: {
         userId: req.user.id
