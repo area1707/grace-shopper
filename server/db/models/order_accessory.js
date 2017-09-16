@@ -17,7 +17,7 @@ const Order_accessory = db.define('order_accessory', {
     ]
   },
   hooks: {
-    beforeValidate: (orderedAccessory) => {
+    beforeValidate: (orderedAccessory, options) => {
       Accessory.findById(orderedAccessory.accessoryId)
         .then((accessory) => {orderedAccessory.orderedPrice = accessory.price})
     }
