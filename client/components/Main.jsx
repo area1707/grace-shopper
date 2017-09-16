@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { Router, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom'
 import store from '../store'
 import Root from './Root'
-import history from './history'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
@@ -11,10 +11,10 @@ import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
 import {fetchAccessories} from '../reducers/accessories'
-import {fetchUsers} from '../reducers/users'
+import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
-import { fetchCart } from '../reducers/cart'
 import {fetchReviews} from '../reducers/reviews'
+import {fetchCurrentUser} from '../reducers/login'
 
 export default class Main extends Component {
   constructor() {
@@ -33,11 +33,12 @@ export default class Main extends Component {
     store.dispatch(fetchAccessories())
     store.dispatch(fetchUsers())
     store.dispatch(fetchReviews())
+    store.dispatch(fetchCurrentUser())
   }
 
   render() {
     return (
-      <Router history={history}>
+      <Router >
         <Root>
           <Navbar handleSubmit={this.handleSubmit}/>
           <Switch>

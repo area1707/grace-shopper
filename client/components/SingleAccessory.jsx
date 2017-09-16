@@ -132,7 +132,7 @@ class SingleAccessory extends Component {
       </div>
     );
   }
-  removeAccessory (event) {
+  removeAccessory(event) {
     const { accessory, removeAccessory } = this.props;
     event.stopPropagation()
     removeAccessory(accessory.id)
@@ -167,7 +167,7 @@ class SingleAccessory extends Component {
   }
   handleCartAdd(e, user, selectedProduct) {
     e.preventDefault()
-    this.props.addToCart(user, selectedProduct)
+    this.props.addToCart(user, selectedProduct, 1)
   }
 }
 

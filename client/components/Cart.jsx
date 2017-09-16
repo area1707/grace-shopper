@@ -6,16 +6,22 @@ import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {updateLineItem, removeLineItem, addToCart, fetchItemsInCart} from '../reducers/cart'
+import store from '../store'
 
 class Cart extends Component {
 
   constructor(props) {
     super(props)
   }
+  componentDidMount() {
+    store.dispatch(fetchItemsInCart())
+  }
+
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
   let rows = lineItems && lineItems.map(item => {
+    !item.quantity ? item.quantity = 1 : item.quantity
     let price = (item.price * item.quantity).toFixed(2);
     total += +price;
 
@@ -86,7 +92,6 @@ const mapState = (state) => {
     lineItems: state.cart.lineItems
   }
 }
-// const mapState = {}
 
 const mapDispatch = (dispatch) => {
   return {
@@ -103,9 +108,6 @@ const mapDispatch = (dispatch) => {
       axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
         .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
         .catch(console.error)
-    },
-    fetchItems: function(orderId) {
-      dispatch(fetchItemsInCart(orderId))
     }
   }
 }

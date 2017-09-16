@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createNewUser } from '../reducers/login';
+import {verifyUser} from '../reducers/login';
 import store from '../store';
+import {withRouter} from 'react-router';
+import {fetchItemsInCart} from '../reducers/cart';
 
 /* -----------------    COMPONENT     ------------------ */
 
-class Signup extends React.Component {
-
+class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    this.onLoginSubmit = this.onLoginSubmit.bind(this);
   }
 
   render() {
@@ -17,15 +18,7 @@ class Signup extends React.Component {
     return (
       <div className="signin-container">
         <div className="buffer local">
-          <form onSubmit={this.onSignupSubmit}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                name="name"
-                type="name"
-                className="form-control"
-              />
-            </div>
+          <form onSubmit={this.onLoginSubmit}>
             <div className="form-group">
               <label>email</label>
               <input
@@ -36,13 +29,13 @@ class Signup extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label>password</label>
-              <input
-                name="password"
-                type="password"
-                className="form-control"
-                required
-              />
+                <label>password</label>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  required
+                />
             </div>
             <button type="submit" className="btn btn-block btn-primary">{message}</button>
           </form>
@@ -67,23 +60,22 @@ class Signup extends React.Component {
     );
   }
 
-  onSignupSubmit(event) {
-    const { message } = this.props;
+  onLoginSubmit(event) {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    store.dispatch(createNewUser({name, email, password}));
+    const { message, currentUser } = this.props;
+    const email = event.target.email.value
+    const password = event.target.password.value
+    store.dispatch(verifyUser({email, password}))
+    this.props.history.push('/')
   }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = (state) => ({
-  message: 'Sign up',
+  message: 'Log in',
   currentUser: state.currentUser
 });
-
 const mapDispatch = null;
 
-export default connect(mapState, mapDispatch)(Signup);
+export default withRouter(connect(mapState, mapDispatch)(Login))
