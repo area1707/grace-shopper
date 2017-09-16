@@ -1,6 +1,7 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 const Accessory = require('./accessories')
+const Order = require('./orders')
 
 const Order_accessory = db.define('order_accessory', {
   orderedPrice: {
@@ -9,18 +10,27 @@ const Order_accessory = db.define('order_accessory', {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1
+  },
+  test: {
+    type: Sequelize.BOOLEAN,
   }
 }, {
   defaultScope: {
     include: [
-      { model: Accessory}
+      { model: Accessory},
+      { model: Order }
+
     ]
   },
   hooks: {
-    beforeValidate: (orderedAccessory, options) => {
-      Accessory.findById(orderedAccessory.accessoryId)
-        .then((accessory) => {orderedAccessory.orderedPrice = accessory.price})
-    }
+    // beforeBulkCreate: (orderedAccessories) => {
+    //   // Accessory.findById(orderedAccessories.accessoryId)
+    //   //   .then((accessory) => {orderedAccessories.orderedPrice = accessory.price})
+    //   for (const accessoryOrder in orderedAccessories) {
+    //     Accessory.findById(accessoryOrder.id)
+    //       .then( accessory => {accessoryOrder.orderedPrice = accessory.price})
+    //   }
+    // }
   }
 })
 
