@@ -18,6 +18,7 @@ class Home extends Component {
 
     return (
       <div className="container">
+        <img className="mascot" src="/img/tabby-cat.png" />
       {
         searchResults.length ? searchResults.map(accessory => {
           return (<SingleAccessory accessory={accessory} key={accessory.id} />)
