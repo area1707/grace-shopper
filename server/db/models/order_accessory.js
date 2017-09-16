@@ -1,5 +1,6 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
+const Accessory = require('./accessories')
 
 const Order_accessory = db.define('order_accessory', {
   orderedPrice: {
@@ -10,31 +11,27 @@ const Order_accessory = db.define('order_accessory', {
     defaultValue: 1
   }
 }, {
-    // hooks: {
-    //   beforeCreate: function(accessory) {
-    //     Order_accessory.findById(accessory.id).then(
-    //       accessory => {
-    //         if (accessory.id) {
-    //           accessory.quantity++
-    //           accessory.save()
-    //           .then( () => Sequelize.Promise.reject('Already exists')
-    //         )}
-    //       }
-    //     )
-    //   }
-    // }
-    // classMethods: {
-    //   insertOrIncrement: function(accessoryId) {
-    //     return accessoryId
-    //   }
-    // }
+  defaultScope: {
+    include: [
+      { model: Accessory}
+    ]
+  },
+  hooks: {
+    beforeValidate: (orderedAccessory) => {
+      Accessory.findById(orderedAccessory.accessoryId)
+        .then((accessory) => {orderedAccessory.orderedPrice = accessory.price})
+    }
+  }
 })
 
 Order_accessory.insertOrIncrement = function(accessoryId) {
-  Order_accessory.findOne({where:{accessoryId: accessoryId}})
+  Order_accessory.find({where:{accessoryId}})
     .then( accessory => {
       if (!accessory) return false
-      else return accessory
+      else {
+        accessory.quantity++
+        return accessory.save()
+      }
     })
 }
 

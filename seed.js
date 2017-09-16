@@ -529,16 +529,20 @@ const seed = () => {
   .then(() => {
     return Promise.all(orders.map(order =>
       Order.create(order)
+      // .then(order => {
+      //   const basket = makeRandomOrder()
+      //   return Promise.all(basket.map(accessoryId => {
+      //     if (!Order_accessory.insertOrIncrement(accessoryId)) return order.addAccessory(accessoryId)
+      //   })
+      //   )
+      // })
       .then(order => {
-        const basket = makeRandomOrder().filter(function(elem, index, self) {
-          return index === self.indexOf(elem);
-      })
+        const basket = makeRandomOrder().filter((elem, index, self) => index === self.indexOf(elem))
         return order.addAccessories(basket)
-      })
+        })
     ))
   })
 }
-//need to add quantity to the join table
 
 const main = () => {
   console.log('Syncing db...')
