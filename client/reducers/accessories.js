@@ -19,11 +19,9 @@ const accessoriesReducer = function(state=[], action) {
     case CREATE:
       return [action.accessory, ...state]
     case UPDATE:
-      return [
-        ...state.filter(accessory => accessory.id !== action.accessory.id),
-        Object.assign({}, action.accessory)
-      ]
-    default: return state
+      return state.map(accessory => accessory.id == action.accessory.id ? action.accessory : accessory)
+    default: 
+      return state
   }
 }
 
@@ -40,19 +38,19 @@ export const fetchAccessories = () => dispatch => {
 export const removeAccessory = id => dispatch => {
   dispatch(remove(id));
   axios.delete(`/api/accessories/${id}`)
-       .catch(err => console.error(`Removing accessory: ${id} unsuccessful`, err));
+    .catch(err => console.error(`Removing accessory: ${id} unsuccessful`, err));
 }
 
 export const addAccessory = accessory => dispatch => {
   axios.post('/api/accessories', accessory)
-       .then(res => dispatch(create(res.data)))
-       .catch(err => console.error(`Creating accessory: ${accessory} unsuccesful`, err))
+    .then(res => dispatch(create(res.data)))
+    .catch(err => console.error(`Creating accessory: ${accessory} unsuccesful`, err))
 }
 
 export const updateAccessory = (id, accessory) => dispatch => {
   axios.put(`/api/accessories/${id}`, accessory)
-       .then(res => {
-         dispatch(update(res.data))
-       })
-       .catch(err => console.error(`Updating accessory: ${accessory} unsuccessful`, err))
+    .then(res => {
+      dispatch(update(res.data))
+    })
+    .catch(err => console.error(`Updating accessory: ${accessory} unsuccessful`, err))
 }
