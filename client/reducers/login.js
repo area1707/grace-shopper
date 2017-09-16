@@ -28,35 +28,28 @@ export default function loginReducer(currentUser={}, action) {
 export const fetchCurrentUser = () => dispatch => {
   axios.get('/auth/me')
     .then(res => {
-      console.log("res inside fetchCurrentUser", res.data)
       dispatch(initialUser(res.data))
     })
     .catch(console.error)
 }
 
-export function verifyUser(user) {
-  return function thunk(dispatch) {
-    return axios.post('/auth/login', user)
-    .then(res => res.data)
-    .then(currentUser => {
-      dispatch(loginUser(currentUser))
-      //need to figure out redirect link
-      //history.push(`/`)
-    })
-    .catch(console.error)
-  }
+export const verifyUser = (user) => dispatch => {
+  return axios.post('/auth/login', user)
+  .then(res => res.data)
+  .then(currentUser => {
+    dispatch(loginUser(currentUser))
+  })
+  .catch(console.error)
 }
 
-export function createNewUser(user) {
-  return function thunk(dispatch) {
-    return axios.post('/auth/signup', user)
-    .then(res => res.data)
-    .then(newUser => {
-      console.log('got back new user!', newUser);
-      dispatch(createUser(newUser));
-    })
-    .catch(console.error)
-  }
+export const createNewUser = (user) => dispatch => {
+  return axios.post('/auth/signup', user)
+  .then(res => res.data)
+  .then(newUser => {
+    console.log('got back new user!', newUser);
+    dispatch(createUser(newUser));
+  })
+  .catch(console.error)
 }
 
 export const logUserOut = (user) => dispatch => {

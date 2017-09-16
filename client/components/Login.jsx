@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {verifyUser} from '../reducers/login';
 import store from '../store';
 import {withRouter} from 'react-router';
+import {fetchItemsInCart} from '../reducers/cart';
 
 /* -----------------    COMPONENT     ------------------ */
 
