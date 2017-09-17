@@ -61,6 +61,35 @@ api.put(`/item/:lineItemId`, (req, res, next) => {
         .catch(next)
 })
 
+api.put(`/:cartId`, (req, res, next) => {
+  console.log(req.body, 'in the back')
+  Order.update({
+    shippingAddress: req.body.shippingAddress,
+    emailAddress: req.body.emailAddress,
+    status: 'processing'
+  }, {
+    where: {
+      id: req.params.cartId
+    },
+    returning: true
+  })
+    .then(orderUpdated => {
+      // console.log('ORDERS IN THE BACK',orderUpdated.data)f
+      req.session.cartId ? req.session.cartId = 0 : req.cart = {"lineItems": []} 
+      res.send(orderUpdated[1][0])
+    })
+    .catch(next)
+})
+
+api.get('/id', (req, res, next) => {
+  Order.findOne({
+    where: {
+      id: req.cart ? req.cart.id : req.session.cartId
+    }
+  })
+  .then(order => res.send(order))
+})
+
 api.get('/', (req, res, next) => {
   Order_accessory.findAll({
     where: {

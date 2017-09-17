@@ -6,6 +6,12 @@ const Order = db.define('order', {
     type: Sequelize.ENUM,
     values: ['incomplete', 'created', 'processing', 'cancelled', 'completed'],
     defaultValue: 'incomplete'
+  },
+  emailAddress: {
+    type: Sequelize.STRING
+  },
+  shippingAddress: {
+    type: Sequelize.STRING
   }
 }, {})
 

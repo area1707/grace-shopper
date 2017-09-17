@@ -20,6 +20,7 @@ class Cart extends Component {
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
+  console.log(lineItems, 'hi')
   let rows = lineItems && lineItems.map(item => {
     !item.quantity ? item.quantity = 1 : item.quantity
     let price = (item.price * item.quantity).toFixed(2);

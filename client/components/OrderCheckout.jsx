@@ -4,18 +4,26 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import { addUser } from '../reducers/users'
+import {addAddressToOrder, clearCart} from '../reducers/cart'
+import {addCartId} from '../reducers/cartId'
+import store from '../store'
+
 
 class OrderCheckout extends Component {
   constructor(props) {
     super(props)
   }
 
+  componentDidMount() {
+    store.dispatch(addCartId())
+  }
+
   render() {
-    //const currentUser = req.user
+    console.log(this.props.cartId, 'cartId')
     return (
       <div>
 
-        <form onSubmit={this.props.handleSubmit}>
+        <form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.cartId)}}>
           <label>Shipping Information</label>
           <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -46,20 +54,21 @@ class OrderCheckout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users
+        users: state.users,
+        currentUser: state.currentUser,
+        cartId: state.cartId
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        handleSubmit: function(evt) {
+        handleSubmit: function(evt, cartId) {
           evt.preventDefault()
-          const email = evt.target.email.value
-          const shipping_address = evt.target.shippingAddress.value
-          dispatch(addUser({email, shipping_address}))
-        },
-        addUsertoCart: function(evt) {
-
+          const emailAddress = evt.target.email.value
+          const shippingAddress = evt.target.shippingAddress.value
+          dispatch(addAddressToOrder(cartId, shippingAddress, emailAddress))
+          // dispatch(clearCart())
+          console.log('are you HERE')
         },
         removeSessionCart: function() {
 
