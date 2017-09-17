@@ -14,7 +14,7 @@ function Accessory(props) {
 
   return (
     <div className="single-accessory">
-      <h3>Accessory Details</h3>
+      <h2>Accessory Details</h2>
       <SingleAccessory accessory={accessory} />
       <h3>Reviews</h3>
       {

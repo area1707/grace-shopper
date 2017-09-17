@@ -7,6 +7,8 @@ import {receiveLineItem, addToCart} from '../reducers/cart'
 import axios from 'axios'
 import store from '../store'
 
+//non admin-view
+
 class SingleAccessory extends Component {
   constructor(props){
     super(props)
@@ -28,96 +30,29 @@ class SingleAccessory extends Component {
 
   render() {
     const { accessory, receiveLineItem, user } = this.props
-    if (this.state.isEditing) {
-      return (
-        <div className="list-group-item min-content user-item">
-          <form className="media">
-            <div className="media-left media-middle icon-container">
-              <button
-                type="submit"
-                onClick={this.doneEdit}
-              >Save</button>
-              <button
-                type="cancel"
-                onClick={this.cancelEdit}
-              >Cancel</button>
-            </div>
-            <div className="media-body">
-              <h4 className="media-heading tucked">
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  className="form-like"
-                  value={this.state.name}
-                  onChange={this.updateAccessoryName}
-                />
-              </h4>
-              <h5 className="tucked">
-                <input
-                  name="picture"
-                  type="text"
-                  className="form-like"
-                  value={this.state.image}
-                  onChange={this.updateAccessoryImage}
-                />
-              </h5>
-              <h5 className="tucked">
-                <input
-                  name="price"
-                  type="text"
-                  className="form-like"
-                  value={this.state.price}
-                  onChange={this.updateAccessoryPrice}
-                />
-              </h5>
-              </div>
-            </form>
-          </div>
-      )
-    }
 
     return (
       <div className="list-group-item min-content students-item grey">
         <div className="media">
-          <div className="media-left media-middle icon-container ">
-            <img className="media-object" src={accessory.imageUrl} height="120" width="120"/>
+          <div className="media-left">
+            <img src={accessory.imageUrl} height="200" width="400"/>
           </div>
-          <NavLink
-            className="media-body"
-            activeClassName="active"
-            to={`/accessories/${accessory.id}`}>
-            <h4 className="media-heading tucked">
-              <span placeholder="tabby glasses">{accessory.name}</span>
-            </h4>
-            <p className="">
-              <span placeholder="tabby glasses">{accessory.description}</span>
+          <div className="media-body">
+            <h3 className="media-heading tucked">
+              <span >{accessory.name.toUpperCase()}</span>
+            </h3>
+            <p>
+              <span >{accessory.description}</span>
             </p>
             <p className="">
               <span placeholder="10">Color: {accessory.color}</span>
             </p>
             <p className="">
-              <span placeholder="$10">${accessory.price}</span>
+              <span placeholder="$10">Price: ${accessory.price}</span>
             </p>
             <p className="">
               <span placeholder="10">In store: {accessory.inventory}</span>
             </p>
-          </NavLink>
-          <div className="media-right media-middle">
-            <button
-                className="btn btn-default"
-                onClick={this.removeAccessory}
-                value={accessory.id}>
-              <span className="glyphicon glyphicon-remove" />
-            </button>
-          </div>
-          <div className="media-right media-middle">
-            <button
-                className="btn btn-default"
-                onClick={this.clickEdit}
-                value={accessory.id}>
-              <span className="glyphicon glyphicon-edit" />
-            </button>
           </div>
           <div className="media-right media-middle">
              <NavLink to="/cart" onClick={(e) => this.handleCartAdd(e, user, accessory)}>
