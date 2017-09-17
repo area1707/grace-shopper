@@ -8,7 +8,8 @@ api.use((req, res, next) => {
   if (req.user) {
     Order.findOrCreate({
       where: {
-        userId: req.user.id
+        userId: req.user.id,
+        status: 'incomplete'
       }
     })
     .then(cart => {
@@ -62,7 +63,7 @@ api.put(`/item/:lineItemId`, (req, res, next) => {
 })
 
 api.put(`/:cartId`, (req, res, next) => {
-  console.log(req.body, 'in the back')
+  // console.log(req.body, 'in the back')
   Order.update({
     shippingAddress: req.body.shippingAddress,
     emailAddress: req.body.emailAddress,
@@ -75,7 +76,10 @@ api.put(`/:cartId`, (req, res, next) => {
   })
     .then(orderUpdated => {
       // console.log('ORDERS IN THE BACK',orderUpdated.data)f
-      req.session.cartId ? req.session.cartId = 0 : req.cart = {"lineItems": []} 
+      if (req.session.cartId) req.session.cartId = 0 
+      // if (req.cart) req.cart.id = 0
+      
+      // console.log(req.cart, 'cart')
       res.send(orderUpdated[1][0])
     })
     .catch(next)
@@ -91,12 +95,14 @@ api.get('/id', (req, res, next) => {
 })
 
 api.get('/', (req, res, next) => {
+  console.log(req.cart.id, 'in the very back')
   Order_accessory.findAll({
     where: {
       orderId: req.cart ? req.cart.id : req.session.cartId
     }
   })
   .then(accArr => {
+    // console.log('accArr inside get', accArr)
     return Promise.all(accArr.map(acc => Accessory.findOne({
       where: {
         id: acc.accessoryId

@@ -118,7 +118,7 @@ export const fetchItemsInCart = () => dispatch => {
 export const addAddressToOrder = (cartId, shippingAddress, emailAddress) => dispatch => {
   return axios.put(`/api/cart/${cartId}`, { shippingAddress, emailAddress })
   .then(updatedOrder => {
-    console.log(updatedOrder.data) 
+    // console.log(updatedOrder.data) 
     dispatch(receiveLineItems([]))})
   .catch(console.error)
 }
