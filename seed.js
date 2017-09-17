@@ -2,8 +2,6 @@ const db = require('./server/db')
 const Accessory = require('./server/db/models/accessories')
 const User = require('./server/db/models/users')
 const Review = require('./server/db/models/reviews')
-const Order = require('./server/db/models/orders')
-const Order_accessory = require('./server/db/models/order_accessory')
 
 const accessories = [
   {
@@ -390,127 +388,89 @@ const reviews = [
   {
     content: 'a purrfect pair of glasses',
     star: 5,
-    accessoryId: 2,
+    accesoryId: 2,
     userId: 1
   },
   {
     content: 'would purrfer if they were more feline',
     star: 3,
-    accessoryId: 2,
+    accesoryId: 2,
     userId: 2
   },
   {
     content: 'who would go in the water?!',
     star: 1,
-    accessoryId: 4,
+    accesoryId: 4,
     userId: 2
   },
   {
     content: 'feliz cumpleaños, feline!',
     star: 4,
-    accessoryId: 8,
+    accesoryId: 8,
     userId: 1
   },
   {
     content: 'fit for royalty!',
     star: 5,
-    accessoryId: 15,
+    accesoryId: 15,
     userId: 2
   },
   {
     content: 'a fez fit for a feline friend!',
     star: 4,
-    accessoryId: 11,
+    accesoryId: 11,
     userId: 3
   },
   {
     content: 'delish!',
     star: 5,
-    accessoryId: 26,
+    accesoryId: 26,
     userId: 4
   },
   {
     content: 'would have preferred it alive...',
     star: 3,
-    accessoryId: 22,
+    accesoryId: 22,
     userId: 4
   },
   {
     content: 'who doesn\'t love a good pizza?',
     star: 4,
-    accessoryId: 23,
+    accesoryId: 23,
     userId: 1
   },
   {
     content: 'used to be alive...',
     star: 1,
-    accessoryId: 24,
+    accesoryId: 24,
     userId: 1
   },
   {
     content: 'a purrfect spot to curl up next to',
     star: 4,
-    accessoryId: 28,
+    accesoryId: 28,
     userId: 3
   },  {
     content: 'wish it were a bit stronger :(',
     star: 3,
-    accessoryId: 39,
+    accesoryId: 39,
     userId: 4
   },
 ]
 
-const orders = [
-  {status: 'incomplete',
-  userId: 1},
-  {status: 'created',
-  userId: 1},
-  {status: 'processing',
-  userId: 1},
-  {status: 'cancelled',
-  userId: 1},
-  {status: 'completed',
-  userId: 1},
-  {status: 'incomplete',
-  userId: 2},
-  {status: 'created',
-  userId: 2},
-  {status: 'processing',
-  userId: 2},
-  {status: 'cancelled',
-  userId: 2},
-  {status: 'completed',
-  userId: 2},
-  {status: 'incomplete',
-  userId: 3},
-  {status: 'created',
-  userId: 3},
-  {status: 'processing',
-  userId: 3},
-  {status: 'cancelled',
-  userId: 3},
-  {status: 'completed',
-  userId: 3},
-  {status: 'incomplete',
-  userId: 4},
-  {status: 'created',
-  userId: 4},
-  {status: 'processing',
-  userId: 4},
-  {status: 'cancelled',
-  userId: 4},
-  {status: 'completed',
-  userId: 4}
+const randomReviews = [
+  ['i love it!', 5],
+  ['could be improved...', 2],
+  ['cute but not practical :-/', 3],
+  ['almost perfect!', 4],
+  ['hated it!', 1],
+  ['i want more!', 5],
+  ['didn\'t fit :(,', 2],
+  ['it was awful!', 1],
+  ['i need more!', 4],
+  ['wish i loved it...', 3],
+  ['i love it!', 3],
 ]
-
-const makeRandomOrder = () => {
-  let orderItems = []
-  let orderNum = Math.ceil(Math.random() * 9)
-  for (var i = 0; i <= orderNum; i++) {
-    orderItems.push(Math.ceil(Math.random() * 39))
-  }
-  return orderItems
-}
 
 const seed = () => {
   return Promise.all(accessories.map(accessory =>
@@ -526,23 +486,8 @@ const seed = () => {
       Review.create(review))
     )
   })
-  .then(() => {
-    return Promise.all(orders.map(order =>
-      Order.create(order)
-      // .then(order => {
-      //   const basket = makeRandomOrder()
-      //   return Promise.all(basket.map(accessoryId => {
-      //     if (!Order_accessory.insertOrIncrement(accessoryId)) return order.addAccessory(accessoryId)
-      //   })
-      //   )
-      // })
-      .then(order => {
-        const basket = makeRandomOrder().filter((elem, index, self) => index === self.indexOf(elem))
-        return order.addAccessories(basket)
-        })
-    ))
-  })
 }
+
 
 const main = () => {
   console.log('Syncing db...')
