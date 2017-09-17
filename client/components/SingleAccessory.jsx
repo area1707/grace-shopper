@@ -38,7 +38,7 @@ class SingleAccessory extends Component {
             <img src={accessory.imageUrl} height="200" width="400"/>
           </div>
           <div className="media-body">
-            <h3 className="media-heading tucked">
+            <h3 className="media-heading tucked center">
               <span >{accessory.name.toUpperCase()}</span>
             </h3>
             <p>
