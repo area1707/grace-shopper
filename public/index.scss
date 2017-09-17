@@ -195,10 +195,22 @@ body {
 .allProducts {
   width: 150;
   display: inline-flex;
-  margin: 0px 50px 50px 50px;
-  justify-content: space-around
+  align-content: center;
+  margin:0px 50px 50px 50px;
+  justify-content: space-around;
+  flex-flow: row wrap
 }
 
 h1 {
   font-style: bold
+}
+
+.banner {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: baseline;
+  font-size: 48px;
+  p {
+    margin: 40px
+  }
 }

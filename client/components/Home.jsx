@@ -18,17 +18,28 @@ class Home extends Component {
 
     return (
       <div className="container">
-        <img className="mascot" src="/img/cat-banner.gif" />
+        <div className="banner">
+          <img className="mascot" src="/img/cat-banner.gif" />
+          <p>TABBY CAT EMPORIUM</p>
+        </div>
         <center><h1>{ searchValue.toUpperCase() || 'ALL ACCESSORIES'}</h1></center>
       {
         searchResults.length ? searchResults.map(accessory => {
           return (
+            <NavLink
+            activeClassName="active"
+            to={`/accessories/${accessory.id}`}>
             <img className="allProducts" src ={accessory.imageUrl}/>
+            </NavLink>
           )
         }) :
         accessories.map(accessory => {
           return (
+            <NavLink
+            activeClassName="active"
+            to={`/accessories/${accessory.id}`}>
             <img className="allProducts" src ={accessory.imageUrl}/>
+            </NavLink>
           )
         })
       }
