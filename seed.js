@@ -388,72 +388,72 @@ const reviews = [
   {
     content: 'a purrfect pair of glasses',
     star: 5,
-    accesoryId: 2,
+    accessoryId: 2,
     userId: 1
   },
   {
     content: 'would purrfer if they were more feline',
     star: 3,
-    accesoryId: 2,
+    accessoryId: 2,
     userId: 2
   },
   {
     content: 'who would go in the water?!',
     star: 1,
-    accesoryId: 4,
+    accessoryId: 4,
     userId: 2
   },
   {
     content: 'feliz cumpleaños, feline!',
     star: 4,
-    accesoryId: 8,
+    accessoryId: 8,
     userId: 1
   },
   {
     content: 'fit for royalty!',
     star: 5,
-    accesoryId: 15,
+    accessoryId: 15,
     userId: 2
   },
   {
     content: 'a fez fit for a feline friend!',
     star: 4,
-    accesoryId: 11,
+    accessoryId: 11,
     userId: 3
   },
   {
     content: 'delish!',
     star: 5,
-    accesoryId: 26,
+    accessoryId: 26,
     userId: 4
   },
   {
     content: 'would have preferred it alive...',
     star: 3,
-    accesoryId: 22,
+    accessoryId: 22,
     userId: 4
   },
   {
     content: 'who doesn\'t love a good pizza?',
     star: 4,
-    accesoryId: 23,
+    accessoryId: 23,
     userId: 1
   },
   {
     content: 'used to be alive...',
     star: 1,
-    accesoryId: 24,
+    accessoryId: 24,
     userId: 1
   },
   {
     content: 'a purrfect spot to curl up next to',
     star: 4,
-    accesoryId: 28,
+    accessoryId: 28,
     userId: 3
   },  {
     content: 'wish it were a bit stronger :(',
     star: 3,
-    accesoryId: 39,
+    accessoryId: 39,
     userId: 4
   },
 ]
@@ -465,12 +465,29 @@ const randomReviews = [
   ['almost perfect!', 4],
   ['hated it!', 1],
   ['i want more!', 5],
-  ['didn\'t fit :(,', 2],
+  ['didn\'t fit :(', 2],
   ['it was awful!', 1],
   ['i need more!', 4],
   ['wish i loved it...', 3],
   ['i love it!', 3],
 ]
+
+const reviewGenerator = () => {
+  let reviewArr = []
+  for (let i = 1; i < 80; i++) {
+    let randomAcc = Math.ceil(Math.random() * 39)
+    let randomUser = Math.ceil(Math.random() * 4)
+    let randomReview = Math.ceil(Math.random() * 10)
+    reviewArr.push({
+      content: randomReviews[randomReview][0],
+      star: randomReviews[randomReview][1],
+      accessoryId: randomAcc,
+      userId: randomUser
+    })
+  }
+  return reviewArr
+}
+
 
 const seed = () => {
   return Promise.all(accessories.map(accessory =>
@@ -485,6 +502,10 @@ const seed = () => {
     return Promise.all(reviews.map(review =>
       Review.create(review))
     )
+  .then(() => {
+    return Promise.all(reviewGenerator().map(review =>
+      Review.create(review)))
+  })
   })
 }
 
