@@ -1,7 +1,7 @@
-import {connect} from 'react-redux'
-import React, {Component} from 'react'
-import {withRouter} from 'react-router'
-import {addReview} from '../reducers/reviews'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
+import { addReview } from '../reducers/reviews'
 
 class WriteReview extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class WriteReview extends Component {
     }
   }
   render() {
-    const accessory  = props.accessory
+    const accessory = this.props.accessory
     const stars = (num) => {
       let reviewStars = []
       for (var star = 1; star <= num; star++) {
@@ -20,39 +20,38 @@ class WriteReview extends Component {
       return reviewStars
     }
 
-    const starRender = (starsArr) => starArr.map(star => star)
-      return (
-          <div>
-            <img src={accessory.imageUrl} />
-            <h3>{accessory.name}</h3>
-            <form>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Select Rating</label>
-                <select class="form-control" id="exampleFormControlSelect1" >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-              <div>
-                {/*if value on option select, change STATE*/}
-              </div>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">What did you think?!</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </form>
+    return (
+      <div>
+        <img src={accessory.imageUrl} />
+        <h3>{accessory.name}</h3>
+        <form>
+          <div className="form-group">
+            <label for="exampleFormControlSelect1">Select Rating</label>
+            <select className="form-control" id="exampleFormControlSelect1" onChange={() => this.setState({selectedStars: event.target.value})}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
           </div>
+          <div>
+            {this.state.selectedStars ? stars(this.state.selectedStars).map(img => img) : null}
+          </div>
+          <div className="form-group">
+            <label for="exampleFormControlTextarea1">What did you think?!</label>
+            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
     );
   }
 }
 
-const mapState = ({reviews}) => ({reviews})
+const mapState = ({ reviews }) => ({ reviews })
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    handleSubmit: function(event, accessoryId) {
+    handleSubmit: function (event, accessoryId) {
       //const content
       //const star
       //const accessoryId
