@@ -30,7 +30,7 @@ function SingleOrder(props){
           }
           </ul>
           <p className="">
-          <span placeholder="10">Total Cost: {total}</span>
+          <span placeholder="10">Total Cost: ${total}</span>
           </p>
         
         </div>
