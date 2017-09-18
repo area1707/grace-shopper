@@ -99,7 +99,7 @@ export class SingleAccessory extends Component {
   }
   handleCartAdd(e, user, selectedProduct) {
     e.preventDefault()
-    this.props.addToCart(user, selectedProduct, 1)
+    this.props.addToCart(user, selectedProduct)
   }
 }
 
