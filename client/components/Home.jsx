@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {NavLink} from 'react-router-dom'
 import SingleAccessory from './SingleAccessory'
 
 class Home extends Component {
@@ -15,15 +16,31 @@ class Home extends Component {
       if (accessory.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 || accessory.category.toLowerCase() === searchValue.toLowerCase()) searchResults.push(accessory)
     })
 
-
     return (
       <div className="container">
+        <div className="banner">
+          <img className="mascot" src="/img/cat-banner.gif" />
+          <p>TABBY CAT EMPORIUM</p>
+        </div>
+        <center><h1>{ searchValue.toUpperCase() || 'ALL ACCESSORIES'}</h1></center>
       {
         searchResults.length ? searchResults.map(accessory => {
-          return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+          return (
+            <NavLink
+            activeClassName="active"
+            to={`/accessories/${accessory.id}`}>
+            <img className="allProducts" src ={accessory.imageUrl}/>
+            </NavLink>
+          )
         }) :
         accessories.map(accessory => {
-          return (<SingleAccessory accessory={accessory} key={accessory.id} />)
+          return (
+            <NavLink
+            activeClassName="active"
+            to={`/accessories/${accessory.id}`}>
+            <img className="allProducts" src ={accessory.imageUrl}/>
+            </NavLink>
+          )
         })
       }
       </div>
