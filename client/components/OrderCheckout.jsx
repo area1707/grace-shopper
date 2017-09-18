@@ -1,4 +1,3 @@
-
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
@@ -14,12 +13,13 @@ class OrderCheckout extends Component {
     super(props)
   }
 
+  //using component did mount to get the current cart ID from the store before starting 
+  // the checkout so we have the id to use to update the DB with buyer information
   componentDidMount() {
     store.dispatch(addCartId())
   }
 
   render() {
-    console.log(this.props.cartId, 'cartId')
     return (
       <div>
 
@@ -67,8 +67,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           const emailAddress = evt.target.email.value
           const shippingAddress = evt.target.shippingAddress.value
           dispatch(addAddressToOrder(cartId, shippingAddress, emailAddress))
-          // dispatch(clearCart())
-          console.log('are you HERE')
         },
         removeSessionCart: function() {
 
