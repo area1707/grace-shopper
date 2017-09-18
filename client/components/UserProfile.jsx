@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import store from '../store';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchSingleUser } from '../reducers/users'
 
-export class UserProfile extends Component {
-    render() {
-        const { user } = this.props
+function UserProfile(props) {
+
+        const { user } = props
         return (
             <div>
                 {!!user && 
@@ -19,7 +18,7 @@ export class UserProfile extends Component {
             </div>
         )
     }
-}
+
 
 const mapStateToProps = function (state, ownProps) {
     const userId = Number(ownProps.match.params.userId)
