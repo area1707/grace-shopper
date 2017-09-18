@@ -1,9 +1,7 @@
 import {connect} from 'react-redux'
-import React, {Component} from 'react'
+import React from 'react'
 import {withRouter} from 'react-router'
-import SingleAccessory from './SingleAccessory'
-//SINGLEACCESSORY IS BLOATED NOW, MAKE A NEW ACCESSORY COMPONENT
-//THAT U ONLY NEED FOR ORDERS
+import OrderAccessory from './OrderAccessory'
 
 function SingleOrder(props){
   const { orderAccs } = props
@@ -16,7 +14,6 @@ function SingleOrder(props){
         <div>
         <h2>Order #{order.id}</h2>
         <div className="list-group-item min-content media "> 
-          {console.log('my ORDER OBJ', orderAccs)}
           <p className="">
             <span placeholder="order created">Order placed on: {order.createdAt}</span>
           </p>
@@ -27,7 +24,7 @@ function SingleOrder(props){
           {orderAccs.map(orderAcc => {
             {total+=orderAcc.orderedPrice}
             return(
-                <SingleAccessory key={orderAcc.accessoryId} accessory={orderAcc.accessory} />
+                <OrderAccessory key={orderAcc.accessoryId} orderAcc={orderAcc}/>
 
               
             )
@@ -48,7 +45,6 @@ function SingleOrder(props){
 const mapState = function (state, ownProps) {
   const orderId = Number(ownProps.match.params.orderId)
   const selectedOrderAcc = state.orderAccessories.filter(orderAcc => orderAcc.order.id == orderId)
-  console.log(selectedOrderAcc)
   return {
       orderAccs: selectedOrderAcc
   }
