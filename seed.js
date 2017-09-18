@@ -402,7 +402,7 @@ const reviews = [
   {
     content: 'who would go in the water?!',
     star: 1,
-    accessoryId: 4,
+    accessoryId: 5,
     userId: 2
   },
   {
@@ -459,6 +459,36 @@ const reviews = [
     userId: 4
   },
 ]
+
+const randomReviews = [
+  ['i love it!', 5],
+  ['could be improved...', 2],
+  ['cute but not practical :-/', 3],
+  ['almost perfect!', 4],
+  ['hated it!', 1],
+  ['i want more!', 5],
+  ['didn\'t fit :(', 2],
+  ['it was awful!', 1],
+  ['i need more!', 4],
+  ['wish i loved it...', 3],
+  ['i love it!', 3],
+]
+
+const reviewGenerator = () => {
+  let reviewArr = []
+  for (let i = 1; i < 39; i++) {
+    // let randomAcc = Math.ceil(Math.random() * 39)
+    let randomUser = Math.ceil(Math.random() * 4)
+    let randomReview = Math.ceil(Math.random() * 10)
+    reviewArr.push({
+      content: randomReviews[randomReview][0],
+      star: randomReviews[randomReview][1],
+      accessoryId: i,
+      userId: randomUser
+    })
+  }
+  return reviewArr
+}
 
 const orders = [
   {status: 'incomplete',
@@ -525,6 +555,10 @@ const seed = () => {
     return Promise.all(reviews.map(review =>
       Review.create(review))
     )
+  .then(() => {
+    return Promise.all(reviewGenerator().map(review =>
+      Review.create(review)))
+  })
   })
   .then(() => {
     return Promise.all(orders.map(order =>
@@ -543,6 +577,7 @@ const seed = () => {
     ))
   })
 }
+
 
 const main = () => {
   console.log('Syncing db...')

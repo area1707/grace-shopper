@@ -15,7 +15,6 @@ describe('UserProfile', () => {
   })
 
   it('renders the greeting in an h1', () => {
-    // console.log('userProfile inside test', userProfile)
     expect(userProfile.find('h1').text()).to.be.equal('Hello, Bob!')
   })
 })

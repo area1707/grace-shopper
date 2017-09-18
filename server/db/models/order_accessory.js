@@ -10,9 +10,6 @@ const Order_accessory = db.define('order_accessory', {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1
-  },
-  test: {
-    type: Sequelize.BOOLEAN,
   }
 }, {
   defaultScope: {
