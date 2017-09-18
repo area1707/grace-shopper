@@ -20,7 +20,6 @@ class OrderCheckout extends Component {
   }
 
   render() {
-    console.log(this.props.currentUser, 'this is current user')
     const { currentUser } = this.props
     return (
       <div>
