@@ -16,8 +16,9 @@ export default class OrderCheckout extends Component {
   render () {
     return (
       <div>
-        <p>hi i made it fam</p>
-        <p> render the order here too </p>
+        <h1>Your order is being processed...</h1>
+        <p> render the single order component here from Raz</p>
+        <p> <NavLink to="/">Click to go back to main page</NavLink></p>
       </div>
     )
   }

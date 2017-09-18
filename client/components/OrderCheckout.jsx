@@ -20,6 +20,7 @@ class OrderCheckout extends Component {
   }
 
   render() {
+    const { currentUser } = this.props
     return (
       <div>
 
@@ -30,7 +31,8 @@ class OrderCheckout extends Component {
             <input 
               name="email"
               className="form-control" 
-              placeholder="Enter email..." 
+              placeholder="Enter email..."
+              value={(currentUser) ? currentUser.email : null} 
             />
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
@@ -67,6 +69,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           const emailAddress = evt.target.email.value
           const shippingAddress = evt.target.shippingAddress.value
           dispatch(addAddressToOrder(cartId, shippingAddress, emailAddress))
+          ownProps.history.push('/confirmation')
         },
         removeSessionCart: function() {
 
