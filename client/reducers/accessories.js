@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// KM/SC -- keep spaces around '=' consistent
 const GET_ACCESSORIES = 'GET_ACCESSORIES'
 const REMOVE_ACCESSORIES  = 'REMOVE_ACCESSORIES'
 const CREATE     = 'CREATE_ACCESSORIES'
@@ -20,7 +21,7 @@ const accessoriesReducer = function(state=[], action) {
       return [action.accessory, ...state]
     case UPDATE:
       return state.map(accessory => accessory.id == action.accessory.id ? action.accessory : accessory)
-    default: 
+    default:
       return state
   }
 }
@@ -35,10 +36,11 @@ export const fetchAccessories = () => dispatch => {
     })
 }
 
+// KM/SC -- do axios and THEN dispatch in a '.then', to ensure that it was actually deleted before you delete it from store
 export const removeAccessory = id => dispatch => {
   dispatch(remove(id));
   axios.delete(`/api/accessories/${id}`)
-    .catch(err => console.error(`Removing accessory: ${id} unsuccessful`, err));
+    .catch(err => console.error(`Removing accessory: ${id} unsuccessful`, err)); // KM/SC -- consider actually *rendering* your error to the user (Toaster?)
 }
 
 export const addAccessory = accessory => dispatch => {

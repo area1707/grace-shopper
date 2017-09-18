@@ -1,3 +1,4 @@
+// KM/SC -- Nice, clean start file!
 'use strict'
 const db = require('./db/index')
 const app = require('./middleware')

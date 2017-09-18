@@ -5,7 +5,7 @@ import axios from 'axios';
 import {logUserOut} from '../reducers/login'
 
 /* -----------------    COMPONENT     ------------------ */
-
+// KM/SC -- consider conditional rendering of 'signup' link, based on whether user is already logged in
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,7 @@ class Navbar extends React.Component {
       searchValue: ''
     }
 
+    // KM/SC -- so many semicolons! :o
     this.renderHome = this.renderHome.bind(this);
     this.renderLoginSignup = this.renderLoginSignup.bind(this);
     this.renderLogout = this.renderLogout.bind(this);
@@ -51,7 +52,7 @@ class Navbar extends React.Component {
       </ul>
     )
   }
-
+  // KM/SC -- great modularity!
   renderCart() {
     return (
       <ul className="nav navbar-nav navbar-left">

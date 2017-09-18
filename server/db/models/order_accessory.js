@@ -20,6 +20,7 @@ const Order_accessory = db.define('order_accessory', {
     ]
   },
   hooks: {
+    // KM/SC -- remove dead code in master!
     // beforeBulkCreate: (orderedAccessories) => {
     //   // Accessory.findById(orderedAccessories.accessoryId)
     //   //   .then((accessory) => {orderedAccessories.orderedPrice = accessory.price})
@@ -31,6 +32,7 @@ const Order_accessory = db.define('order_accessory', {
   }
 })
 
+// KM/SC -- obsolete? Make sure you're only doing this in one place
 Order_accessory.insertOrIncrement = function(accessoryId) {
   Order_accessory.find({where:{accessoryId}})
     .then( accessory => {

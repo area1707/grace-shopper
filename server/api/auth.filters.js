@@ -1,3 +1,4 @@
+// KM/SC -- either use these, or don't have them in master
 const mustBeLoggedIn = (req, res, next) => {
   if (!req.user) {
     return res.status(401).send('You must be logged in')

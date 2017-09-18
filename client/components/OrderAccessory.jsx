@@ -4,9 +4,9 @@ import React from 'react'
 import {withRouter} from 'react-router'
 
 function OrderAccessory(props){
-  const { orderAcc } = props
+  const { orderAcc } = props // KM/SC -- choose spaces or no-spaces in object destructuring
   const accessory = orderAcc.accessory
-
+  // KM/SC -- note single/double quote usage in style guide (for JSX vs. JS)
   return (
     <div className="list-group-item min-content accessory-item grey">
       <div className="media">
@@ -43,7 +43,8 @@ function OrderAccessory(props){
     </div>
   );
 }
-  
+
+// KM/SC -- delete dead code from master
   // handleReviewAdd(e, user, selectedProduct) {
   //   e.preventDefault()
   //   this.props.addReview(user, selectedProduct, 1)
