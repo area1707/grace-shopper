@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {removeAccessory, updateAccessory} from '../reducers/accessories'
-import {receiveLineItem, addToCart, updateLineItem, lineItems } from '../reducers/cart'
+import {receiveLineItem, addToCart, updateLineItem} from '../reducers/cart'
 import axios from 'axios'
 import store from '../store'
 
@@ -27,7 +27,7 @@ export class SingleAccessory extends Component {
   }
 
   render() {
-    const { accessory, receiveLineItem, user, cart } = this.props
+    const { accessory, receiveLineItem, user, cart} = this.props
     console.log(cart)
     return (
       <div className="list-group-item min-content accessory-item grey">
