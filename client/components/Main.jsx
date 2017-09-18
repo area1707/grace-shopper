@@ -7,7 +7,6 @@ import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
 import Cart from './Cart'
-import Checkout from './Checkout'
 import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
@@ -55,7 +54,6 @@ export default class Main extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
             <Route path="/users/:userId" component={UserProfile} />
-            <Route path="/checkout" component={Checkout} />
           </Switch>
         </Root>
       </Router>

@@ -19,24 +19,25 @@ const cartReducer = (state = initialState, action) => {
       let duplicate = newState.lineItems.filter(item => item.id === action.lineItem.id)
       if (duplicate.length) {
         duplicate[0].quantity = action.quantity
-        newState.lineItems = [...newState.lineItems]
+        newState.lineItems = [...newState.lineItems];
       }
       else { newState.lineItems = [...newState.lineItems, action.lineItem] }
-      console.log('quantity inside reducer', action.quantity)
       break;
 
     case RECEIVE_LINE_ITEMS:
       newState.lineItems = action.lineItems
+      break;
 
     case REMOVE_LINE_ITEM:
       newState.lineItems = newState.lineItems.filter(item => item.id !== action.lineItemId)
+      break;
 
     case UPDATE_LINE_ITEM:
       let itemToUpdate = newState.lineItems.filter(item => item.id === action.lineItemId)
       itemToUpdate[0].quantity = action.quantity
       newState.lineItems = [...newState.lineItems]
 
-    default: return state
+    default: return state;
     }
   return newState
 }
@@ -78,6 +79,7 @@ export default cartReducer
 export const addToCart = (user, selectedProduct, quantity) => dispatch => {
   return axios.post(`/api/cart`, {orderedPrice: selectedProduct.price, accessoryId: selectedProduct.id})
     .then(createdLineItem => {
+      console.log('createdLineItem inside reducer', createdLineItem)
       dispatch(receiveLineItem(createdLineItem.data, quantity))
     })
     .catch(console.error)
