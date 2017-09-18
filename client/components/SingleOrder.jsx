@@ -15,7 +15,7 @@ function SingleOrder(props){
         <h2>Order #{order.id}</h2>
         <div className="list-group-item min-content media "> 
           <p className="">
-            <span placeholder="order created">Order placed on: {order.createdAt}</span>
+            <span placeholder="order created">Order placed on: {(order.createdAt).slice(0,10)}</span>
           </p>
           <p className="">
             <span placeholder="status">Status: {order.status}</span>

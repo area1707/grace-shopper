@@ -2,7 +2,6 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import React from 'react'
 import {withRouter} from 'react-router'
-import axios from 'axios'
 
 function OrderAccessory(props){
   const { orderAcc } = props
