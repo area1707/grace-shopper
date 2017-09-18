@@ -8,13 +8,16 @@ import store from '../store'
 class SingleOrder extends Component{
     
     render() {
-      const { orderAcc } = this.props
-      const order = orderAcc.length ? orderAcc[0].order: {}
+      const { orderAccs } = this.props
+      const order = orderAccs.length ? orderAccs[0].order: {}
 
     return (
-      <div className="list-group-item min-content students-item">
-        {orderAcc.length && <div className="media" className="media-body">
-            {console.log('my ORDER OBJ', orderAcc)}
+      <div>
+        {orderAccs.length &&
+          <div>
+          <h2>Order #</h2>
+          <div className="list-group-item min-content media media-body"> 
+            {console.log('my ORDER OBJ', orderAccs)}
             <h4 className="media-heading tucked">
               <span placeholder="order id here">Order #{order.id}</span>
             </h4>
@@ -24,16 +27,26 @@ class SingleOrder extends Component{
             <p className="">
               <span placeholder="status">Status: {order.status}</span>
             </p>
-            {/*<p className="">
-              <span placeholder="accessoryNameQuantity">${orderAcc.accessory.accessoryId} ${orderAcc.accessory.quantity} ACCESSORY_NAME</span>
-    </p>*/}
+            <ul>
+            {orderAccs.map(orderAcc => {
+              return(
+                  <li key = {orderAcc.accessoryId}>
+                  {orderAcc.quantity} {orderAcc.accessory.name}
+                  </li>
+                
+              )
+            })
+            }
+            </ul>
             <p className="">
-              <span placeholder="10">Total Cost: {orderAcc.orderedPrice}</span>
+            <span placeholder="10">Total Cost: {orderAccs.orderedPrice}</span>
             </p>
           
-        </div>}
+          </div>
+          </div>
+        }
       </div>
-    );
+    )
   }
 }
 
@@ -42,7 +55,7 @@ const mapState = function (state, ownProps) {
   const selectedOrderAcc = state.orderAccessories.filter(orderAcc => orderAcc.order.id == orderId)
   console.log(selectedOrderAcc)
   return {
-      orderAcc: selectedOrderAcc
+      orderAccs: selectedOrderAcc
   }
 }
 
