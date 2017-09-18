@@ -5,49 +5,43 @@ import {fetchOrders} from '../reducers/orders'
 import store from '../store'
 
 
-class SingleOrder extends Component{
-    
-    render() {
-      const { orderAccs } = this.props
-      const order = orderAccs.length ? orderAccs[0].order: {}
+function SingleOrder(props){
+  const { orderAccs } = props
+  const order = orderAccs.length ? orderAccs[0].order: {}
 
-    return (
-      <div>
-        {orderAccs.length &&
-          <div>
-          <h2>Order #</h2>
-          <div className="list-group-item min-content media media-body"> 
-            {console.log('my ORDER OBJ', orderAccs)}
-            <h4 className="media-heading tucked">
-              <span placeholder="order id here">Order #{order.id}</span>
-            </h4>
-            <p className="">
-              <span placeholder="order created">Order placed on: {order.createdAt}</span>
-            </p>
-            <p className="">
-              <span placeholder="status">Status: {order.status}</span>
-            </p>
-            <ul>
-            {orderAccs.map(orderAcc => {
-              return(
-                  <li key = {orderAcc.accessoryId}>
-                  {orderAcc.quantity} {orderAcc.accessory.name}
-                  </li>
-                
-              )
-            })
-            }
-            </ul>
-            <p className="">
-            <span placeholder="10">Total Cost: {orderAccs.orderedPrice}</span>
-            </p>
-          
-          </div>
-          </div>
-        }
-      </div>
-    )
-  }
+  return (
+    <div>
+      {orderAccs.length &&
+        <div>
+        <h2>Order #{order.id}</h2>
+        <div className="list-group-item min-content media media-body"> 
+          {console.log('my ORDER OBJ', orderAccs)}
+          <p className="">
+            <span placeholder="order created">Order placed on: {order.createdAt}</span>
+          </p>
+          <p className="">
+            <span placeholder="status">Status: {order.status}</span>
+          </p>
+          <ul>
+          {orderAccs.map(orderAcc => {
+            return(
+                <li key = {orderAcc.accessoryId}>
+                {orderAcc.quantity} {orderAcc.accessory.name}
+                </li>
+              
+            )
+          })
+          }
+          </ul>
+          <p className="">
+          <span placeholder="10">Total Cost: {orderAccs.orderedPrice}</span>
+          </p>
+        
+        </div>
+        </div>
+      }
+    </div>
+  )  
 }
 
 const mapState = function (state, ownProps) {
