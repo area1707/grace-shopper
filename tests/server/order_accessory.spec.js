@@ -1,4 +1,4 @@
-
+// KM/SC -- delete this file if it's dead
 // const {expect} = require('chai')
 // const request = require('supertest')
 // const db = require('../../server/db')

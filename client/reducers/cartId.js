@@ -1,3 +1,4 @@
+// KM/SC -- If this becomes unnecessary, be sure to delete it from master
 import axios from 'axios'
 import store from '../store'
 
@@ -15,7 +16,7 @@ const idReducer = (state = 0, action) => {
 }
 
 export const addCartId = () => dispatch => {
-    return axios.get(`/api/cart/id`) 
+    return axios.get(`/api/cart/id`)
         .then(cart => {
             dispatch(addId(cart.data.id))
         })

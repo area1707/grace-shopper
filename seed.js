@@ -1,3 +1,4 @@
+// KM/SC -- low priority suggestion: have separate DBs for testing and development.
 const db = require('./server/db')
 const Accessory = require('./server/db/models/accessories')
 const User = require('./server/db/models/users')

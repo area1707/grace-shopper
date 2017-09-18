@@ -6,14 +6,14 @@ import OrderAccessory from './OrderAccessory'
 function SingleOrder(props){
   const { orderAccs } = props
   const order = orderAccs.length ? orderAccs[0].order: {}
-  let total = 0;
+  let total = 0; // KM/SC -- Don't use semicolons - follow your style guide
 
   return (
     <div>
       {orderAccs.length &&
         <div>
         <h2>Order #{order.id}</h2>
-        <div className="list-group-item min-content media "> 
+        <div className="list-group-item min-content media ">
           <p className="">
             <span placeholder="order created">Order placed on: {(order.createdAt).slice(0,10)}</span>
           </p>
@@ -24,7 +24,7 @@ function SingleOrder(props){
           {orderAccs.map(orderAcc => {
             {total+=orderAcc.orderedPrice}
             return(
-                <OrderAccessory key={orderAcc.accessoryId} orderAcc={orderAcc}/> 
+                <OrderAccessory key={orderAcc.accessoryId} orderAcc={orderAcc}/>
             )
           })
           }
@@ -32,12 +32,12 @@ function SingleOrder(props){
           <p className="">
           <span placeholder="10">Total Cost: ${total}</span>
           </p>
-        
+
         </div>
         </div>
       }
     </div>
-  )  
+  )
 }
 
 const mapState = function (state, ownProps) {
@@ -48,4 +48,4 @@ const mapState = function (state, ownProps) {
   }
 }
 
-export default withRouter(connect(mapState)(SingleOrder));
+export default withRouter(connect(mapState)(SingleOrder)); // KM/SC -- try this without withRouter, and see if you really need it.
