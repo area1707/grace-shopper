@@ -7,6 +7,7 @@ import cart from './cart'
 import accessories from './accessories'
 import currentUser from './login'
 import reviews from './reviews'
+import orderAccessories from './orders'
 import cartId from './cartId'
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   accessories,
   currentUser,
   cart,
+  orderAccessories,
   cartId
 })
 
