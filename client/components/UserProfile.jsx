@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchSingleUser } from '../reducers/users'
 
 function UserProfile(props) {
 
