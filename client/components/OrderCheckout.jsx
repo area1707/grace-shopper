@@ -20,6 +20,8 @@ class OrderCheckout extends Component {
   }
 
   render() {
+    console.log(this.props.currentUser, 'this is current user')
+    const { currentUser } = this.props
     return (
       <div>
 
@@ -30,7 +32,8 @@ class OrderCheckout extends Component {
             <input 
               name="email"
               className="form-control" 
-              placeholder="Enter email..." 
+              placeholder="Enter email..."
+              value={(currentUser) ? currentUser.email : null} 
             />
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
