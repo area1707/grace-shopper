@@ -14,7 +14,9 @@ function Accessory(props) {
 
   return (
     <div className="single-accessory">
+      <h2>Accessory Details</h2>
       <SingleAccessoryContainer accessory={accessory} />
+      <h3>Reviews</h3>
       {
         reviews.map(review => {
           if (review.accessoryId === +accessoryId) return <SingleReview review={review} key={review.id} />

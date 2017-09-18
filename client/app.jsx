@@ -8,7 +8,7 @@ import '../public/index.scss'
 
 render (
   <Provider store={store}>
-      <Main />
+    <Main />
   </Provider>,
   document.getElementById('main')
 )
