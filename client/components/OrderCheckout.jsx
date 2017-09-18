@@ -43,7 +43,7 @@ class OrderCheckout extends Component {
             />
           </div>
           <div className='form-group'>
-              <button type='submit' className='btn btn-default' onClick={this.props.history.push('/confirmation')}>Submit Order</button>
+              <button type='submit' className='btn btn-default'>Submit Order</button>
           </div>
         </form>
 
@@ -67,6 +67,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           const emailAddress = evt.target.email.value
           const shippingAddress = evt.target.shippingAddress.value
           dispatch(addAddressToOrder(cartId, shippingAddress, emailAddress))
+          ownProps.history.push('/confirmation')
         },
         removeSessionCart: function() {
 
