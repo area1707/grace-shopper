@@ -12,6 +12,7 @@ import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
 import SingleOrder from './SingleOrder'
 import OrderCheckout from './OrderCheckout'
+import OrderConfirmation from './OrderConfirmation'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
@@ -54,6 +55,7 @@ export default class Main extends Component {
                 render = {() => <Home searchValue={this.state.searchValue} />}
             />
             <Route path="/checkout" component={OrderCheckout} />
+            <Route path="/confirmation" component={OrderConfirmation} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
