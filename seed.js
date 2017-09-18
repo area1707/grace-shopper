@@ -402,7 +402,7 @@ const reviews = [
   {
     content: 'who would go in the water?!',
     star: 1,
-    accessoryId: 4,
+    accessoryId: 5,
     userId: 2
   },
   {
@@ -476,14 +476,14 @@ const randomReviews = [
 
 const reviewGenerator = () => {
   let reviewArr = []
-  for (let i = 1; i < 80; i++) {
-    let randomAcc = Math.ceil(Math.random() * 39)
+  for (let i = 1; i < 39; i++) {
+    // let randomAcc = Math.ceil(Math.random() * 39)
     let randomUser = Math.ceil(Math.random() * 4)
     let randomReview = Math.ceil(Math.random() * 10)
     reviewArr.push({
       content: randomReviews[randomReview][0],
       star: randomReviews[randomReview][1],
-      accessoryId: randomAcc,
+      accessoryId: i,
       userId: randomUser
     })
   }
