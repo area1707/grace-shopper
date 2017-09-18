@@ -8,7 +8,6 @@ class OrderCheckout extends Component {
     super(props)
   }
   render() {
-    //const currentUser = req.user
     return (
       <div>
         <form onSubmit={this.props.handleSubmit}>
