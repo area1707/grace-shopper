@@ -9,12 +9,11 @@ class SingleOrder extends Component{
     
     render() {
       const { order } = this.props
-      console.log(order, 'this is order') 
     return (
       <div className="list-group-item min-content students-item">
-        <div className="media" className="media-body">
-        <p>I HATE THIS</p>
-            {/*<h4 className="media-heading tucked">
+        {order && <div className="media" className="media-body">
+        
+            <h4 className="media-heading tucked">
               <span placeholder="order id here">{order.id}</span>
             </h4>
             <p className="">
@@ -28,9 +27,9 @@ class SingleOrder extends Component{
             </p>
             <p className="">
               <span placeholder="10">Total Cost: {order.orderedPrice}</span>
-    </p>*/}
+            </p>
           
-        </div>
+        </div>}
       </div>
     );
   }
@@ -38,9 +37,8 @@ class SingleOrder extends Component{
 
 const mapState = function (state, ownProps) {
   const orderId = Number(ownProps.match.params.orderId)
-  console.log('what is state', state.orderAccessories)
-  const selectedOrder = state.order.filter(order => order.order.id == orderId)[0]
-  //console.log('what is selectedOrder', selectedOrder)
+  const selectedOrder = state.orderAccessories.filter(order => order.order.id == orderId)[0]
+  console.log('what is selectedOrder', selectedOrder)
   return {
       order: selectedOrder      
   }
