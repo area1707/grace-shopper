@@ -6,16 +6,6 @@ import store from '../store'
 
 
 class SingleOrder extends Component{
-
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-    const orderId = this.props.match.params.orderId
-    store.dispatch(fetchOrders())
-    console.log(store, 'im in singleorder')
-  }
     
     render() {
       const { order } = this.props
@@ -48,8 +38,9 @@ class SingleOrder extends Component{
 
 const mapState = function (state, ownProps) {
   const orderId = Number(ownProps.match.params.orderId)
-  console.log('what is state', state)
-  const selectedOrder = state.orders.filter(order => order.id == orderId)[0]
+  console.log('what is state', state.orderAccessories)
+  const selectedOrder = state.order.filter(order => order.order.id == orderId)[0]
+  //console.log('what is selectedOrder', selectedOrder)
   return {
       order: selectedOrder      
   }

@@ -15,7 +15,7 @@ import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
 import {fetchReviews} from '../reducers/reviews'
-import {fetchOrders} from '../reducers/orders'
+import {fetchOrderAccessories} from '../reducers/orders'
 import {fetchCurrentUser} from '../reducers/login'
 
 export default class Main extends Component {
@@ -36,7 +36,7 @@ export default class Main extends Component {
     store.dispatch(fetchUsers())
     store.dispatch(fetchReviews())
     store.dispatch(fetchCurrentUser())
-    store.dispatch(fetchOrders())
+    store.dispatch(fetchOrderAccessories())
   }
 
   render() {

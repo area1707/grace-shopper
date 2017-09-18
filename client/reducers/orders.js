@@ -2,23 +2,23 @@ import axios from 'axios'
 
 const GET_ORDERS = 'GET_ORDERS'
 
-const load = orders => ({type: GET_ORDERS, orders})
-
+const load = orderAccessories => ({type: GET_ORDERS, orderAccessories})
+//change orders to be orderAccessories
 export default function orderReducer(state = [], action){
   switch(action.type){
     case GET_ORDERS:
-      return action.orders
+      return action.orderAccessories
     default:
       return state
   }
 }
 
-export function fetchOrders() {
+export function fetchOrderAccessories() {
   return function thunk (dispatch) {
     return axios.get('/api/orders')
       .then(res => res.data)
-      .then(orders => {
-        dispatch(load(orders))
+      .then(orderAccessories => {
+        dispatch(load(orderAccessories))
       })
   }
 }
