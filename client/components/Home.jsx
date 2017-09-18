@@ -45,20 +45,6 @@ class Home extends Component {
       }
       </div>
     )
-
-    // return (
-    //   <div className="container">
-    //     <img className="mascot" src="/img/tabby-cat.png" />
-    //   {
-    //     searchResults.length ? searchResults.map(accessory => {
-    //       return (<SingleAccessory accessory={accessory} key={accessory.id} />)
-    //     }) :
-    //     accessories.map(accessory => {
-    //       return (<SingleAccessory accessory={accessory} key={accessory.id} />)
-    //     })
-    //   }
-    //   </div>
-    // )
   }
 }
 
