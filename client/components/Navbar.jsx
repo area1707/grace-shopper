@@ -86,10 +86,6 @@ class Navbar extends React.Component {
   }
 
   renderAdmin() {
-    // const sortByCategory = (category) => {
-    //   this.props.handleSubmit(category)
-    //   this.props.history.push(`/search/${category}`)
-    // }
     return (
       <ul className="nav navbar-nav navbar-left">
         <li className="dropdown">
