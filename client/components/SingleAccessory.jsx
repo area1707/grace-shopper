@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {removeAccessory, updateAccessory} from '../reducers/accessories'
-import {receiveLineItem, addToCart} from '../reducers/cart'
+import {receiveLineItem, addToCart, updateLineItem} from '../reducers/cart'
 import axios from 'axios'
 import store from '../store'
 
@@ -99,12 +99,14 @@ export class SingleAccessory extends Component {
   }
   handleCartAdd(e, user, selectedProduct) {
     e.preventDefault()
+    //if already exists, add to cart
+    //else updatecart
     this.props.addToCart(user, selectedProduct, 1)
   }
 }
 
 const mapState = ({accessories, user}) => ({accessories, user})
-const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart}
+const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart, updateLineItem}
 
 const SingleAccessoryContainer = withRouter(connect(mapState, mapDispatch)(SingleAccessory))
 export default SingleAccessoryContainer
