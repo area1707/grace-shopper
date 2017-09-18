@@ -2,7 +2,8 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import SingleAccessory from './SingleAccessory'
-
+//SINGLEACCESSORY IS BLOATED NOW, MAKE A NEW ACCESSORY COMPONENT
+//THAT U ONLY NEED FOR ORDERS
 
 function SingleOrder(props){
   const { orderAccs } = props
