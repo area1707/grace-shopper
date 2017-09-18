@@ -43,7 +43,7 @@ class OrderCheckout extends Component {
             />
           </div>
           <div className='form-group'>
-              <button type='submit' className='btn btn-default'>Submit Order</button>
+              <button type='submit' className='btn btn-default' onClick={this.props.history.push('/confirmation')}>Submit Order</button>
           </div>
         </form>
 
