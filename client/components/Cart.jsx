@@ -21,8 +21,6 @@ class Cart extends Component {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
   let rows = lineItems && lineItems.map(item => {
-    console.log('item inside Cart Component', item)
-    // !item.quantity ? item.quantity = 1 : item.quantity
     let accessory = item.accessory
     let price = (accessory.price * item.quantity).toFixed(2);
     total += +price;
@@ -89,7 +87,6 @@ class Cart extends Component {
 }
 
 const mapState = (state) => {
-  console.log('state.cart', state.cart)
   return {
     lineItems: state.cart
   }
