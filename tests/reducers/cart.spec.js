@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import cartReducer,{receiveLineItem} from '../../client/reducers/cart'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import configureMockStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 
 const mockAxios = new MockAdapter(axios)
 const middlewares = [thunkMiddleware]
-const mockStore = configureMockStore(middlewares)
+const mockStore = configureStore(middlewares)
 
 describe('thunk creators', () => {
   let store
