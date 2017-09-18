@@ -40,11 +40,18 @@ api.use((req, res, next) => {
 })
 
 api.post('/', (req, res, next) => {
-    let product = req.body.product
-    return req.cart.addAccessory(product.id)
+    const accessoryId = req.body.accessoryId
+    const orderedPrice = req.body.orderedPrice
+    return req.cart.addAccessory(accessoryId)
+    .then((result) => {
+      const returnedOrder = result[0][0]
+      return returnedOrder.update({orderedPrice})
+    })
     .then(() => {
-      Accessory.findById(product.id)
-      .then(line => res.send(line))
+      Accessory.findById(accessoryId)
+      .then(line => {
+        res.send(line)
+      })
     })
     .catch(next)
 })
@@ -56,7 +63,7 @@ api.delete(`/item/:lineItemId`, (req, res, next) => {
 })
 
 api.put(`/item/:lineItemId`, (req, res, next) => {
-    Order_accessory.update({quantity: req.body.newQuantity}, {where: {accessoryId: req.params.lineItemId}})
+    Order_accessory.update({quantity: req.body.newQuantity, orderedPrice: req.body.orderedPrice}, {where: {accessoryId: req.params.lineItemId}})
         .then(updated => res.send(req.body.newQuantity))
         .catch(next)
 })

@@ -157,3 +157,17 @@ input.form-like[disabled] {
 .star {
   width: 50px
 }
+
+.accessory-item .icon-container {
+  position: relative; }
+  .accessory-item .icon-container .glyphicon {
+    font-size: 40px;
+    padding: 20px;
+    border-radius: 50%; }
+  .accessory-item .icon-container .glyphicon.clickable {
+    background-color: #f0ad4e;
+    color: #fff; }
+    .accessory-item .icon-container .glyphicon.clickable:hover {
+      background-color: #eea236; }
+  .accessory-item .icon-container img {
+    width: 80px; }

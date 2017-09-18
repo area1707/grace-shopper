@@ -7,7 +7,7 @@ import {receiveLineItem, addToCart} from '../reducers/cart'
 import axios from 'axios'
 import store from '../store'
 
-class SingleAccessory extends Component {
+export class SingleAccessory extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -30,7 +30,7 @@ class SingleAccessory extends Component {
     const { accessory, receiveLineItem, user } = this.props
     if (this.state.isEditing) {
       return (
-        <div className="list-group-item min-content user-item">
+        <div className="list-group-item min-content accessory-item">
           <form className="media">
             <div className="media-left media-middle icon-container">
               <button
@@ -78,7 +78,7 @@ class SingleAccessory extends Component {
     }
 
     return (
-      <div className="list-group-item min-content students-item">
+      <div className="list-group-item min-content accessory-item">
         <div className="media">
           <div className="media-left media-middle icon-container">
             <img className="media-object" src={accessory.imageUrl} height="120" width="120"/>
@@ -174,4 +174,5 @@ class SingleAccessory extends Component {
 const mapState = ({accessories, user}) => ({accessories, user})
 const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart}
 
-export default withRouter(connect(mapState, mapDispatch)(SingleAccessory))
+const SingleAccessoryContainer = withRouter(connect(mapState, mapDispatch)(SingleAccessory))
+export default SingleAccessoryContainer
