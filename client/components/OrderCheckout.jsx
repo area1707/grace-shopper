@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import { addUser } from '../reducers/users'
 import {addAddressToOrder, clearCart} from '../reducers/cart'
 import {addCartId} from '../reducers/cartId'
+import SingleOrder from './SingleOrder'
 import store from '../store'
 
 
@@ -55,11 +56,11 @@ class OrderCheckout extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        users: state.users,
-        currentUser: state.currentUser,
-        cartId: state.cartId
-    }
+  return {
+      users: state.users,
+      currentUser: state.currentUser,
+      cartId: state.cartId,
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -69,7 +70,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           const emailAddress = evt.target.email.value
           const shippingAddress = evt.target.shippingAddress.value
           dispatch(addAddressToOrder(cartId, shippingAddress, emailAddress))
-          ownProps.history.push('/confirmation')
+          ownProps.history.push(`/confirmation/${cartId}`)
         },
         removeSessionCart: function() {
 
