@@ -24,9 +24,7 @@ function SingleOrder(props){
           {orderAccs.map(orderAcc => {
             {total+=orderAcc.orderedPrice}
             return(
-                <OrderAccessory key={orderAcc.accessoryId} orderAcc={orderAcc}/>
-
-              
+                <OrderAccessory key={orderAcc.accessoryId} orderAcc={orderAcc}/> 
             )
           })
           }

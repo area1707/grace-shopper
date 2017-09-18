@@ -3,7 +3,6 @@ import axios from 'axios'
 const GET_ORDERS = 'GET_ORDERS'
 
 const load = orderAccessories => ({type: GET_ORDERS, orderAccessories})
-//change orders to be orderAccessories
 export default function orderReducer(state = [], action){
   switch(action.type){
     case GET_ORDERS:
