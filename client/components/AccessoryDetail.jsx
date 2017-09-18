@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
-import SingleAccessory from './SingleAccessory'
+import SingleAccessoryContainer from './SingleAccessory'
 import SingleReview from './SingleReview'
 
 
@@ -15,7 +15,7 @@ function Accessory(props) {
   return (
     <div className="single-accessory">
       <h2>Accessory Details</h2>
-      <SingleAccessory accessory={accessory} />
+      <SingleAccessoryContainer accessory={accessory} />
       <h3>Reviews</h3>
       {
         reviews.map(review => {

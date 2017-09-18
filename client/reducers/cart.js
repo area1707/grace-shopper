@@ -23,21 +23,23 @@ const cartReducer = (state = initialState, action) => {
         newState.lineItems = [...newState.lineItems];
       }
       else { newState.lineItems = [...newState.lineItems, action.lineItem] }
-      break
+      break;
 
     case RECEIVE_LINE_ITEMS:
       newState.lineItems = action.lineItems
-      break
+      break;
 
     case REMOVE_LINE_ITEM:
       newState.lineItems = newState.lineItems.filter(item => item.id !== action.lineItemId)
-      break
+      break;
+
+    case REMOVE_LINE_ITEM:
+      newState.lineItems = newState.lineItems.filter(item => item.id !== action.lineItemId)
 
     case UPDATE_LINE_ITEM:
       let itemToUpdate = newState.lineItems.filter(item => item.id === action.lineItemId)
       itemToUpdate[0].quantity = action.quantity
-      newState.lineItems = [...newState.lineItems];
-      break
+      newState.lineItems = [...newState.lineItems]
     
     case CLEAR_CART:
       return initialState
@@ -89,8 +91,9 @@ export const clearCart = () => {
 export default cartReducer
 
 export const addToCart = (user, selectedProduct, quantity) => dispatch => {
-  return axios.post(`/api/cart/`, {product: selectedProduct})
+  return axios.post(`/api/cart`, {orderedPrice: selectedProduct.price, accessoryId: selectedProduct.id})
     .then(createdLineItem => {
+      console.log('createdLineItem inside reducer', createdLineItem)
       dispatch(receiveLineItem(createdLineItem.data, quantity))
     })
     .catch(console.error)
