@@ -1,3 +1,9 @@
+body {
+  font-family: 'Chivo', sans-serif;
+  font-size: 16px;
+}
+
+
 select {
   -webkit-appearance: menulist-button;
   background-color: transparent;
@@ -156,4 +162,60 @@ input.form-like[disabled] {
 // formatting our star size
 .star {
   width: 50px
+}
+
+//flexbox for our reviews
+.review {
+  display: block;
+  align-content: space-between;
+}
+
+.bottom {
+  display: block;
+}
+
+.grey {
+  background: #c9d2fc
+}
+
+.bold {
+  font-style: bold
+}
+
+body {
+  background: #c9d2fc
+}
+
+.mascot {
+  height: 200px;
+  display: block
+}
+
+.allProducts {
+  width: 150;
+  display: inline-flex;
+  align-content: center;
+  margin:0px 50px 50px 50px;
+  justify-content: space-around;
+  flex-flow: row wrap
+}
+
+h1 {
+  font-style: bold
+}
+
+.banner {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: baseline;
+  font-size: 48px;
+  p {
+    margin: 40px
+  }
+}
+
+.center {
+  display: inline-flex;
+  align-content: center;
+  margin-top: 40px
 }
