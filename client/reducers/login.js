@@ -16,7 +16,6 @@ export default function loginReducer(currentUser={}, action) {
     case CREATE_USER:
       return action.user
     case INITIAL_USER:
-      console.log('currentUser', action.user)
       return action.user
     case LOG_OUT:
       return {}
@@ -46,7 +45,6 @@ export const createNewUser = (user) => dispatch => {
   return axios.post('/auth/signup', user)
   .then(res => res.data)
   .then(newUser => {
-    console.log('got back new user!', newUser);
     dispatch(createUser(newUser));
   })
   .catch(console.error)

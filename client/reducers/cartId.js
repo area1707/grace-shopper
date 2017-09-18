@@ -17,7 +17,6 @@ const idReducer = (state = 0, action) => {
 export const addCartId = () => dispatch => {
     return axios.get(`/api/cart/id`) 
         .then(cart => {
-            console.log(cart)
             dispatch(addId(cart.data.id))
         })
         .catch(console.error)

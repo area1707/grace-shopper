@@ -17,29 +17,27 @@ const cartReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_LINE_ITEM:
-    //we can use find method
       let duplicate = newState.lineItems.filter(item => item.id === action.lineItem.id)
       if (duplicate.length) {
         duplicate[0].quantity = action.quantity
         newState.lineItems = [...newState.lineItems];
       }
       else { newState.lineItems = [...newState.lineItems, action.lineItem] }
-      console.log('quantity inside reducer', action.quantity)
-      break;
+      break
 
     case RECEIVE_LINE_ITEMS:
       newState.lineItems = action.lineItems
-      break;
+      break
 
     case REMOVE_LINE_ITEM:
       newState.lineItems = newState.lineItems.filter(item => item.id !== action.lineItemId)
-      break;
+      break
 
     case UPDATE_LINE_ITEM:
       let itemToUpdate = newState.lineItems.filter(item => item.id === action.lineItemId)
       itemToUpdate[0].quantity = action.quantity
       newState.lineItems = [...newState.lineItems];
-      break;
+      break
     
     case CLEAR_CART:
       return initialState
@@ -93,7 +91,6 @@ export default cartReducer
 export const addToCart = (user, selectedProduct, quantity) => dispatch => {
   return axios.post(`/api/cart/`, {product: selectedProduct})
     .then(createdLineItem => {
-      console.log('createdLineItem inside addToCart', createdLineItem)
       dispatch(receiveLineItem(createdLineItem.data, quantity))
     })
     .catch(console.error)
@@ -118,7 +115,6 @@ export const fetchItemsInCart = () => dispatch => {
 export const addAddressToOrder = (cartId, shippingAddress, emailAddress) => dispatch => {
   return axios.put(`/api/cart/${cartId}`, { shippingAddress, emailAddress })
   .then(updatedOrder => {
-    // console.log(updatedOrder.data) 
     dispatch(receiveLineItems([]))})
   .catch(console.error)
 }
