@@ -26,7 +26,7 @@ class OrderCheckout extends Component {
         <form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.cartId)}}>
           <label>Shipping Information</label>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label htmlFor="exampleInputEmail1">Email address</label>
             <input 
               name="email"
               className="form-control" 
@@ -35,7 +35,7 @@ class OrderCheckout extends Component {
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Shipping Address</label>
+            <label htmlFor="exampleInputPassword1">Shipping Address</label>
             <input 
               name="shippingAddress"
               className="form-control" 

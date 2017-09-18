@@ -155,7 +155,6 @@ class Navbar extends React.Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapProps = ({currentUser}) => {
-  console.log('currentUser', currentUser)
   return {
     currentUser: currentUser
   }
