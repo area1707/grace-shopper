@@ -24,7 +24,7 @@ class Navbar extends React.Component {
 
   render() {
 
-    const { accessories } = this.props
+    const { accessories, currentUser } = this.props
 
     return (
       <nav className="navbar navbar-default">
