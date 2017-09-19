@@ -20,13 +20,14 @@ function AllOrders(props) {
         </thead>
         <tbody>
           {uniqueOrders.length && uniqueOrders.map(uniqOrder => {
+            let user = users.find(user => user.id === uniqOrder.order.userId)
             return(
               <tr key={uniqOrder.orderId}>
                 <NavLink to={`/orders/${uniqOrder.orderId}`}>
                 <th scope="row">{uniqOrder.orderId}</th>
                 </NavLink>
                 <td>{(uniqOrder.order.createdAt).slice(0,10)}</td>
-                <td>USER uniqOrder.order.userId to filter thru users for name</td>
+                <td>{user ? user.name : 'Guest User'}</td>
                 <td>{uniqOrder.order.status}</td>
               </tr>
             )
