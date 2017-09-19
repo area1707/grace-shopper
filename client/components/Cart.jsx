@@ -103,7 +103,7 @@ const mapDispatch = (dispatch) => {
         .catch(console.error)
     },
     handleUpdate: function(e, lineItemId) {
-      // e.preventDefault()
+      e.preventDefault()
       axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
         .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
         .catch(console.error)
