@@ -8,7 +8,7 @@ export function SingleOrder(props){
   const order = orderAccs.length ? orderAccs[0].order: {}
   let total = 0;
   let pinkBackground = {
-    backgroundColor: '#C8B8F2',
+    backgroundColor: '#c9d2fc',
     borderRadius: 6
   }
 
