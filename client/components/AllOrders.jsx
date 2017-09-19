@@ -7,7 +7,6 @@ import { uniqBy } from 'lodash'
 function AllOrders(props) {
   const { orderAccessories, users } = props
   let uniqueOrders = orderAccessories.length ? uniqBy(orderAccessories,'orderId') : []
-  console.log('pls be unique', uniqueOrders)
   return (
     <div>
       <table className="table">
@@ -19,6 +18,20 @@ function AllOrders(props) {
             <th>Status</th>
           </tr>
         </thead>
+        <tbody>
+          {uniqueOrders.length && uniqueOrders.map(uniqOrder => {
+            return(
+              <tr key={uniqOrder.orderId}>
+                <NavLink to={`/orders/${uniqOrder.orderId}`}>
+                <th scope="row">{uniqOrder.orderId}</th>
+                </NavLink>
+                <td>{(uniqOrder.order.createdAt).slice(0,10)}</td>
+                <td>USER uniqOrder.order.userId to filter thru users for name</td>
+                <td>{uniqOrder.order.status}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     </div>
   )
