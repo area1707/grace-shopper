@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const databaseURI = DATABASE_URL
+const databaseURI = process.env.DATABASE_URL
 
 const db = new Sequelize(databaseURI, {
   logging: false
