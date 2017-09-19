@@ -49,7 +49,11 @@ api.post('/', (req, res, next) => {
       return returnedOrder.update({orderedPrice})
     })
     .then(() => {
-      Accessory.findById(accessoryId)
+      Order_accessory.findOne({
+        where: {
+          accessoryId: accessoryId
+        }
+      })
       .then(line => {
         res.send(line)
       })
@@ -64,7 +68,7 @@ api.delete(`/item/:lineItemId`, (req, res, next) => {
 })
 
 api.put(`/item/:lineItemId`, (req, res, next) => {
-    Order_accessory.update({quantity: req.body.newQuantity, orderedPrice: req.body.orderedPrice}, {where: {accessoryId: req.params.lineItemId}})
+    Order_accessory.update({quantity: req.body.newQuantity}, {where: {accessoryId: req.params.lineItemId}})
         .then(updated => res.send(req.body.newQuantity))
         .catch(next)
 })
@@ -102,15 +106,8 @@ api.get('/', (req, res, next) => {
       orderId: req.cart ? req.cart.id : req.session.cartId
     }
   })
-  .then(accArr => {
-    return Promise.all(accArr.map(acc => Accessory.findOne({
-      where: {
-        id: acc.accessoryId
-      }
-    })))
-  .then(result => {
-    res.send(result)
-  })
-  .catch(next)
+  .then(orderArr => {
+    console.log('orderArr inside get backend', orderArr)
+    res.send(orderArr)
   })
 })

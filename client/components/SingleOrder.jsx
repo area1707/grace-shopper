@@ -3,7 +3,7 @@ import React from 'react'
 import {withRouter} from 'react-router'
 import OrderAccessory from './OrderAccessory'
 
-function SingleOrder(props){
+export function SingleOrder(props){
   const { orderAccs } = props
   const order = orderAccs.length ? orderAccs[0].order: {}
   let total = 0;
@@ -30,7 +30,7 @@ function SingleOrder(props){
           }
           </ul>
           <p className="">
-          <span placeholder="10">Total Cost: {total}</span>
+          <span placeholder="10">Total Cost: ${total}</span>
           </p>
         
         </div>

@@ -55,7 +55,7 @@ export default class Main extends Component {
                 render = {() => <Home searchValue={this.state.searchValue} />}
             />
             <Route path="/checkout" component={OrderCheckout} />
-            <Route path="/confirmation" component={OrderConfirmation} />
+            <Route path="/confirmation/:orderId" component={OrderConfirmation} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
