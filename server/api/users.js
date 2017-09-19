@@ -22,7 +22,12 @@ router.post('/', (req, res, next) =>
 // matches PUT requests to /api/users/:userId
 router.put('/:userId', function (req, res, next) { /* etc */});
 // matches DELTE requests to /api/users/:userId
-router.delete('/:userId', function (req, res, next) { /* etc */});
+router.delete('/:userId', function (req, res, next) { 
+	User.findById(req.params.userId)
+	.then(user => user.destroy())
+	.then(() => res.sendStatus(204))
+  	.catch(next)
+});
 
 router.get('/unauth', (req, res, next) => res.send(req.headers.cookie))
 router.get('/:id', mustBeLoggedIn, (req, res, next) =>

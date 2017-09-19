@@ -33,7 +33,7 @@ export class AllUsers extends Component {
                 <button
                   className="btn btn-default"
                   value={user.id}
-                  onClick={() => removeUser(user.id)}>
+                  onClick={() => this.props.handleRemove(user.id)}>
                   <span className="glyphicon glyphicon-minus" />
                 </button>
               </tr>
@@ -52,10 +52,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToState = (dispatch) => {
-  // return {
-  //   handleRemove: function()
-  // }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleRemove: function(id) {
+      dispatch(removeUser(id))
+    }
+  }
 }
 
-export default withRouter(connect(mapStateToProps)(AllUsers));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AllUsers));
