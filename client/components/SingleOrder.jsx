@@ -7,13 +7,17 @@ export function SingleOrder(props){
   const { orderAccs } = props
   const order = orderAccs.length ? orderAccs[0].order: {}
   let total = 0;
+  let pinkBackground = {
+    backgroundColor: '#C8B8F2',
+    borderRadius: 6
+  }
 
   return (
     <div>
       {orderAccs.length &&
         <div>
         <h2>Order #{order.id}</h2>
-        <div className="list-group-item min-content media "> 
+        <div className="list-group-item min-content media" style={pinkBackground}> 
           <p className="">
             <span placeholder="order created">Order placed on: {(order.createdAt).slice(0,10)}</span>
           </p>
