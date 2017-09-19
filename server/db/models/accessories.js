@@ -27,7 +27,7 @@ const Accessory = db.define('accessory', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: "https://i.pinimg.com/736x/ab/48/9d/ab489de6e7a85bac1290f4b615e95b04--fat-face-sad-cat.jpg"
+    defaultValue: '/img/default-acc-img.svg'
   }
 }, {})
 
