@@ -18,10 +18,10 @@ class WriteReview extends Component {
     store.dispatch(fetchAccessories())
   }
 
-  shouldComponentUpdate(nextProps) {
-    const differentRating = this.state.selectedStars !== nextProps.selectedStars;
-    return differentRating
-}
+//   shouldComponentUpdate(nextProps) {
+//     const differentRating = this.state.selectedStars !== nextProps.selectedStars;
+//     return differentRating
+// }
 
 
   render() {
@@ -45,14 +45,14 @@ class WriteReview extends Component {
           <h2>{accessory.name}</h2>
           </div>
         }
-        <form onSubmit={(evt) => {this.props.handleSubmit(evt, userId, accessoryId)}}>
+        <form onSubmit={(event) => {this.props.handleSubmit(event, userId, accessoryId)}}>
           <div className="form-group">
-            <label for="exampleFormControlSelect1">Select Rating</label>
+            <label>Select Rating</label>
             <select
             name="star"
             className="form-control"
             id="exampleFormControlSelect1"
-            onChange={() => this.setState({selectedStars: event.target.value})
+            onChange={(event) => this.setState({selectedStars: event.target.value})
             }>
               <option>1</option>
               <option>2</option>
