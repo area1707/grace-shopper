@@ -10,6 +10,7 @@ import Cart from './Cart'
 import UserProfile from './UserProfile'
 import AccessoryDetail from './AccessoryDetail'
 import Navbar from './Navbar'
+import WriteReview from './WriteReview'
 import SingleOrder from './SingleOrder'
 import OrderCheckout from './OrderCheckout'
 import OrderConfirmation from './OrderConfirmation'
@@ -60,6 +61,7 @@ export default class Main extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
+            <Route path="/review/:userId/:accessoryId" component={WriteReview} />
             <Route path="/accessories/:accessoryId" component={AccessoryDetail} />
             <Route path="/users/:userId" component={UserProfile} />
             <Route path="/orders/:orderId" component={SingleOrder} />
