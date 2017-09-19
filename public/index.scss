@@ -180,7 +180,7 @@ input.form-like[disabled] {
 
 //flexbox for our reviews
 .review {
-  display: block;
+  display: inline-block;
   align-content: space-between;
 }
 
@@ -225,6 +225,9 @@ h1 {
   font-size: 48px;
   p {
     margin: 40px
+  }
+  h2 {
+    align-self: baseline
   }
 }
 

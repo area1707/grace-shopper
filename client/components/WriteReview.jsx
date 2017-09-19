@@ -2,16 +2,33 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { addReview } from '../reducers/reviews'
+import { fetchAccessories } from '../reducers/accessories'
+import store from '../store'
+
 
 class WriteReview extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStars: 0
+      selectedStars: 1
     }
   }
+
+  componentDidMount () {
+    store.dispatch(fetchAccessories())
+  }
+
+//   shouldComponentUpdate(nextProps) {
+//     const differentRating = this.state.selectedStars !== nextProps.selectedStars;
+//     return differentRating
+// }
+
+
   render() {
-    const accessory = this.props.accessory
+    const {accessories} = this.props
+    const accessoryId = this.props.match.params.accessoryId
+    const accessory = accessories.find((acc) => acc.id === +accessoryId)
+    const userId = this.props.match.params.userId
     const stars = (num) => {
       let reviewStars = []
       for (var star = 1; star <= num; star++) {
@@ -22,12 +39,21 @@ class WriteReview extends Component {
 
     return (
       <div>
-        <img src={accessory.imageUrl} />
-        <h3>{accessory.name}</h3>
-        <form>
+        { accessory &&
+          <div className="banner">
+          <img className="allProducts" src={accessory.imageUrl} />
+          <h2>{accessory.name}</h2>
+          </div>
+        }
+        <form onSubmit={(event) => {this.props.handleSubmit(event, userId, accessoryId)}}>
           <div className="form-group">
-            <label for="exampleFormControlSelect1">Select Rating</label>
-            <select className="form-control" id="exampleFormControlSelect1" onChange={() => this.setState({selectedStars: event.target.value})}>
+            <label>Select Rating</label>
+            <select
+            name="star"
+            className="form-control"
+            id="exampleFormControlSelect1"
+            onChange={(event) => this.setState({selectedStars: event.target.value})
+            }>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -36,11 +62,14 @@ class WriteReview extends Component {
             </select>
           </div>
           <div>
-            {this.state.selectedStars ? stars(this.state.selectedStars).map(img => img) : null}
+            {this.state.selectedStars && stars(this.state.selectedStars).map(img => img)}
           </div>
           <div className="form-group">
-            <label for="exampleFormControlTextarea1">What did you think?!</label>
-            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label>What did you think?!</label>
+            <textarea name="content" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div className='form-group'>
+              <button type='submit' className='btn btn-default'>Submit Review</button>
           </div>
         </form>
       </div>
@@ -48,17 +77,15 @@ class WriteReview extends Component {
   }
 }
 
-const mapState = ({ reviews }) => ({ reviews })
+const mapState = ({ reviews, accessories }) => ({ reviews, accessories })
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    handleSubmit: function (event, accessoryId) {
-      //const content
-      //const star
-      //const accessoryId
-      //const userId
+    handleSubmit: function (event, userId, accessoryId) {
+      const content = event.target.content.value
+      const star = event.target.star.value
       event.preventDefault()
-      dispatch(addReview(/*add body to submit here*/))
-      ownProps.history.push('/')
+      dispatch(addReview({content, star, userId, accessoryId}))
+      ownProps.history.push(`/`)
     }
   }
 }
