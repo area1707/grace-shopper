@@ -20,7 +20,7 @@ const cartReducer = (state = [], action) => {
       return state.filter(item => item.accessory.id !== action.lineItemId)
 
     case UPDATE_LINE_ITEM:
-      let newState = state
+      let newState = [...state]
       newState.forEach(item => {
         if (action.lineItemId === item.accessory.id) {
           item.quantity = action.quantity
