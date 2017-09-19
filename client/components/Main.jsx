@@ -19,6 +19,7 @@ import { receiveProducts, receiveProduct } from '../reducers/accessories'
 import {fetchReviews} from '../reducers/reviews'
 import {fetchOrderAccessories} from '../reducers/orders'
 import {fetchCurrentUser} from '../reducers/login'
+import {fetchItemsInCart} from '../reducers/cart'
 
 export default class Main extends Component {
   constructor() {
@@ -39,6 +40,7 @@ export default class Main extends Component {
     store.dispatch(fetchReviews())
     store.dispatch(fetchCurrentUser())
     store.dispatch(fetchOrderAccessories())
+    store.dispatch(fetchItemsInCart())
   }
 
   render() {
