@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import { addUser } from '../reducers/users'
 import {addAddressToOrder, clearCart} from '../reducers/cart'
 import {addCartId} from '../reducers/cartId'
+import SingleOrder from './SingleOrder'
 import store from '../store'
 
 
@@ -13,12 +14,21 @@ export default class OrderCheckout extends Component {
     super(props)
   }
 
+  componentDidMount() {
+    store.dispatch(addCartId())
+  }
+
   render () {
     return (
       <div>
-        <h1>Your order is being processed...</h1>
-        <p> render the single order component here from Raz</p>
-        <p> <NavLink to="/">Click to go back to main page</NavLink></p>
+        <div className="banner">
+          <img className="mascot" src="/img/cat-banner.gif" />
+          <p>Your order has been placed!</p>
+        </div>
+        <p>Your tabby cat thanks you ...</p>
+          <SingleOrder />
+        <p> <NavLink to="/">Are you sure your tabby cat doesn't want more?</NavLink></p>
+
       </div>
     )
   }
