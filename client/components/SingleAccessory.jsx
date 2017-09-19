@@ -28,7 +28,6 @@ export class SingleAccessory extends Component {
 
   render() {
     const { accessory, receiveLineItem, user, cart} = this.props
-    console.log(cart)
     return (
       <div className="list-group-item min-content accessory-item grey">
         <div className="media">
