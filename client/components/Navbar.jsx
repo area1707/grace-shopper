@@ -76,9 +76,9 @@ class Navbar extends React.Component {
           <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span className="caret"></span></a>
           <ul className="dropdown-menu" >
             <li><a onClick={() => {sortByCategory('glasses')}}>Glasses</a></li>
-            <li><a  onClick={() => {sortByCategory('hats')}}>Hats</a></li>
-            <li><a  onClick={() => {sortByCategory('toys')}}>Toys</a></li>
-            <li><a  onClick={() => {sortByCategory('')}}>All Accessories</a></li>
+            <li><a onClick={() => {sortByCategory('hats')}}>Hats</a></li>
+            <li><a onClick={() => {sortByCategory('toys')}}>Toys</a></li>
+            <li><a onClick={() => {sortByCategory('')}}>All Accessories</a></li>
           </ul>
         </li>
       </ul>
@@ -136,9 +136,10 @@ class Navbar extends React.Component {
     const {currentUser} = this.props
     return (
       <ul className="nav navbar-nav navbar-right">
-        <li>
+        {/* This is not working, doesn't refresh after logout */}
+        { (currentUser) ? null : <li>
           <NavLink to="/signup" activeClassName="active">signup</NavLink>
-        </li>
+        </li> }
         {
         (Object.keys(currentUser).length !== 0) ?
         <li>
