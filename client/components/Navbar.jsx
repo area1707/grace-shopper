@@ -92,7 +92,7 @@ class Navbar extends React.Component {
           <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span className="caret"></span></a>
           <ul className="dropdown-menu" >
             <li><a onClick={() => this.props.history.push('/admin/allusers')}>All Users</a></li>
-            <li><a>All Orders</a></li>
+            <li><a onClick={() => this.props.history.push('/admin/allorders')}>All Orders</a></li>
           </ul>
         </li>
       </ul>

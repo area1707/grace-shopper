@@ -15,6 +15,7 @@ import SingleOrder from './SingleOrder'
 import OrderCheckout from './OrderCheckout'
 import OrderConfirmation from './OrderConfirmation'
 import AllUsers from './AllUsers'
+import AllOrders from './AllOrders'
 import {fetchAccessories} from '../reducers/accessories'
 import {fetchUsers } from '../reducers/users'
 import { receiveProducts, receiveProduct } from '../reducers/accessories'
@@ -66,6 +67,7 @@ export default class Main extends Component {
             <Route path="/users/:userId" component={UserProfile} />
             <Route path="/orders/:orderId" component={SingleOrder} />
             <Route path="/admin/allusers" component={AllUsers} />
+            <Route path="/admin/allorders" component={AllOrders} />
           </Switch>
         </Root>
       </Router>
