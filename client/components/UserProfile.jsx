@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { uniqBy } from 'lodash'
 
 function UserProfile(props) {
-    const { user, orderAccessories } = props
+    const { user, orderAccessories, currentUser } = props
     const userOrderAccs = orderAccessories.length ? orderAccessories.filter(orderAcc => orderAcc.order.userId == user.id) : {}  
     let userOrders = userOrderAccs.length ? uniqBy(userOrderAccs,'orderId') : []
-
+    console.log('HELLO CURRENT', currentUser)
     let spanStyle = {
         margin: 10,
         padding: 4
@@ -17,7 +17,7 @@ function UserProfile(props) {
         <div>
             {user && 
             <div>
-                <h1>Hello, {user.name}!</h1>
+                {(currentUser.id != user.id && currentUser.isAdmin) ? <h1>{user.name}</h1> : <h1>Hello, {user.name}!</h1>}
                 <h3>Email: {user.email}</h3>
                 <h3>Shipping Address: {user.shipping_address}</h3>
                 <h3>Order History: </h3>
@@ -46,7 +46,8 @@ const mapStateToProps = function (state, ownProps) {
 
     return {
         user: selectedUser,
-        orderAccessories: orderAcc
+        orderAccessories: orderAcc,
+        currentUser: state.currentUser
     }
 }
 
