@@ -107,7 +107,6 @@ api.get('/', (req, res, next) => {
     }
   })
   .then(orderArr => {
-    console.log('orderArr inside get backend', orderArr)
     res.send(orderArr)
   })
 })

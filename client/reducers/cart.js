@@ -1,60 +1,44 @@
 import axios from 'axios'
 import store from '../store'
+import _ from 'lodash'
 
-const RECEIVE_LINE_ITEM = 'RECEIVE_LINE_ITEM'
+const CREATE_LINE_ITEM = 'CREATE_LINE_ITEM'
 const RECEIVE_LINE_ITEMS  = 'RECEIVE_LINE_ITEMS'
 const REMOVE_LINE_ITEM     = 'REMOVE_LINE_ITEM'
 const UPDATE_LINE_ITEM     = 'UPDATE_LINE_ITEM'
-const CLEAR_CART = 'CLEAR_CART'
 
-
-const initialState = {
-  lineItems: []
-}
-
-const cartReducer = (state = initialState, action) => {
-  const newState = Object.assign({}, state)
+const cartReducer = (state = [], action) => {
 
   switch (action.type) {
-    case RECEIVE_LINE_ITEM:
-      let duplicate = newState.lineItems.filter(item => item.id === action.lineItem.id)
-      if (duplicate.length) {
-        duplicate[0].quantity = action.quantity
-        newState.lineItems = [...newState.lineItems];
-      }
-      else { newState.lineItems = [...newState.lineItems, action.lineItem] }
-      break;
+    case CREATE_LINE_ITEM:
+      return [action.lineItem, ...state]
 
     case RECEIVE_LINE_ITEMS:
-      newState.lineItems = action.lineItems
-      break;
+      return action.lineItems
 
     case REMOVE_LINE_ITEM:
-      newState.lineItems = newState.lineItems.filter(item => item.accessory.id !== action.lineItemId)
-      break;
+      return state.filter(item => item.accessory.id !== action.lineItemId)
 
     case UPDATE_LINE_ITEM:
-      let itemToUpdate = newState.lineItems.filter(item => item.accessory.id === action.lineItemId)
-      itemToUpdate[0].quantity = action.quantity
-      newState.lineItems = [...newState.lineItems]
-      break
+      let newState = state
+      newState.forEach(item => {
+        if (action.lineItemId === item.accessory.id) {
+          item.quantity = action.quantity
+        }
+      })
+      return newState
 
-
-    case CLEAR_CART:
-      return initialState
-
-    default: return state;
-    }
-  return newState
+    default: 
+      return state
+  }
 }
 
 //ACTION CREATORS
 
-export const receiveLineItem = (lineItem, quantity) => {
+export const receiveLineItem = (lineItem) => {
   return {
-    type: RECEIVE_LINE_ITEM,
-    lineItem,
-    quantity
+    type: CREATE_LINE_ITEM,
+    lineItem
   }
 }
 
@@ -74,7 +58,7 @@ export const removeLineItem = (lineItemId) => {
 
 export const updateLineItem = (lineItemId, quantity) => {
   return {
-    type: "UPDATE_LINE_ITEM",
+    type: UPDATE_LINE_ITEM,
     lineItemId,
     quantity
   }
@@ -82,10 +66,10 @@ export const updateLineItem = (lineItemId, quantity) => {
 
 export default cartReducer
 
-export const addToCart = (user, selectedProduct, quantity) => dispatch => {
+export const addToCart = (user, selectedProduct) => dispatch => {
   return axios.post(`/api/cart`, {orderedPrice: selectedProduct.price, accessoryId: selectedProduct.id})
     .then(createdLineItem => {
-      dispatch(receiveLineItem(createdLineItem.data, quantity))
+      dispatch(receiveLineItem(createdLineItem.data))
     })
     .catch(console.error)
 }
