@@ -1,11 +1,14 @@
 import React from 'react'
 import { withRouter, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { uniqBy } from 'lodash'
 
 function UserProfile(props) {
     const { user, orderAccessories } = props
     const userOrderAccs = orderAccessories.length ? orderAccessories.filter(orderAcc => orderAcc.order.userId == user.id) : {}  
-    //let userOrders = userOrderAccs.length? uniqBy(userOrders,'orderId') : []
+    let userOrders = userOrderAccs.length ? uniqBy(userOrderAccs,'orderId') : []
+
+    
     return (
         <div>
             {user && 
@@ -15,11 +18,10 @@ function UserProfile(props) {
                 <h3>Shipping Address: {user.shipping_address}</h3>
                 <h3>Order History: </h3>
 
-                {Array.isArray(userOrderAccs) && userOrderAccs.map(userOrderAcc => {
-                    console.log('wtf', userOrderAcc.orderId)
+                {userOrders.length && userOrders.map(userOrder => {
                     return(
-                        <NavLink to = {`/orders/${userOrderAcc.orderId}`} key={userOrderAcc.orderId}>
-                        Order#{userOrderAcc.orderId}____Placed On: {userOrderAcc.order.createdAt.slice(0,10)}____Status:{userOrderAcc.order.status}
+                        <NavLink to = {`/orders/${userOrder.orderId}`} key={userOrder.orderId}>
+                        Order#{userOrder.orderId}____Placed On: {userOrder.order.createdAt.slice(0,10)}____Status:{userOrder.order.status}
                         <br/>
                         </NavLink>
                     )
