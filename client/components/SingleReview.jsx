@@ -29,6 +29,5 @@ function SingleReview(props) {
 }
 
 const mapState = ({reviews}) => ({reviews})
-// const mapDispatch = {removeAccessory, updateAccessory, addItem}
 
 export default withRouter(connect(mapState)(SingleReview))
