@@ -27,7 +27,7 @@ export class SingleAccessory extends Component {
   }
 
   render() {
-    const { accessory, receiveLineItem, user, cart} = this.props
+    const { accessory, receiveLineItem, user, cart, currentUser } = this.props
     return (
       <div className="list-group-item min-content accessory-item grey">
         <div className="media">
@@ -51,8 +51,28 @@ export class SingleAccessory extends Component {
               <span placeholder="10">In store: {accessory.inventory}</span>
             </p>
           </div>
+        {currentUser.isAdmin ? (
           <div className="media-right media-middle">
-             <NavLink to="/cart" onClick={(e) => this.handleCartAdd(e, user, accessory)}>
+            <div className="media-right media-middle">
+            <button
+                className="btn btn-default"
+                onClick={this.removeAccessory}
+                value={accessory.id}>
+              <span className="glyphicon glyphicon-remove" />
+            </button>
+            </div>
+            <div className="media-right media-middle">
+              <button
+                  className="btn btn-default"
+                  onClick={this.clickEdit}
+                  value={accessory.id}>
+                <span className="glyphicon glyphicon-edit" />
+              </button>
+            </div>
+          </div> ) : null}
+
+          <div className="media-right media-middle">
+          <NavLink to="/cart" onClick={(e) => this.handleCartAdd(e, user, accessory)}>
             <button
                 className="btn btn-default"
                 value={accessory.id}>
@@ -60,6 +80,7 @@ export class SingleAccessory extends Component {
             </button>
           </NavLink>
           </div>
+
         </div>
       </div>
     );
@@ -103,7 +124,7 @@ export class SingleAccessory extends Component {
   }
 }
 
-const mapState = ({accessories, user, cart}) => ({accessories, user, cart})
+const mapState = ({accessories, user, cart, currentUser}) => ({accessories, user, cart, currentUser})
 const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart, updateLineItem}
 
 const SingleAccessoryContainer = withRouter(connect(mapState, mapDispatch)(SingleAccessory))
