@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import { addReview } from '../reducers/reviews'
+import { addReview, fetchReviews } from '../reducers/reviews'
 import { fetchAccessories } from '../reducers/accessories'
 import store from '../store'
 
@@ -85,6 +85,7 @@ const mapDispatch = (dispatch, ownProps) => {
       const star = event.target.star.value
       event.preventDefault()
       dispatch(addReview({content, star, userId, accessoryId}))
+      dispatch(fetchReviews())
       ownProps.history.push(`/`)
     }
   }
