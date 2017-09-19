@@ -91,10 +91,8 @@ class Navbar extends React.Component {
         <li className="dropdown">
           <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span className="caret"></span></a>
           <ul className="dropdown-menu" >
-            <li><a>All Users</a></li>
+            <li><a onClick={() => this.props.history.push('/admin/allusers')}>All Users</a></li>
             <li><a>All Orders</a></li>
-            {/* <li><a  onClick={() => {sortByCategory('toys')}}>Toys</a></li>
-            <li><a  onClick={() => {sortByCategory('')}}>All Accessories</a></li> */}
           </ul>
         </li>
       </ul>

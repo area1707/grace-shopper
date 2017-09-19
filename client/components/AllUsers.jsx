@@ -2,19 +2,14 @@ import React, { Component } from 'react'
 import store from '../store';
 import { withRouter, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchUsers } from '../reducers/users'
+import { fetchUsers, removeUser } from '../reducers/users'
 
 export class AllUsers extends Component {
   constructor(props) {
     super(props)
   }
 
-  // componentDidMount() {
-  //   store.dispatch(fetchUsers())
-  // }
-
   render() {
-    console.log('WHERE MA USERS AT', this.props)
     const { users } = this.props
     return (
       <div>
@@ -30,20 +25,20 @@ export class AllUsers extends Component {
           <tbody>
             {users && users.map(user => {
               return (
-              <tr>
+              <tr key={user.id}>
                 <th scope="row">{user.id}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td><NavLink to={`/users/${user.id}`}>OrderHistory</NavLink></td>
+                <td><NavLink to={`/users/${user.id}`}>Order History</NavLink></td>
+                <button
+                  className="btn btn-default"
+                  value={user.id}
+                  onClick={() => removeUser(user.id)}>
+                  <span className="glyphicon glyphicon-minus" />
+                </button>
               </tr>
               )
             })}
-            {/* <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr> */}
           </tbody>
         </table>
       </div>
@@ -51,10 +46,16 @@ export class AllUsers extends Component {
   }
 }
 
-const mapStateToProps = function (state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
       users: state.users
   }
+}
+
+const mapDispatchToState = (dispatch) => {
+  // return {
+  //   handleRemove: function()
+  // }
 }
 
 export default withRouter(connect(mapStateToProps)(AllUsers));
