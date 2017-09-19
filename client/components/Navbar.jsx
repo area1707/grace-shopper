@@ -124,7 +124,7 @@ class Navbar extends React.Component {
         {
         (Object.keys(currentUser).length !== 0) ?
         <li>
-          <NavLink to={`users/${currentUser.id}`}>
+          <NavLink to={`/users/${currentUser.id}`}>
           Welcome {this.props.currentUser.name}!
           </NavLink>
         </li>
