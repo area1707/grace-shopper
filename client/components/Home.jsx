@@ -28,7 +28,7 @@ class Home extends Component {
           return (
             <NavLink
             activeClassName="active"
-            to={`/accessories/${accessory.id}`}>
+            to={`/accessories/${accessory.id}`} key={accessory.id}>
             <img className="allProducts" src ={accessory.imageUrl}/>
             </NavLink>
           )

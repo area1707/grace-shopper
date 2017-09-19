@@ -37,7 +37,8 @@ const cartReducer = (state = initialState, action) => {
       let itemToUpdate = newState.lineItems.filter(item => item.accessory.id === action.lineItemId)
       itemToUpdate[0].quantity = action.quantity
       newState.lineItems = [...newState.lineItems]
-      break;
+      break
+
 
     case CLEAR_CART:
       return initialState
