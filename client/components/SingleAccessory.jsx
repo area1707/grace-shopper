@@ -97,11 +97,9 @@ export class SingleAccessory extends Component {
   cancelEdit(event) {
     return this.setState({isEditing: false})
   }
-  handleCartAdd(event, user, selectedProduct) {
-    event.preventDefault()
-    //if already exists, add to cart
-    //else updatecart
-    this.props.addToCart(user, selectedProduct, 1)
+  handleCartAdd(e, user, selectedProduct) {
+    e.preventDefault()
+    this.props.addToCart(user, selectedProduct)
   }
 }
 

@@ -20,11 +20,8 @@ class Cart extends Component {
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
-  console.log('lineItems inside Cart Component', lineItems)
   let rows = lineItems && lineItems.map(item => {
-    !item.quantity ? item.quantity = 1 : item.quantity
     let accessory = item.accessory
-    console.log('accessory inside Cart Component', accessory)
     let price = (accessory.price * item.quantity).toFixed(2);
     total += +price;
     return (
@@ -91,14 +88,14 @@ class Cart extends Component {
 
 const mapState = (state) => {
   return {
-    lineItems: state.cart.lineItems
+    lineItems: state.cart
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     handleRemove: function(e, lineItemId) {
-      e.preventDefault();
+      e.preventDefault()
       axios.delete(`/api/cart/item/${lineItemId}`)
         .then(status => {
           dispatch(removeLineItem(lineItemId))
@@ -106,7 +103,7 @@ const mapDispatch = (dispatch) => {
         .catch(console.error)
     },
     handleUpdate: function(e, lineItemId) {
-      e.preventDefault();
+      // e.preventDefault()
       axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: e.target.inputField.value})
         .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
         .catch(console.error)
