@@ -19,6 +19,7 @@ export class AllUsers extends Component {
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Admin</th>
               <th>Link to User Order History</th>
             </tr>
           </thead>
@@ -29,6 +30,7 @@ export class AllUsers extends Component {
                 <th scope="row">{user.id}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{(user.isAdmin) ? "Yes" : "No"}</td>
                 <td><NavLink to={`/users/${user.id}`}>Order History</NavLink></td>
                 <button
                   className="btn btn-default"
