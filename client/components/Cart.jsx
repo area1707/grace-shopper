@@ -20,24 +20,26 @@ class Cart extends Component {
   render() {
   let total = 0
   const {lineItems, handleUpdate, handleRemove} = this.props
+  console.log('lineItems inside Cart Component', lineItems)
   let rows = lineItems && lineItems.map(item => {
     !item.quantity ? item.quantity = 1 : item.quantity
-    let price = (item.price * item.quantity).toFixed(2);
+    let accessory = item.accessory
+    console.log('accessory inside Cart Component', accessory)
+    let price = (accessory.price * item.quantity).toFixed(2);
     total += +price;
-
     return (
-      <div key={item.id} >
+      <div key={accessory.id} >
         <Row className="show-grid">
           <Col sm={2} md={2} >
-            <Link to={`accessories/${item.id}`}>
-              <img className="image-responsive" src={item.imageUrl} />
+            <Link to={`accessories/${accessory.id}`}>
+              <img className="image-responsive" src={accessory.imageUrl} />
             </Link>
           </Col>
 
           <Col sm={5} md={5} >
-            <h3>{item.name}</h3>
+            <h3>{accessory.name}</h3>
             <br />
-            <Form inline onSubmit={(e) => handleUpdate(e, item.id)}>
+            <Form inline onSubmit={(e) => handleUpdate(e, accessory.id)}>
               <FormGroup controlId="formInlineName">
                 <ControlLabel><h4>Quantity: </h4></ControlLabel>
                 {' '}
@@ -52,7 +54,7 @@ class Cart extends Component {
             </h4>
           </Col>
           <br />
-          <Button bsStyle='danger' onClick={(e) => handleRemove(e, item.id)}>Remove</Button>
+          <Button bsStyle='danger' onClick={(e) => handleRemove(e, accessory.id)}>Remove</Button>
 
         </Row>
         <hr />

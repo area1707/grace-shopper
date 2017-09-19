@@ -23,22 +23,22 @@ const cartReducer = (state = initialState, action) => {
         newState.lineItems = [...newState.lineItems];
       }
       else { newState.lineItems = [...newState.lineItems, action.lineItem] }
-      break
+      break;
 
     case RECEIVE_LINE_ITEMS:
       newState.lineItems = action.lineItems
-      break
+      break;
 
     case REMOVE_LINE_ITEM:
-      newState.lineItems = newState.lineItems.filter(item => item.id !== action.lineItemId)
-      break
+      newState.lineItems = newState.lineItems.filter(item => item.accessory.id !== action.lineItemId)
+      break;
 
     case UPDATE_LINE_ITEM:
-      let itemToUpdate = newState.lineItems.filter(item => item.id === action.lineItemId)
+      let itemToUpdate = newState.lineItems.filter(item => item.accessory.id === action.lineItemId)
       itemToUpdate[0].quantity = action.quantity
-      newState.lineItems = [...newState.lineItems];
-      break
-    
+      newState.lineItems = [...newState.lineItems]
+      break;
+
     case CLEAR_CART:
       return initialState
 
@@ -79,17 +79,10 @@ export const updateLineItem = (lineItemId, quantity) => {
   }
 }
 
-export const clearCart = () => {
-  return {
-    type: 'CLEAR_CART',
-    initialState
-  }
-}
-
 export default cartReducer
 
 export const addToCart = (user, selectedProduct, quantity) => dispatch => {
-  return axios.post(`/api/cart/`, {product: selectedProduct})
+  return axios.post(`/api/cart`, {orderedPrice: selectedProduct.price, accessoryId: selectedProduct.id})
     .then(createdLineItem => {
       dispatch(receiveLineItem(createdLineItem.data, quantity))
     })
@@ -104,12 +97,16 @@ export const removeFromCart = (lineItemId) => dispatch => {
 
 export const updateQuantity = (lineItemId, quantity) => dispatch => {
   return axios.put(`/api/cart/item/${lineItemId}`, {newQuantity: quantity})
-    .then((newQuantity) => dispatch(updateLineItem(lineItemId, newQuantity.data)))
+    .then((newQuantity) => {
+      dispatch(updateLineItem(lineItemId, newQuantity.data))
+    })
     .catch(console.error)
 }
 export const fetchItemsInCart = () => dispatch => {
   return axios.get(`/api/cart`)
-  .then(itemsArr => dispatch(receiveLineItems(itemsArr.data)))
+  .then(itemsArr => {
+    dispatch(receiveLineItems(itemsArr.data))
+  })
 }
 
 export const addAddressToOrder = (cartId, shippingAddress, emailAddress) => dispatch => {

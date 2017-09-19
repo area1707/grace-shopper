@@ -16,6 +16,7 @@
     "body-parser": "^1.18.0",
     "bootstrap": "^3.3.7",
     "bootstrap-social": "^5.1.1",
+    "chai-enzyme": "^0.8.0",
     "connect-session-sequelize": "^4.1.0",
     "crypto": "^1.0.1",
     "express": "^4.15.4",
@@ -38,7 +39,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.4.0"
+    "sequelize": "^4.4.0",
+    "sinon-chai": "^2.13.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",

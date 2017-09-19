@@ -7,9 +7,7 @@ import {receiveLineItem, addToCart} from '../reducers/cart'
 import axios from 'axios'
 import store from '../store'
 
-//non admin-view
-
-class SingleAccessory extends Component {
+export class SingleAccessory extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -30,9 +28,8 @@ class SingleAccessory extends Component {
 
   render() {
     const { accessory, receiveLineItem, user } = this.props
-
     return (
-      <div className="list-group-item min-content students-item grey">
+      <div className="list-group-item min-content accessory-item grey">
         <div className="media">
           <div className="media-left">
             <img src={accessory.imageUrl} height="200" width="400"/>
@@ -109,4 +106,5 @@ class SingleAccessory extends Component {
 const mapState = ({accessories, user}) => ({accessories, user})
 const mapDispatch = {removeAccessory, updateAccessory, receiveLineItem, addToCart}
 
-export default withRouter(connect(mapState, mapDispatch)(SingleAccessory))
+const SingleAccessoryContainer = withRouter(connect(mapState, mapDispatch)(SingleAccessory))
+export default SingleAccessoryContainer
