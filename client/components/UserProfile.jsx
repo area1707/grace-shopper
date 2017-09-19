@@ -8,6 +8,10 @@ function UserProfile(props) {
     const userOrderAccs = orderAccessories.length ? orderAccessories.filter(orderAcc => orderAcc.order.userId == user.id) : {}  
     let userOrders = userOrderAccs.length ? uniqBy(userOrderAccs,'orderId') : []
 
+    let spanStyle = {
+        margin: 10,
+        padding: 4
+    }
     
     return (
         <div>
@@ -21,7 +25,9 @@ function UserProfile(props) {
                 {userOrders.length && userOrders.map(userOrder => {
                     return(
                         <NavLink to = {`/orders/${userOrder.orderId}`} key={userOrder.orderId}>
-                        Order#{userOrder.orderId}____Placed On: {userOrder.order.createdAt.slice(0,10)}____Status:{userOrder.order.status}
+                        <span style={spanStyle}>Order#{userOrder.orderId}</span>
+                        <span style={spanStyle}>Placed On: {userOrder.order.createdAt.slice(0,10)}</span>
+                        <span style={spanStyle}>Status:{userOrder.order.status}</span>
                         <br/>
                         </NavLink>
                     )
