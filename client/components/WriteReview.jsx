@@ -69,7 +69,7 @@ class WriteReview extends Component {
             <textarea name="content" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
           </div>
           <div className='form-group'>
-              <button type='submit' className='btn btn-default'>Submit Order</button>
+              <button type='submit' className='btn btn-default'>Submit Review</button>
           </div>
         </form>
       </div>
@@ -85,7 +85,7 @@ const mapDispatch = (dispatch, ownProps) => {
       const star = event.target.star.value
       event.preventDefault()
       dispatch(addReview({content, star, userId, accessoryId}))
-      ownProps.history.push('/')
+      ownProps.history.push(`/`)
     }
   }
 }
