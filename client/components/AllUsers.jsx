@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import store from '../store';
-import { withRouter } from 'react-router-dom'
+import { withRouter, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchUsers } from '../reducers/users'
 
@@ -24,16 +24,26 @@ export class AllUsers extends Component {
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Shipping Address</th>
+              <th>Link to User Order History</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {users && users.map(user => {
+              return (
+              <tr>
+                <th scope="row">{user.id}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td><NavLink to={`/users/${user.id}`}>OrderHistory</NavLink></td>
+              </tr>
+              )
+            })}
+            {/* <tr>
               <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
