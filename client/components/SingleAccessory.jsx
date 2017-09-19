@@ -27,7 +27,7 @@ export class SingleAccessory extends Component {
   }
 
   render() {
-    const { accessory, receiveLineItem, user, cart} = this.props
+    const {accessory, receiveLineItem, user, cart} = this.props
     return (
       <div className="list-group-item min-content accessory-item grey">
         <div className="media">
@@ -52,7 +52,7 @@ export class SingleAccessory extends Component {
             </p>
           </div>
           <div className="media-right media-middle">
-             <NavLink to="/cart" onClick={(e) => this.handleCartAdd(e, user, accessory)}>
+             <NavLink to="/cart" onClick={(event) => this.handleCartAdd(event, user, accessory, cart)}>
             <button
                 className="btn btn-default"
                 value={accessory.id}>
@@ -97,7 +97,7 @@ export class SingleAccessory extends Component {
   cancelEdit(event) {
     return this.setState({isEditing: false})
   }
-  handleCartAdd(e, user, selectedProduct) {
+  handleCartAdd(event, user, selectedProduct, cart) {
     e.preventDefault()
     this.props.addToCart(user, selectedProduct)
   }
