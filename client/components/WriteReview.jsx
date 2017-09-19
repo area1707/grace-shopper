@@ -36,7 +36,7 @@ class WriteReview extends Component {
       }
       return reviewStars
     }
-    console.log('THIS DOT STATE', this.state)
+
     return (
       <div>
         { accessory &&
