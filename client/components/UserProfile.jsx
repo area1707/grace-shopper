@@ -7,7 +7,6 @@ function UserProfile(props) {
     const { user, orderAccessories, currentUser } = props
     const userOrderAccs = orderAccessories.length ? orderAccessories.filter(orderAcc => orderAcc.order.userId == user.id) : {}  
     let userOrders = userOrderAccs.length ? uniqBy(userOrderAccs,'orderId') : []
-    console.log('HELLO CURRENT', currentUser)
     let spanStyle = {
         margin: 10,
         padding: 4
