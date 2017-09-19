@@ -20,11 +20,12 @@ class Navbar extends React.Component {
     this.renderSearch = this.renderSearch.bind(this);
     this.renderCart = this.renderCart.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
+    this.renderAdmin = this.renderAdmin.bind(this);
   }
 
   render() {
 
-    const { accessories } = this.props
+    const { accessories, currentUser } = this.props
 
     return (
       <nav className="navbar navbar-default">
@@ -32,9 +33,11 @@ class Navbar extends React.Component {
           { this.renderHome() }
           { this.renderCart() }
           { this.renderCategories() }
+          { (currentUser.isAdmin) ? this.renderAdmin() : null }
           { this.renderLogout() }
           { this.renderLoginSignup() }
           { this.renderSearch() }
+
         </div>
       </nav>
     )
@@ -63,25 +66,38 @@ class Navbar extends React.Component {
   }
 
   renderCategories() {
-
-  const sortByCategory = (category) => {
-    this.props.handleSubmit(category)
-    this.props.history.push(`/search/${category}`)
-  }
+    const sortByCategory = (category) => {
+      this.props.handleSubmit(category)
+      this.props.history.push(`/search/${category}`)
+    }
     return (
       <ul className="nav navbar-nav navbar-left">
         <li className="dropdown">
           <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span className="caret"></span></a>
           <ul className="dropdown-menu" >
             <li><a onClick={() => {sortByCategory('glasses')}}>Glasses</a></li>
-            <li><a  onClick={() => {sortByCategory('hats')}}>Hats</a></li>
-            <li><a  onClick={() => {sortByCategory('toys')}}>Toys</a></li>
-            <li><a  onClick={() => {sortByCategory('')}}>All Accessories</a></li>
+            <li><a onClick={() => {sortByCategory('hats')}}>Hats</a></li>
+            <li><a onClick={() => {sortByCategory('toys')}}>Toys</a></li>
+            <li><a onClick={() => {sortByCategory('')}}>All Accessories</a></li>
           </ul>
         </li>
       </ul>
     )
   }
+
+  renderAdmin() {
+    return (
+      <ul className="nav navbar-nav navbar-left">
+        <li className="dropdown">
+          <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span className="caret"></span></a>
+          <ul className="dropdown-menu" >
+            <li><a onClick={() => this.props.history.push('/admin/allusers')}>All Users</a></li>
+            <li><a>All Orders</a></li>
+          </ul>
+        </li>
+      </ul>
+    )
+  } 
 
   // search everything for the searchValue
   renderSearch() {
@@ -118,9 +134,10 @@ class Navbar extends React.Component {
     const {currentUser} = this.props
     return (
       <ul className="nav navbar-nav navbar-right">
-        <li>
+        {/* This is not working, doesn't refresh after logout */}
+        { (currentUser) ? null : <li>
           <NavLink to="/signup" activeClassName="active">signup</NavLink>
-        </li>
+        </li> }
         {
         (Object.keys(currentUser).length !== 0) ?
         <li>

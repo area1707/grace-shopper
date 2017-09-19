@@ -53,7 +53,8 @@ export const fetchUsers = () => dispatch => {
 export const removeUser = id => dispatch => {
   dispatch(remove(id));
   axios.delete(`/api/users/${id}`)
-       .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
+      .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
+  
 };
 
 export const addUser = user => dispatch => {
