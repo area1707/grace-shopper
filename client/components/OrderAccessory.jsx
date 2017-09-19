@@ -6,6 +6,7 @@ import {withRouter} from 'react-router'
 function OrderAccessory(props){
   const { orderAcc } = props
   const accessory = orderAcc.accessory
+  const userId = orderAcc.order.userId
 
   return (
     <div className="list-group-item min-content accessory-item grey">
@@ -31,7 +32,7 @@ function OrderAccessory(props){
           </p>
         </div>
         <div className="media-right media-middle">
-            <NavLink to="/review" onClick={(e) => this.handleReviewAdd(e, user, accessory)}>
+            <NavLink to={`/review/${userId}/${accessory.id}`} >
           <button
               className="btn btn-default"
               value={accessory.id}>
@@ -43,7 +44,7 @@ function OrderAccessory(props){
     </div>
   );
 }
-  
+
   // handleReviewAdd(e, user, selectedProduct) {
   //   e.preventDefault()
   //   this.props.addReview(user, selectedProduct, 1)
