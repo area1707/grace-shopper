@@ -1,6 +1,26 @@
-#  Grace Shopper -- Name TBD
+## Tabby Cat Emporium
 
-I am full of information about this repo!
+<img src="tabbycat-main.gif" width="300">
+
+Tabby Cat Emporium is an e-commerce website that sells accessories for your chubby tabby.
+I was built by members of the 1707 Grace Hopper cohort to fulfill the requirements for the Grace Shopper Project.
+
+You can find our live site HERE: (tabby-cat-store.herokuapp.com)
+
+...and more about its inspiration HERE: (http://tabbycats.club/)
+
+## Technologies used
+
+React
+React-Redux
+React-Router
+Bootstrap
+Express
+Node.js
+Sequelize and PostgreSQL
+Passport
+Webpack
+Babel
 
 ## Running this code in development
 
