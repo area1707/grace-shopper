@@ -11,16 +11,16 @@ You can find our live site HERE: (http://tabby-cat-store.herokuapp.com)
 
 ## Technologies used
 
-React
-React-Redux
-React-Router
-Bootstrap
-Express
-Node.js
-Sequelize and PostgreSQL
-Passport
-Webpack
-Babel
+* React
+* React-Redux
+* React-Router
+* Bootstrap
+* Express
+* Node.js
+* Sequelize and PostgreSQL
+* Passport
+* Webpack
+* Babel
 
 ## Running this code in development
 
