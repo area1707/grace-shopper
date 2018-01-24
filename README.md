@@ -1,6 +1,6 @@
 ## Tabby Cat Emporium
 
-<img src="tabbycat-main.gif" width="300">
+<img src="tabbycat-main.gif" width="750">
 
 Tabby Cat Emporium is an e-commerce website that sells accessories for your chubby tabby.
 I was built by members of the 1707 Grace Hopper cohort to fulfill the requirements for the Grace Shopper Project.
